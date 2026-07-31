@@ -31,4 +31,6 @@ xcuserdata/
 .idea/
 *.swp
 *~
-test*
+test.swift
+test_*
+test
