@@ -88,7 +88,7 @@ if (( TEST )); then
     rm -rf build
     mkdir -p build
     compile_test() {
-        swiftc -O -target "$1" -sdk "$SDK" \
+        swiftc -target "$1" -sdk "$SDK" \
         Sources/Vorssaint/Services/Media/MediaSupport.swift \
         Sources/Vorssaint/Core/Defaults.swift \
         Sources/Vorssaint/Core/FeatureCatalog.swift \
