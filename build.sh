@@ -30,7 +30,8 @@ else
     APP_NAME="Vorssaint"
     EXECUTABLE="Vorssaint"
 fi
-TARGET="arm64-apple-macosx14.0"
+TARGET_ARM64="arm64-apple-macosx14.0"
+TARGET_X86_64="x86_64-apple-macosx14.0"
 ENTITLEMENTS="Resources/Vorssaint.entitlements"
 LEGACY_IDENTITY="Vorssaint Utils Signing"
 
@@ -86,7 +87,8 @@ if (( TEST )); then
     echo "▸ Building & running unit tests against $(basename "$SDK")…"
     rm -rf build
     mkdir -p build
-    swiftc -O -target "$TARGET" -sdk "$SDK" \
+    compile_test() {
+        swiftc -O -target "$1" -sdk "$SDK" \
         Sources/Vorssaint/Services/Media/MediaSupport.swift \
         Sources/Vorssaint/Core/Defaults.swift \
         Sources/Vorssaint/Core/FeatureCatalog.swift \
@@ -187,7 +189,11 @@ if (( TEST )); then
         Sources/Vorssaint/Services/Cleaner/CleanerSchedule.swift \
         Sources/Vorssaint/Services/ManagedDownloads/WhatsAppDownloadSupport.swift \
         Tests/MetricsTests.swift \
-        -o build/metrics-tests
+        -o "$2"
+    }
+    compile_test "$TARGET_ARM64" build/metrics-tests-arm64
+    compile_test "$TARGET_X86_64" build/metrics-tests-x86_64
+    lipo -create -output build/metrics-tests build/metrics-tests-arm64 build/metrics-tests-x86_64
     ./build/metrics-tests
     exit $?
 fi
@@ -195,9 +201,15 @@ fi
 echo "▸ Compiling (release) against $(basename "$SDK")…"
 rm -rf build
 mkdir -p build
-swiftc -O -target "$TARGET" -sdk "$SDK" \
+swiftc -O -target "$TARGET_ARM64" -sdk "$SDK" \
     Sources/Vorssaint/**/*.swift \
-    -o "build/$EXECUTABLE"
+    -o "build/${EXECUTABLE}_arm64"
+
+swiftc -O -target "$TARGET_X86_64" -sdk "$SDK" \
+    Sources/Vorssaint/**/*.swift \
+    -o "build/${EXECUTABLE}_x86_64"
+
+lipo -create -output "build/$EXECUTABLE" "build/${EXECUTABLE}_arm64" "build/${EXECUTABLE}_x86_64"
 
 echo "▸ Generating app icon…"
 swift Tools/MakeIcon.swift build/AppIcon.iconset

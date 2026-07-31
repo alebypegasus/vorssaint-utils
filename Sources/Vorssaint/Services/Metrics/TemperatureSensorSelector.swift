@@ -10,6 +10,7 @@ enum CPUTemperaturePlatform: Equatable {
     case appleM3Family
     case appleM4Family
     case appleM5Family
+    case intel
     case generic
 }
 
@@ -43,8 +44,12 @@ enum TemperatureSensorSelector {
         "Tp00", "Tp04", "Tp08", "Tp0C",
         "Tp0G", "Tp0K",
         "Tp0O", "Tp0R", "Tp0U", "Tp0X",
-        "Tp0a", "Tp0d", "Tp0g", "Tp0j",
         "Tp0m", "Tp0p", "Tp0u", "Tp0y",
+    ]
+
+    private static let intelCPUCoreKeys: Set<String> = [
+        "TC0P", "TC0D", "TC0E", "TC0F", "TC0C",
+        "TC1C", "TC2C", "TC3C", "TC4C", "TC5C", "TC6C", "TC7C", "TC8C",
     ]
 
     static func platform(brandString: String?) -> CPUTemperaturePlatform {
@@ -55,7 +60,7 @@ enum TemperatureSensorSelector {
         case 3: return .appleM3Family
         case 4: return .appleM4Family
         case 5: return .appleM5Family
-        default: return .generic
+        default: return .intel
         }
     }
 
@@ -66,7 +71,7 @@ enum TemperatureSensorSelector {
         }
         var buffer = [CChar](repeating: 0, count: size)
         guard sysctlbyname("machdep.cpu.brand_string", &buffer, &size, nil, 0) == 0 else {
-            return .generic
+            return .intel
         }
         return platform(brandString: String(cString: buffer))
     }
@@ -85,7 +90,7 @@ enum TemperatureSensorSelector {
 
     static func hasCPUCoreSet(platform: CPUTemperaturePlatform) -> Bool {
         switch platform {
-        case .appleM1Family, .appleM2Family, .appleM3Family, .appleM4Family, .appleM5Family:
+        case .appleM1Family, .appleM2Family, .appleM3Family, .appleM4Family, .appleM5Family, .intel:
             return true
         case .generic: return false
         }
@@ -103,6 +108,8 @@ enum TemperatureSensorSelector {
             return appleM4CPUCoreKeys.contains(key)
         case .appleM5Family:
             return appleM5CPUCoreKeys.contains(key)
+        case .intel:
+            return intelCPUCoreKeys.contains(key)
         case .generic:
             return false
         }

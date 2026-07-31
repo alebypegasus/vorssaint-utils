@@ -933,10 +933,16 @@ final class SystemMonitor: ObservableObject {
             // sampling for the menu bar expensive.
             guard let ref = IORegistryEntryCreateCFProperty(entry, "PerformanceStatistics" as CFString,
                                                             kCFAllocatorDefault, 0),
-                  let stats = ref.takeRetainedValue() as? [String: Any],
-                  let utilization = stats["Device Utilization %"] as? Int
+                  let stats = ref.takeRetainedValue() as? [String: Any]
             else { continue }
-            return Double(utilization) / 100.0
+            
+            if let utilization = stats["Device Utilization %"] as? Int {
+                return Double(utilization) / 100.0
+            } else if let utilization = stats["GPU Core Utilization"] as? Int {
+                return Double(utilization) / 100.0
+            } else if let utilization = stats["GPU Activity(%)"] as? Int {
+                return Double(utilization) / 100.0
+            }
         }
         return nil
     }
