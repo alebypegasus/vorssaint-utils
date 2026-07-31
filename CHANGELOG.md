@@ -42,6 +42,8 @@ on Caps Lock and mouse button shortcuts.
   Thanks to @ruvelro.
 - W closes the highlighted window in the app switcher, leaving the app
   running.
+- The app switcher can list apps that are running with no window open, the
+  way the system one does. Under Switcher, still set to the Finder alone.
 - Hide apps from the volume mixer with a right click. The same menu brings
   them back.
 - Each removable drive in the Drives tab now has its own eject button.

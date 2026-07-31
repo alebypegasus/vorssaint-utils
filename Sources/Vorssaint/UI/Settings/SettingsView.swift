@@ -743,7 +743,7 @@ struct SwitcherSettings: View {
     @AppStorage(DefaultsKey.switcherIconRowMode) private var switcherIconRowMode = false
     @AppStorage(DefaultsKey.switcherSimpleMode) private var switcherSimpleMode = false
     @AppStorage(DefaultsKey.switcherMergeTabs) private var switcherMergeTabs = false
-    @AppStorage(DefaultsKey.switcherShowWindowlessFinder) private var switcherShowWindowlessFinder = true
+    @AppStorage(DefaultsKey.switcherWindowlessApps) private var switcherWindowlessApps = SwitcherWindowlessApps.fallback.rawValue
     @AppStorage(DefaultsKey.switcherCurrentSpaceOnly) private var switcherCurrentSpaceOnly = false
     @AppStorage(DefaultsKey.dockPreviewEnabled) private var dockPreviewEnabled = false
     @AppStorage(DefaultsKey.dockClickMinimize) private var dockClickMinimize = false
@@ -812,12 +812,15 @@ struct SwitcherSettings: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
 
-                    if switcherEnabled {
-                        Toggle(l10n.s.switcherShowFinder, isOn: $switcherShowWindowlessFinder)
-                        Text(l10n.s.switcherShowFinderCaption)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                    Picker(l10n.s.switcherWindowlessApps, selection: $switcherWindowlessApps) {
+                        Text(l10n.s.switcherWindowlessAppsOff).tag(SwitcherWindowlessApps.off.rawValue)
+                        Text(l10n.s.switcherWindowlessAppsFinder).tag(SwitcherWindowlessApps.finder.rawValue)
+                        Text(l10n.s.switcherWindowlessAppsAll).tag(SwitcherWindowlessApps.all.rawValue)
                     }
+                    .disabled(!switcherEnabled)
+                    Text(l10n.s.switcherWindowlessAppsCaption)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
             }
             if AppFeature.dockPreview.isAvailable || AppFeature.dockClick.isAvailable {

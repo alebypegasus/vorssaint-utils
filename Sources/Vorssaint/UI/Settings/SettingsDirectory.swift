@@ -58,7 +58,7 @@ enum SettingsDirectory {
                                                  FeatureStrings.mouseExceptions(language).listTitle]),
                 SettingsDirectoryItem(page: .switcher, title: s.tabSwitcher, icon: "rectangle.on.rectangle",
                                       keywords: [s.switcherEnable, s.dockClickMinimize,
-                                                 s.dockClickCycleWindows]),
+                                                 s.dockClickCycleWindows, s.switcherWindowlessApps]),
                 SettingsDirectoryItem(page: .windowLayout,
                                       title: FeatureStrings.windowLayout(language).title,
                                       icon: "rectangle.3.group",

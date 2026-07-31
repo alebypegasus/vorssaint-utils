@@ -110,6 +110,23 @@ enum WindowUseOrder {
         return capped(result, limit: limit)
     }
 
+    /// The history after the switcher committed to `target`.
+    ///
+    /// An entry standing for an app with no window of its own still moves the
+    /// window the user came from to the front: with nothing to switch to on
+    /// the other side, that window is now the most recently used one there is,
+    /// and a quick repeat of the shortcut has to find it there.
+    static func promoting(target: CGWindowID?,
+                          previous: CGWindowID?,
+                          in history: [CGWindowID],
+                          limit: Int = limit) -> [CGWindowID] {
+        guard let target else {
+            guard let previous else { return history }
+            return promoting(previous, in: history, limit: limit)
+        }
+        return promoting(target, previous: previous, in: history, limit: limit)
+    }
+
     /// Same move-to-front, for the list of applications.
     static func promoting(_ pid: pid_t, in history: [pid_t], limit: Int = limit) -> [pid_t] {
         var result = history

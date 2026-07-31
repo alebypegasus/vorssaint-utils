@@ -323,8 +323,12 @@ struct Strings {
     let switcherWindowShortcutCaption: String
     let switcherMergeTabs: String
     let switcherMergeTabsCaption: String
-    let switcherShowFinder: String
-    let switcherShowFinderCaption: String
+    let switcherWindowlessApps: String
+    let switcherWindowlessAppsCaption: String
+    let switcherWindowlessAppsOff: String
+    let switcherWindowlessAppsFinder: String
+    let switcherWindowlessAppsAll: String
+    let switcherNoOpenWindow: String
     let dockPreviewName: String
     let dockPreviewEnable: String
     let dockPreviewEnableCaption: String
@@ -1239,8 +1243,12 @@ extension Strings {
         switcherWindowShortcutCaption: "Com o seletor aberto, pula entre as janelas do app selecionado.",
         switcherMergeTabs: "Mostrar uma entrada por app",
         switcherMergeTabsCaption: "Junta todas as janelas de um app em uma só entrada no alternador, em vez de uma por janela.",
-        switcherShowFinder: "Mostrar Finder sem janelas",
-        switcherShowFinderCaption: "Mostra o Finder no alternador mesmo quando nenhuma janela do Finder estiver aberta.",
+        switcherWindowlessApps: "Apps sem janela aberta",
+        switcherWindowlessAppsCaption: "Escolhe quais apps que estão abertos sem nenhuma janela aparecem no alternador.",
+        switcherWindowlessAppsOff: "Não mostrar",
+        switcherWindowlessAppsFinder: "Só o Finder",
+        switcherWindowlessAppsAll: "Todos os apps",
+        switcherNoOpenWindow: "Sem janela aberta",
         dockPreviewName: "Dock Preview",
         dockPreviewEnable: "Pré-visualizar janelas no Dock",
         dockPreviewEnableCaption: "Passe o mouse em um app aberto no Dock para ver e espiar suas janelas.",
@@ -2128,8 +2136,12 @@ extension Strings {
         switcherWindowShortcutCaption: "While the switcher is open, jumps between the selected app's windows.",
         switcherMergeTabs: "Show one entry per app",
         switcherMergeTabsCaption: "Collapses all of an app's windows into one entry in the switcher, instead of one entry per window.",
-        switcherShowFinder: "Show Finder without windows",
-        switcherShowFinderCaption: "Shows Finder in the switcher even when no Finder window is open.",
+        switcherWindowlessApps: "Apps with no open window",
+        switcherWindowlessAppsCaption: "Chooses which running apps with no window at all show up in the switcher.",
+        switcherWindowlessAppsOff: "Do not show",
+        switcherWindowlessAppsFinder: "Finder only",
+        switcherWindowlessAppsAll: "All apps",
+        switcherNoOpenWindow: "No open window",
         dockPreviewName: "Dock Preview",
         dockPreviewEnable: "Preview windows from the Dock",
         dockPreviewEnableCaption: "Hover over an open app in the Dock to preview and peek at its windows.",

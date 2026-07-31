@@ -78,10 +78,11 @@ final class WindowUseTracker {
     /// Applied immediately because the window server's order lags an
     /// activation by a frame or two, and a flick is faster than that.
     func recordSwitch(to windowID: CGWindowID?, from previous: CGWindowID?) {
-        guard let windowID else { return }
         stateLock.withLock {
             guard recording else { return }
-            windowHistory = WindowUseOrder.promoting(windowID, previous: previous, in: windowHistory)
+            windowHistory = WindowUseOrder.promoting(target: windowID,
+                                                     previous: previous,
+                                                     in: windowHistory)
         }
     }
 

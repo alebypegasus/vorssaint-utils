@@ -1147,6 +1147,24 @@ struct MetricsTests {
             Defaults.migrateScreenshotOpenEditorDirectly(in: migrationDefaults)
             expect(migrationDefaults.object(forKey: DefaultsKey.screenshotDefaultAction) == nil,
                    "a setup that never used direct-to-editor keeps asking after capture")
+            migrationDefaults.set(false, forKey: DefaultsKey.switcherShowWindowlessFinder)
+            Defaults.migrateSwitcherWindowlessFinder(in: migrationDefaults)
+            expect(migrationDefaults.string(forKey: DefaultsKey.switcherWindowlessApps)
+                   == SwitcherWindowlessApps.off.rawValue
+                   && migrationDefaults.bool(forKey: DefaultsKey.switcherShowWindowlessFinder),
+                   "hiding the windowless desktop app migrates into showing no windowless app at all")
+            migrationDefaults.set(SwitcherWindowlessApps.all.rawValue,
+                                  forKey: DefaultsKey.switcherWindowlessApps)
+            Defaults.migrateSwitcherWindowlessFinder(in: migrationDefaults)
+            expect(migrationDefaults.string(forKey: DefaultsKey.switcherWindowlessApps)
+                   == SwitcherWindowlessApps.all.rawValue,
+                   "the windowless apps migration runs once and never fights a later choice")
+            migrationDefaults.removeObject(forKey: DefaultsKey.switcherShowWindowlessFinder)
+            migrationDefaults.removeObject(forKey: DefaultsKey.switcherWindowlessApps)
+            migrationDefaults.set(true, forKey: DefaultsKey.switcherShowWindowlessFinder)
+            Defaults.migrateSwitcherWindowlessFinder(in: migrationDefaults)
+            expect(migrationDefaults.object(forKey: DefaultsKey.switcherWindowlessApps) == nil,
+                   "a setup that kept the windowless desktop app is left exactly as it was")
             migrationDefaults.removePersistentDomain(forName: shortcutSuite)
         } else {
             expect(false, "test suite defaults are available")
@@ -1350,9 +1368,73 @@ struct MetricsTests {
                                                  items: [embeddedWindow]) == nil,
                "App Switcher leaves the system shortcut alone without a foreground app")
         expect(registeredDefaults[DefaultsKey.switcherShowWindowlessFinder] as? Bool == true,
-               "Finder without windows stays visible in the switcher by default")
+               "the retired windowless Finder toggle keeps its shipped value so the migration can read it")
+        expect(registeredDefaults[DefaultsKey.switcherWindowlessApps] as? String
+               == SwitcherWindowlessApps.finder.rawValue,
+               "the switcher offers the desktop app without windows, and nothing else, by default")
         expect(registeredDefaults[DefaultsKey.switcherCurrentSpaceOnly] as? Bool == false,
                "the switcher keeps showing every desktop unless the user opts out (issue #337)")
+
+        // MARK: Switcher entries for apps with no window (issue #351)
+        expect(SwitcherWindowlessApps.mode(storedValue: nil) == .finder
+               && SwitcherWindowlessApps.mode(storedValue: "") == .finder
+               && SwitcherWindowlessApps.mode(storedValue: "bogus") == .finder,
+               "an unset or unreadable windowless apps choice falls back to what the app shipped with")
+        expect(SwitcherWindowlessApps.mode(storedValue: "off") == .off
+               && SwitcherWindowlessApps.mode(storedValue: "finder") == .finder
+               && SwitcherWindowlessApps.mode(storedValue: "all") == .all,
+               "every windowless apps choice survives a round trip through preferences")
+        expect(SwitcherWindowlessApps.migrated(showsWindowlessFinder: true) == .finder
+               && SwitcherWindowlessApps.migrated(showsWindowlessFinder: false) == .off,
+               "the old windowless Finder toggle maps onto the choice that keeps its behavior")
+
+        let desktopApp = SwitcherAppCandidate(pid: 501, bundleIdentifier: Defaults.finderBundleIdentifier)
+        let plainApp = SwitcherAppCandidate(pid: 502, bundleIdentifier: "com.example.editor")
+        let otherApp = SwitcherAppCandidate(pid: 503, bundleIdentifier: "com.example.notes")
+        let windowlessCandidates = [desktopApp, plainApp, otherApp]
+        expect(SwitcherSupport.windowlessAppPIDs(mode: .off,
+                                                 candidates: windowlessCandidates,
+                                                 pidsWithWindows: [],
+                                                 pidsWithWithheldWindows: [],
+                                                 desktopAppBundleIdentifier: Defaults.finderBundleIdentifier).isEmpty,
+               "asking for no windowless apps adds none of them")
+        expect(SwitcherSupport.windowlessAppPIDs(mode: .finder,
+                                                 candidates: windowlessCandidates,
+                                                 pidsWithWindows: [],
+                                                 pidsWithWithheldWindows: [],
+                                                 desktopAppBundleIdentifier: Defaults.finderBundleIdentifier) == [501],
+               "asking for the desktop app alone leaves every other windowless app out")
+        expect(SwitcherSupport.windowlessAppPIDs(mode: .all,
+                                                 candidates: windowlessCandidates,
+                                                 pidsWithWindows: [],
+                                                 pidsWithWithheldWindows: [],
+                                                 desktopAppBundleIdentifier: Defaults.finderBundleIdentifier) == [501, 502, 503],
+               "asking for every windowless app keeps them in the order the window server gave")
+        expect(SwitcherSupport.windowlessAppPIDs(mode: .all,
+                                                 candidates: windowlessCandidates,
+                                                 pidsWithWindows: [502],
+                                                 pidsWithWithheldWindows: [],
+                                                 desktopAppBundleIdentifier: Defaults.finderBundleIdentifier) == [501, 503],
+               "an app that already has a window in the list never gets a second entry for itself")
+        expect(SwitcherSupport.windowlessAppPIDs(mode: .all,
+                                                 candidates: windowlessCandidates,
+                                                 pidsWithWindows: [],
+                                                 pidsWithWithheldWindows: [503],
+                                                 desktopAppBundleIdentifier: Defaults.finderBundleIdentifier) == [501, 502],
+               "an app whose windows were held back for being on another desktop stays out (issue #337)")
+        expect(SwitcherSupport.windowlessAppPIDs(mode: .finder,
+                                                 candidates: windowlessCandidates,
+                                                 pidsWithWindows: [501],
+                                                 pidsWithWithheldWindows: [],
+                                                 desktopAppBundleIdentifier: Defaults.finderBundleIdentifier).isEmpty,
+               "the desktop app with a window of its own does not also get an entry for itself")
+
+        expect(WindowUseOrder.promoting(target: 7, previous: 3, in: [3, 5, 7]) == [7, 3, 5],
+               "committing to a window puts it first and the one left behind second")
+        expect(WindowUseOrder.promoting(target: nil, previous: 3, in: [5, 3, 9]) == [3, 5, 9],
+               "committing to an app with no window leaves the window behind as the most recent one")
+        expect(WindowUseOrder.promoting(target: nil, previous: nil, in: [5, 3]) == [5, 3],
+               "committing to an app with no window and coming from none changes no history")
         expect(registeredDefaults[DefaultsKey.dockPreviewEnabled] as? Bool == false,
                "Dock Preview is opt-in for clean installs")
         expect(registeredDefaults[DefaultsKey.autoCheckUpdates] as? Bool == true,
@@ -5957,6 +6039,22 @@ struct MetricsTests {
             expect(!strings.switcherCurrentSpaceOnlyCaption.isEmpty
                    && !strings.switcherCurrentSpaceOnlyCaption.contains("—"),
                    "\(prefix) App Switcher current-desktop caption is present without em dash")
+            expect(!strings.switcherWindowlessApps.isEmpty
+                   && !strings.switcherWindowlessApps.contains("—"),
+                   "\(prefix) App Switcher windowless apps title is present without em dash")
+            expect(!strings.switcherWindowlessAppsCaption.isEmpty
+                   && !strings.switcherWindowlessAppsCaption.contains("—"),
+                   "\(prefix) App Switcher windowless apps caption is present without em dash")
+            expect(!strings.switcherWindowlessAppsOff.isEmpty
+                   && !strings.switcherWindowlessAppsFinder.isEmpty
+                   && !strings.switcherWindowlessAppsAll.isEmpty
+                   && !strings.switcherWindowlessAppsOff.contains("—")
+                   && !strings.switcherWindowlessAppsFinder.contains("—")
+                   && !strings.switcherWindowlessAppsAll.contains("—"),
+                   "\(prefix) App Switcher windowless apps choices are all present without em dash")
+            expect(!strings.switcherNoOpenWindow.isEmpty
+                   && !strings.switcherNoOpenWindow.contains("—"),
+                   "\(prefix) App Switcher no-open-window tile label is present without em dash")
             expect(!strings.switcherShortcutHintApps.isEmpty, "\(prefix) App Switcher app shortcut hint is present")
             expect(!strings.switcherShortcutHintWindows.isEmpty, "\(prefix) App Switcher window shortcut hint is present")
             expect(!strings.networkApps.isEmpty, "\(prefix) network app usage title is present")

@@ -29,6 +29,42 @@ enum SwitcherLetterAction: Equatable {
     case quitApp
 }
 
+/// Which running apps earn an entry of their own when they have no window the
+/// switcher can show. The switcher lists windows, so an app that closed all of
+/// them disappears from it while the system switcher still offers it.
+enum SwitcherWindowlessApps: String, CaseIterable, Equatable {
+    /// Windows only.
+    case off
+    /// The desktop app alone, which is always running and often has no window.
+    case finder
+    /// Every running app, the way the system switcher lists them.
+    case all
+
+    static let fallback = SwitcherWindowlessApps.finder
+
+    /// Preferences are stored as plain strings, so an unknown or missing value
+    /// resolves to the behavior the app shipped with instead of nothing.
+    static func mode(storedValue: String?) -> SwitcherWindowlessApps {
+        guard let storedValue, let mode = SwitcherWindowlessApps(rawValue: storedValue) else {
+            return fallback
+        }
+        return mode
+    }
+
+    /// The value that carries the old on/off preference over unchanged: the
+    /// desktop app kept its entry, anything else stayed windows only.
+    static func migrated(showsWindowlessFinder: Bool) -> SwitcherWindowlessApps {
+        showsWindowlessFinder ? .finder : .off
+    }
+}
+
+/// A running app considered for an entry of its own, with the identity the
+/// choice above is decided on.
+struct SwitcherAppCandidate: Equatable {
+    let pid: pid_t
+    let bundleIdentifier: String?
+}
+
 struct SwitcherAppGroup: Identifiable, Equatable {
     let pid: pid_t
     let appName: String
@@ -205,6 +241,36 @@ enum SwitcherSupport {
             }
             .max { lhs, rhs in lhs.value.count < rhs.value.count }?
             .key
+    }
+
+    /// Picks the running apps that earn an entry of their own because the
+    /// window list has nothing for them.
+    ///
+    /// Only a total absence counts. An app whose windows exist but were left
+    /// out on purpose keeps its absence: showing the app anyway would undo the
+    /// choice the user just made, which is what the current-desktop option
+    /// (issue #337) would suffer from otherwise. Order follows the candidate
+    /// list, so the caller keeps ranking these entries the same way it ranks
+    /// windows.
+    static func windowlessAppPIDs(mode: SwitcherWindowlessApps,
+                                  candidates: [SwitcherAppCandidate],
+                                  pidsWithWindows: Set<pid_t>,
+                                  pidsWithWithheldWindows: Set<pid_t>,
+                                  desktopAppBundleIdentifier: String) -> [pid_t] {
+        guard mode != .off else { return [] }
+        return candidates.compactMap { candidate in
+            guard !pidsWithWindows.contains(candidate.pid),
+                  !pidsWithWithheldWindows.contains(candidate.pid)
+            else { return nil }
+            switch mode {
+            case .off:
+                return nil
+            case .finder:
+                return candidate.bundleIdentifier == desktopAppBundleIdentifier ? candidate.pid : nil
+            case .all:
+                return candidate.pid
+            }
+        }
     }
 
     /// Downsamples a capture into a small alpha grid for classification.

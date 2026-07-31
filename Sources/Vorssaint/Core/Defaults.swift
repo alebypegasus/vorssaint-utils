@@ -57,7 +57,8 @@ enum DefaultsKey {
     static let switcherIconRowMode = "switcherIconRowMode"
     static let switcherSimpleMode = "switcherSimpleMode"  // app-only row without window captures
     static let switcherMergeTabs = "switcherMergeTabs"     // show one switcher entry per app (collapse all of an app's windows)
-    static let switcherShowWindowlessFinder = "switcherShowWindowlessFinder"
+    static let switcherShowWindowlessFinder = "switcherShowWindowlessFinder" // replaced by switcherWindowlessApps, kept so the migration can read it
+    static let switcherWindowlessApps = "switcherWindowlessApps" // SwitcherWindowlessApps raw value
     static let switcherCurrentSpaceOnly = "switcherCurrentSpaceOnly" // list only windows on the desktop the user is in (issue #337)
     static let dockPreviewEnabled = "dockPreviewEnabled"
     static let dockClickMinimize = "dockClickMinimize"    // click the active app's Dock icon to minimize its windows
@@ -643,6 +644,7 @@ enum Defaults {
         DefaultsKey.switcherSimpleMode: false,
         DefaultsKey.switcherMergeTabs: false,
         DefaultsKey.switcherShowWindowlessFinder: true,
+        DefaultsKey.switcherWindowlessApps: SwitcherWindowlessApps.fallback.rawValue,
         DefaultsKey.switcherCurrentSpaceOnly: false,
         DefaultsKey.dockPreviewEnabled: false,
         DefaultsKey.dockClickMinimize: false,
@@ -979,6 +981,20 @@ enum Defaults {
         migrateUtilityOrderForAppUpdates(in: defaults)
         migrateScreenshotOpenEditorDirectly(in: defaults)
         migrateSilentHeadphonesDisconnectVolume(in: defaults)
+        migrateSwitcherWindowlessFinder(in: defaults)
+    }
+
+    /// The "show the desktop app without windows" toggle became one choice of
+    /// the windowless apps picker. Only an explicit off has to travel: the
+    /// picker ships on the same choice the toggle shipped on, so a setup that
+    /// never touched it keeps the switcher it already had. Clearing the old
+    /// toggle is what makes this run once and never fight a later choice.
+    static func migrateSwitcherWindowlessFinder(in defaults: UserDefaults) {
+        let showsWindowlessFinder = defaults.bool(forKey: DefaultsKey.switcherShowWindowlessFinder)
+        guard !showsWindowlessFinder else { return }
+        defaults.set(true, forKey: DefaultsKey.switcherShowWindowlessFinder)
+        let mode = SwitcherWindowlessApps.migrated(showsWindowlessFinder: showsWindowlessFinder)
+        defaults.set(mode.rawValue, forKey: DefaultsKey.switcherWindowlessApps)
     }
 
     /// The "open the editor right after capturing" toggle became the Edit
