@@ -54,20 +54,21 @@ enum TemperatureSensorSelector {
 
     static func platform(brandString: String?) -> CPUTemperaturePlatform {
         let brand = brandString?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        if brand.contains("Intel") { return .intel }
         switch appleSiliconGeneration(in: brand) {
         case 1: return .appleM1Family
         case 2: return .appleM2Family
         case 3: return .appleM3Family
         case 4: return .appleM4Family
         case 5: return .appleM5Family
-        default: return .intel
+        default: return .generic
         }
     }
 
     static func currentPlatform() -> CPUTemperaturePlatform {
         var size = 0
         guard sysctlbyname("machdep.cpu.brand_string", nil, &size, nil, 0) == 0, size > 0 else {
-            return .generic
+            return .intel
         }
         var buffer = [CChar](repeating: 0, count: size)
         guard sysctlbyname("machdep.cpu.brand_string", &buffer, &size, nil, 0) == 0 else {
