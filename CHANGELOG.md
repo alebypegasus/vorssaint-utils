@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [3.2.2]
+
+### Added
+- Added Finder Delete Shortcuts (Delete with Backspace and Revert with Shift+Backspace).
+
+### Fixed
+- Fixed alignment of the Finder Delete Shortcuts in the Menu Panel.
+- Translated Finder Delete Shortcuts to all supported languages.
+
 ## [3.2.1]
 
 ### Summary
