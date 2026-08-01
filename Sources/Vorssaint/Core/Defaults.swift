@@ -13,7 +13,6 @@ enum DefaultsKey {
     static let onboardingStep = "onboardingStep"          // resume point if onboarding is interrupted
     static let featuresOnboardingVersion = "featuresOnboardingVersion" // last feature-tour marker handled
     static let lastUpdateIntroVersion = "lastUpdateIntroVersion"
-    static let dockPreviewIntroVersion = "dockPreviewIntroVersion"
     static let supportUpdateIntroVersion = "supportUpdateIntroVersion"
     static let updateHighlightsSeenVersion = "updateHighlightsSeenVersion"
     static let updateShowcaseIntroVersion = "updateShowcaseIntroVersion"
@@ -61,6 +60,7 @@ enum DefaultsKey {
     static let switcherWindowlessApps = "switcherWindowlessApps" // SwitcherWindowlessApps raw value
     static let switcherCurrentSpaceOnly = "switcherCurrentSpaceOnly" // list only windows on the desktop the user is in (issue #337)
     static let dockPreviewEnabled = "dockPreviewEnabled"
+    static let dockPreviewBackgroundOpacity = "dockPreviewBackgroundOpacity" // how solid the preview panel's material is drawn (DockPreviewSupport.backgroundOpacityRange)
     static let dockClickMinimize = "dockClickMinimize"    // click the active app's Dock icon to minimize its windows
     static let dockClickCycleWindows = "dockClickCycleWindows" // click the active app's Dock icon to cycle through its windows
     static let middleClickEnabled = "middleClickEnabled"  // three-finger PHYSICAL click on the trackpad acts as a middle click
@@ -457,10 +457,6 @@ enum OnboardingInfo {
     static let currentFeatureSet = 4
 }
 
-enum DockPreviewIntroInfo {
-    static let releaseVersion = "3.0.4"
-}
-
 /// The one-time tour of a release's headline features, shown right after the
 /// update. Each row deep links to the exact Settings page or opens the tool
 /// itself, so a new feature is one click from being tried instead of buried.
@@ -647,6 +643,7 @@ enum Defaults {
         DefaultsKey.switcherWindowlessApps: SwitcherWindowlessApps.fallback.rawValue,
         DefaultsKey.switcherCurrentSpaceOnly: false,
         DefaultsKey.dockPreviewEnabled: false,
+        DefaultsKey.dockPreviewBackgroundOpacity: 1.0,
         DefaultsKey.dockClickMinimize: false,
         DefaultsKey.dockClickCycleWindows: false,
         DefaultsKey.middleClickEnabled: false,

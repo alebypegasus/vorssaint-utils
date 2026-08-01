@@ -332,6 +332,8 @@ struct Strings {
     let dockPreviewName: String
     let dockPreviewEnable: String
     let dockPreviewEnableCaption: String
+    let dockPreviewBackgroundOpacity: String
+    let dockPreviewBackgroundOpacityCaption: String
     let dockClickMinimize: String
     let dockClickMinimizeCaption: String
     let dockClickCycleWindows: String
@@ -349,10 +351,6 @@ struct Strings {
     let dockPreviewClosePanel: String
     let dockPreviewPreviousWindow: String
     let dockPreviewNextWindow: String
-    let dockPreviewIntroPeek: String
-    let dockPreviewIntroSettingsHint: String
-    let dockPreviewIntroLater: String
-    let dockPreviewIntroEnable: String
 
     // MARK: Feature — cut & paste in Finder
     let cutPasteName: String
@@ -926,7 +924,7 @@ struct Strings {
     let supportIntroTitle: String
     let supportIntroMessage: String
     let supportIntroStarButton: String
-    let supportIntroCoffeeButton: String
+    let supportIntroSponsorButton: String
     let supportIntroLaterButton: String
     let supportIntroDoneButton: String
     let communityIntroTitle: String
@@ -1028,7 +1026,6 @@ struct Strings {
     let highlightsCaptionDockPreview: String
     let highlightsCaptionScreenshot: String
     let highlightsCaptionSnippetLibrary: String
-    let highlightsCaptionMicMute: String
     let highlightsConfigure: String
     let highlightsTry: String
     let highlightsSeeAll: String
@@ -1252,6 +1249,8 @@ extension Strings {
         dockPreviewName: "Dock Preview",
         dockPreviewEnable: "Pré-visualizar janelas no Dock",
         dockPreviewEnableCaption: "Passe o mouse em um app aberto no Dock para ver e espiar suas janelas.",
+        dockPreviewBackgroundOpacity: "Fundo do painel",
+        dockPreviewBackgroundOpacityCaption: "Diminua para ver mais do que está atrás do painel.",
         dockClickMinimize: "Clicar no Dock minimiza",
         dockClickMinimizeCaption: "As janelas do app ativo são minimizadas ao clicar no ícone dele no Dock. Clique de novo para trazê-las de volta.",
         dockClickCycleWindows: "Clicar no Dock alterna janelas",
@@ -1269,10 +1268,6 @@ extension Strings {
         dockPreviewClosePanel: "Fechar prévia",
         dockPreviewPreviousWindow: "Janela anterior",
         dockPreviewNextWindow: "Próxima janela",
-        dockPreviewIntroPeek: "Passe o mouse em uma miniatura para espiar. Clique para abrir a janela.",
-        dockPreviewIntroSettingsHint: "Você pode mudar isso depois em Ajustes › Switcher.",
-        dockPreviewIntroLater: "Agora não",
-        dockPreviewIntroEnable: "Ativar Dock Preview",
 
         cutPasteName: "Recortar e colar",
         cutPasteEnable: "Recortar e colar arquivos no Finder",
@@ -1818,13 +1813,13 @@ extension Strings {
         shortcutsPageTitle: "Atalhos de teclado",
         settingsSearchPlaceholder: "Buscar ajustes",
         donateHeading: "Apoie o Vorssaint",
-        donateMessage: "Todos os meus projetos públicos são, e sempre serão, totalmente gratuitos: sem assinatura, sem anúncios. O apoio da comunidade é a única forma de manter tudo vivo. Se o Vorssaint te ajuda, um café faz diferença de verdade.",
-        donateButton: "Buy me a coffee",
+        donateMessage: "Todos os meus projetos públicos são, e sempre serão, totalmente gratuitos: sem assinatura, sem anúncios. O apoio da comunidade é a única forma de manter tudo vivo. Se o Vorssaint te ajuda, virar apoiador no GitHub faz diferença de verdade.",
+        donateButton: "Apoiar no GitHub",
         donateThanks: "Obrigado por estar aqui. 🖤",
         supportIntroTitle: "O Vorssaint é 100% gratuito e sempre será",
-        supportIntroMessage: "Eu sigo cuidando do app no meu tempo livre. Se ele te ajuda, você pode me ajudar de um jeito simples, divulgando, deixando uma estrela no GitHub ou pagando um café. Isso me ajuda muito a continuar trazendo melhorias.",
+        supportIntroMessage: "Eu sigo cuidando do app no meu tempo livre. Se ele te ajuda, você pode me ajudar de um jeito simples, divulgando, deixando uma estrela no GitHub ou virando apoiador por lá. Isso me ajuda muito a continuar trazendo melhorias.",
         supportIntroStarButton: "Dar uma estrela",
-        supportIntroCoffeeButton: "Buy me a coffee",
+        supportIntroSponsorButton: "Apoiar no GitHub",
         supportIntroLaterButton: "Agora não",
         supportIntroDoneButton: "Concluir",
         communityIntroTitle: "Vem ver antes de todo mundo",
@@ -1920,7 +1915,6 @@ extension Strings {
         highlightsCaptionDockPreview: "O Dock Preview agora funciona com a ampliação do Dock ligada",
         highlightsCaptionScreenshot: "A captura de tela ganhou uma lupa de pixels e leitura de QR codes",
         highlightsCaptionSnippetLibrary: "Um menu de snippets com busca digita qualquer snippet direto no cursor",
-        highlightsCaptionMicMute: "O silenciar agora vale para todos os microfones, não só o que o Mac está usando",
         highlightsConfigure: "Configurar",
         highlightsTry: "Experimentar",
         highlightsSeeAll: "Ver todas as mudanças",
@@ -2145,6 +2139,8 @@ extension Strings {
         dockPreviewName: "Dock Preview",
         dockPreviewEnable: "Preview windows from the Dock",
         dockPreviewEnableCaption: "Hover over an open app in the Dock to preview and peek at its windows.",
+        dockPreviewBackgroundOpacity: "Panel background",
+        dockPreviewBackgroundOpacityCaption: "Turn it down to see more of what sits behind the panel.",
         dockClickMinimize: "Click the Dock icon to minimize",
         dockClickMinimizeCaption: "The active app's windows minimize when you click its Dock icon. Click again to bring them back.",
         dockClickCycleWindows: "Click the Dock icon to cycle windows",
@@ -2162,10 +2158,6 @@ extension Strings {
         dockPreviewClosePanel: "Close preview",
         dockPreviewPreviousWindow: "Previous window",
         dockPreviewNextWindow: "Next window",
-        dockPreviewIntroPeek: "Hover over a thumbnail to peek. Click to open the window.",
-        dockPreviewIntroSettingsHint: "You can change this later in Settings › Switcher.",
-        dockPreviewIntroLater: "Not now",
-        dockPreviewIntroEnable: "Enable Dock Preview",
 
         cutPasteName: "Cut & paste",
         cutPasteEnable: "Cut & paste files in Finder",
@@ -2711,13 +2703,13 @@ extension Strings {
         shortcutsPageTitle: "Keyboard shortcuts",
         settingsSearchPlaceholder: "Search settings",
         donateHeading: "Support Vorssaint",
-        donateMessage: "Every one of my public projects is, and always will be, completely free: no subscription, no ads. Community support is the only thing that keeps it alive. If Vorssaint helps you, a coffee genuinely makes a difference.",
-        donateButton: "Buy me a coffee",
+        donateMessage: "Every one of my public projects is, and always will be, completely free: no subscription, no ads. Community support is the only thing that keeps it alive. If Vorssaint helps you, becoming a sponsor on GitHub genuinely makes a difference.",
+        donateButton: "Sponsor on GitHub",
         donateThanks: "Thank you for being here. 🖤",
         supportIntroTitle: "Vorssaint is 100% free and always will be",
-        supportIntroMessage: "I keep taking care of the app in my free time. If it helps you, you can help me in a simple way by sharing it, leaving a star on GitHub or buying me a coffee. It helps me a lot to keep improving it.",
+        supportIntroMessage: "I keep taking care of the app in my free time. If it helps you, you can help me in a simple way by sharing it, leaving a star on GitHub or sponsoring me there. It helps me a lot to keep improving it.",
         supportIntroStarButton: "Leave a star",
-        supportIntroCoffeeButton: "Buy me a coffee",
+        supportIntroSponsorButton: "Sponsor on GitHub",
         supportIntroLaterButton: "Not now",
         supportIntroDoneButton: "Done",
         communityIntroTitle: "See it before everyone else",
@@ -2813,7 +2805,6 @@ extension Strings {
         highlightsCaptionDockPreview: "Dock Preview now works with Dock magnification turned on",
         highlightsCaptionScreenshot: "The screenshot tool gained a pixel loupe and QR code reading",
         highlightsCaptionSnippetLibrary: "A searchable snippet menu types any snippet right at your cursor",
-        highlightsCaptionMicMute: "The mute now covers every microphone, not just the one the Mac is set to",
         highlightsConfigure: "Set up",
         highlightsTry: "Try it",
         highlightsSeeAll: "See all changes",

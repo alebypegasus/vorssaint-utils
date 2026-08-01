@@ -745,6 +745,7 @@ struct SwitcherSettings: View {
     @AppStorage(DefaultsKey.switcherWindowlessApps) private var switcherWindowlessApps = SwitcherWindowlessApps.fallback.rawValue
     @AppStorage(DefaultsKey.switcherCurrentSpaceOnly) private var switcherCurrentSpaceOnly = false
     @AppStorage(DefaultsKey.dockPreviewEnabled) private var dockPreviewEnabled = false
+    @AppStorage(DefaultsKey.dockPreviewBackgroundOpacity) private var dockPreviewBackgroundOpacity = 1.0
     @AppStorage(DefaultsKey.dockClickMinimize) private var dockClickMinimize = false
     @AppStorage(DefaultsKey.dockClickCycleWindows) private var dockClickCycleWindows = false
     @AppStorage(DefaultsKey.previewSize) private var previewSize = "normal"
@@ -832,6 +833,19 @@ struct SwitcherSettings: View {
                         Text(dockPreviewCaption)
                             .font(.caption)
                             .foregroundStyle(dockPreviewWarning ? .orange : .secondary)
+                        if dockPreviewEnabled {
+                            HStack {
+                                Text(l10n.s.dockPreviewBackgroundOpacity)
+                                Slider(value: dockPreviewBackgroundOpacityBinding,
+                                       in: DockPreviewSupport.backgroundOpacityRange,
+                                       step: 0.05)
+                                Text("\(dockPreviewBackgroundOpacityPercent)%")
+                                    .font(.system(.body, design: .monospaced))
+                                    .foregroundStyle(.secondary)
+                                    .frame(width: 52, alignment: .trailing)
+                            }
+                            SettingsCaptionText(l10n.s.dockPreviewBackgroundOpacityCaption)
+                        }
                     }
                     if AppFeature.dockClick.isAvailable {
                         Toggle(l10n.s.dockClickMinimize, isOn: $dockClickMinimize)
@@ -900,6 +914,17 @@ struct SwitcherSettings: View {
 
     private var dockPreviewWarning: Bool {
         dockPreviewEnabled && dockPreview.blockedReason != nil
+    }
+
+    private var dockPreviewBackgroundOpacityBinding: Binding<Double> {
+        Binding(
+            get: { DockPreviewSupport.sanitizedBackgroundOpacity(dockPreviewBackgroundOpacity) },
+            set: { dockPreviewBackgroundOpacity = DockPreviewSupport.sanitizedBackgroundOpacity($0) }
+        )
+    }
+
+    private var dockPreviewBackgroundOpacityPercent: Int {
+        Int((DockPreviewSupport.sanitizedBackgroundOpacity(dockPreviewBackgroundOpacity) * 100).rounded())
     }
 }
 
@@ -1093,8 +1118,8 @@ struct ReleaseNotesSettings: View {
 // MARK: - Support / donate
 
 /// A calm, visual page inviting people to support the project. Nothing is
-/// nagged or gated: the message and a single Buy Me a Coffee button that opens
-/// the donate page in the browser.
+/// nagged or gated: the message and a single button that opens the sponsors
+/// page in the browser.
 struct SupportSettings: View {
     @ObservedObject private var l10n = L10n.shared
 
@@ -1105,8 +1130,8 @@ struct SupportSettings: View {
                 Circle()
                     .fill(Theme.spaceGradient)
                     .frame(width: 84, height: 84)
-                Image(systemName: "cup.and.saucer.fill")
-                    .font(.system(size: 33))
+                Image(systemName: "heart.fill")
+                    .font(.system(size: 31))
                     .foregroundStyle(.white)
             }
             Text(l10n.s.donateHeading)
@@ -1116,8 +1141,11 @@ struct SupportSettings: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: 360)
-            CoffeeButton()
-                .padding(.top, 4)
+            VStack(spacing: 10) {
+                SponsorButton()
+                CoffeeLink()
+            }
+            .padding(.top, 4)
             Text(l10n.s.donateThanks)
                 .font(.caption)
                 .foregroundStyle(.tertiary)
@@ -1127,9 +1155,11 @@ struct SupportSettings: View {
     }
 }
 
-/// The Buy Me a Coffee call to action for the Support page. Opens the donate
-/// page in the default browser.
-struct CoffeeButton: View {
+/// The call to action for the Support page. Opens the sponsors page in the
+/// default browser. The pink heart is the mark the sponsors page itself uses,
+/// so the button looks like where it lands, and white on it holds its contrast
+/// in both themes.
+struct SponsorButton: View {
     @ObservedObject private var l10n = L10n.shared
     @Environment(\.openURL) private var openURL
 
@@ -1138,16 +1168,42 @@ struct CoffeeButton: View {
             openURL(AppInfo.donateURL)
         } label: {
             HStack(spacing: 8) {
-                Text("☕").font(.system(size: 15))
+                Image(systemName: "heart.fill").font(.system(size: 13))
                 Text(l10n.s.donateButton)
                     .font(.system(size: 14, weight: .semibold))
             }
-            .foregroundStyle(.black)
+            .foregroundStyle(.white)
             .padding(.horizontal, 22)
             .padding(.vertical, 11)
-            .background(Capsule().fill(Color(red: 1.0, green: 0.84, blue: 0.0)))
+            .background(Capsule().fill(Color(red: 0.86, green: 0.38, blue: 0.64)))
         }
         .buttonStyle(.plain)
+    }
+}
+
+/// The other way to give, for the people who already give that way. Small and
+/// tertiary on purpose: it sits under the main button as an alternative, never
+/// as a second thing to weigh. The name is the same in every language, so it
+/// carries no string of its own.
+struct CoffeeLink: View {
+    @Environment(\.openURL) private var openURL
+    @State private var isHovering = false
+
+    var body: some View {
+        Button {
+            openURL(AppInfo.coffeeURL)
+        } label: {
+            HStack(spacing: 5) {
+                Image(systemName: "cup.and.saucer")
+                Text("Buy me a coffee")
+                    .underline(isHovering)
+            }
+            .font(.system(size: 11.5))
+            .foregroundStyle(isHovering ? Color.secondary : Color(nsColor: .tertiaryLabelColor))
+        }
+        .buttonStyle(.plain)
+        .onHover { isHovering = $0 }
+        .animation(.easeOut(duration: 0.12), value: isHovering)
     }
 }
 

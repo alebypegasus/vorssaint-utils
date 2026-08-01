@@ -60,6 +60,12 @@ struct CommandBarEntry: Identifiable {
     /// True for the few rows whose whole point is to leave the field standing:
     /// they put something INTO the bar instead of doing something with it.
     let keepsBarOpen: Bool
+    /// True for a row that reads whatever is typed after its own name, the way
+    /// a saved search does. The ranking has to score it against everything
+    /// typed, or the words of the argument drop it from the list at the exact
+    /// moment it was about to run. A row that does nothing with those words
+    /// goes on answering to its name alone.
+    let takesArgument: Bool
     let run: (Int?) -> Void
 
     /// Whether running this row asks the person something first. A row that
@@ -81,7 +87,8 @@ struct CommandBarEntry: Identifiable {
                         numericRange: numericRange, numericIsOptional: numericIsOptional,
                         confirmationPrompt: confirmationPrompt, answerValue: answerValue,
                         isAnswer: isAnswer, countsUsage: countsUsage,
-                        matchTitle: matchTitle, keepsBarOpen: keepsBarOpen, run: run)
+                        matchTitle: matchTitle, keepsBarOpen: keepsBarOpen,
+                        takesArgument: takesArgument, run: run)
     }
 
     /// Glyph rows get a tinted plate behind the icon; real app, file and
@@ -110,6 +117,7 @@ struct CommandBarEntry: Identifiable {
          countsUsage: Bool = true,
          matchTitle: String? = nil,
          keepsBarOpen: Bool = false,
+         takesArgument: Bool = false,
          run: @escaping (Int?) -> Void) {
         self.id = id
         self.stableKey = stableKey ?? id
@@ -129,6 +137,7 @@ struct CommandBarEntry: Identifiable {
         self.countsUsage = countsUsage
         self.matchTitle = matchTitle
         self.keepsBarOpen = keepsBarOpen
+        self.takesArgument = takesArgument
         self.run = run
     }
 }
@@ -992,6 +1001,9 @@ enum CommandBarCatalog {
                 // A saved search may still need to be told what to look for,
                 // and it cannot ask from behind a closed panel.
                 keepsBarOpen: link.takesQuery,
+                // Only a search reads the words that follow its name; a plain
+                // site or folder opens the same either way.
+                takesArgument: link.takesQuery,
                 run: { _ in open(link) })
         }
     }

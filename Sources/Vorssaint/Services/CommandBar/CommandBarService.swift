@@ -858,6 +858,23 @@ final class CommandBarService: ObservableObject {
         ("toggle.", 5),
     ]
 
+    /// The folded text a row is ranked against. Almost every row answers to
+    /// its own title, folded once when the catalog was built. A row that reads
+    /// an argument answers to the whole query instead: scored against its name
+    /// alone, it would leave the list the moment the argument was typed, which
+    /// is exactly when it was about to run.
+    private func rankingTitle(for entry: CommandBarEntry,
+                              folded: (title: String, keywords: String)?,
+                              query: String) -> String {
+        guard entry.takesArgument else {
+            return folded?.title ?? CommandBarSearch.normalized(entry.matchTitle ?? entry.title)
+        }
+        // Not cacheable by design: what this row answers to changes with every
+        // keystroke. Only the handful of saved searches pay for it.
+        return CommandBarSearch.normalized(
+            CommandBarLinks.rankingTitle(name: entry.title, query: query))
+    }
+
     private func searchRows(for trimmed: String) -> [CommandBarEntry] {
         let bar = FeatureStrings.commandBar(L10n.shared.language)
         // Inside a category, typing filters that category and nothing else:
@@ -875,8 +892,8 @@ final class CommandBarService: ObservableObject {
             let candidates = pool.enumerated().map { index, entry in
                 let folded = normalizedByID[entry.id]
                 return CommandBarCandidate(index: index,
-                                           normalizedTitle: folded?.title
-                                               ?? CommandBarSearch.normalized(entry.matchTitle ?? entry.title),
+                                           normalizedTitle: rankingTitle(for: entry, folded: folded,
+                                                                         query: trimmed),
                                            normalizedKeywords: folded?.keywords
                                                ?? CommandBarSearch.normalized(entry.keywords),
                                            boost: 0)
@@ -954,8 +971,8 @@ final class CommandBarService: ObservableObject {
             let aliasBoost = names[entry.stableKey]
                 .flatMap { CommandBarPreferences.aliasHit($0, query: effectiveQuery)?.rawValue } ?? 0
             return CommandBarCandidate(index: index,
-                                normalizedTitle: folded?.title
-                                    ?? CommandBarSearch.normalized(entry.matchTitle ?? entry.title),
+                                normalizedTitle: rankingTitle(for: entry, folded: folded,
+                                                              query: effectiveQuery),
                                 normalizedKeywords: folded?.keywords
                                     ?? CommandBarSearch.normalized(entry.keywords),
                                 // A running app is likelier to be the one

@@ -1437,6 +1437,19 @@ struct MetricsTests {
                "committing to an app with no window and coming from none changes no history")
         expect(registeredDefaults[DefaultsKey.dockPreviewEnabled] as? Bool == false,
                "Dock Preview is opt-in for clean installs")
+        expect(registeredDefaults[DefaultsKey.dockPreviewBackgroundOpacity] as? Double == 1.0,
+               "the Dock Preview panel starts fully solid")
+        expect(DockPreviewSupport.sanitizedBackgroundOpacity(0.7) == 0.7,
+               "a Dock Preview background opacity inside the range is kept")
+        expect(DockPreviewSupport.sanitizedBackgroundOpacity(0)
+               == DockPreviewSupport.backgroundOpacityRange.lowerBound
+               && DockPreviewSupport.sanitizedBackgroundOpacity(-3)
+               == DockPreviewSupport.backgroundOpacityRange.lowerBound,
+               "the Dock Preview panel never fades past the floor that keeps it looking like a panel")
+        expect(DockPreviewSupport.sanitizedBackgroundOpacity(4) == 1.0
+               && DockPreviewSupport.sanitizedBackgroundOpacity(.nan) == 1.0
+               && DockPreviewSupport.sanitizedBackgroundOpacity(.infinity) == 1.0,
+               "a broken stored Dock Preview opacity falls back to solid")
         expect(registeredDefaults[DefaultsKey.autoCheckUpdates] as? Bool == true,
                "update checks are on for clean installs")
         expect(registeredDefaults[DefaultsKey.updateShowcaseIntroVersion] as? String == "",
@@ -1469,7 +1482,7 @@ struct MetricsTests {
         // per-release decision: this check fails on every version bump so the
         // decision above is made consciously, never by omission.
         let plistVersion = (NSDictionary(contentsOfFile: "Resources/Info.plist")?["CFBundleShortVersionString"] as? String) ?? ""
-        expect(plistVersion == "3.2.0",
+        expect(plistVersion == "3.2.1",
                "bumping the app version requires re-deciding the support prompt pin above")
         // 3.2.0 is a feature release, so the tour pin moves to it and the
         // pages are re-curated: mouse button shortcuts is the headline. Later
@@ -6055,6 +6068,12 @@ struct MetricsTests {
             expect(!strings.switcherNoOpenWindow.isEmpty
                    && !strings.switcherNoOpenWindow.contains("—"),
                    "\(prefix) App Switcher no-open-window tile label is present without em dash")
+            expect(!strings.dockPreviewBackgroundOpacity.isEmpty
+                   && !strings.dockPreviewBackgroundOpacity.contains("—"),
+                   "\(prefix) Dock Preview background title is present without em dash")
+            expect(!strings.dockPreviewBackgroundOpacityCaption.isEmpty
+                   && !strings.dockPreviewBackgroundOpacityCaption.contains("—"),
+                   "\(prefix) Dock Preview background caption is present without em dash")
             expect(!strings.switcherShortcutHintApps.isEmpty, "\(prefix) App Switcher app shortcut hint is present")
             expect(!strings.switcherShortcutHintWindows.isEmpty, "\(prefix) App Switcher window shortcut hint is present")
             expect(!strings.networkApps.isEmpty, "\(prefix) network app usage title is present")
@@ -6085,7 +6104,6 @@ struct MetricsTests {
             let highlightsStrings = [strings.highlightsTitle, strings.highlightsCaptionDockPreview,
                                      strings.highlightsCaptionScreenshot,
                                      strings.highlightsCaptionSnippetLibrary,
-                                     strings.highlightsCaptionMicMute,
                                      strings.highlightsConfigure,
                                      strings.highlightsTry, strings.highlightsSeeAll]
             expect(highlightsStrings.allSatisfy { !$0.isEmpty && !$0.contains("—") },
@@ -8124,6 +8142,34 @@ struct MetricsTests {
                 && MouseButtonShortcutSupport.buttonName(for: 5, strings: .enUS) == "Button 6",
                "buttons are named by their job or their printed count")
 
+        // A synthesized press has to carry the same flags a finger produces,
+        // or the system matches it against no shortcut of its own (issue #401).
+        expect(GlobalShortcut(keyCode: Int64(kVK_ANSI_N), modifiers: [.command, .shift])
+                .syntheticEventFlags == [.maskCommand, .maskShift],
+               "an ordinary key goes out with its modifiers and nothing else")
+        expect(GlobalShortcut(keyCode: Int64(kVK_RightArrow), modifiers: [.control, .command])
+                .syntheticEventFlags == [.maskControl, .maskCommand, .maskSecondaryFn, .maskNumericPad],
+               "an arrow goes out as a function key of the numeric pad, the way it arrives")
+        expect(GlobalShortcut(keyCode: Int64(kVK_F13), modifiers: [.control, .option, .command])
+                .syntheticEventFlags
+                == [.maskControl, .maskAlternate, .maskCommand, .maskSecondaryFn],
+               "an F key goes out as a function key")
+        expect(GlobalShortcut(keyCode: Int64(kVK_PageDown), modifiers: [.command])
+                .syntheticEventFlags == [.maskCommand, .maskSecondaryFn]
+                && GlobalShortcut(keyCode: Int64(kVK_ForwardDelete), modifiers: [.command])
+                .syntheticEventFlags == [.maskCommand, .maskSecondaryFn],
+               "the navigation block counts as function keys too")
+        expect(GlobalShortcut(keyCode: Int64(kVK_ANSI_Keypad5), modifiers: [.control])
+                .syntheticEventFlags == [.maskControl, .maskNumericPad],
+               "a keypad key goes out as part of the keypad, without the function flag")
+        expect(GlobalShortcut(keyCode: Int64(kVK_Delete), modifiers: [.command])
+                .syntheticEventFlags == [.maskCommand]
+                && GlobalShortcut(keyCode: Int64(kVK_Escape), modifiers: [.command])
+                .syntheticEventFlags == [.maskCommand]
+                && GlobalShortcut(keyCode: Int64(kVK_Return), modifiers: [.control, .option])
+                .syntheticEventFlags == [.maskControl, .maskAlternate],
+               "the keys beside them are ordinary and stay ordinary")
+
         // MARK: Super key (issue #330)
 
         expect(Defaults.registeredDefaults[DefaultsKey.superKeyEnabled] as? Bool == false,
@@ -8438,7 +8484,6 @@ struct MetricsTests {
         expect(!backupKeys.contains(DefaultsKey.startupDidNotFinish),
                "the backup never carries a note about a start that did not finish")
         expect(backupKeys.contains(DefaultsKey.hasOnboarded)
-                && backupKeys.contains(DefaultsKey.dockPreviewIntroVersion)
                 && backupKeys.contains(DefaultsKey.featuresOnboardingVersion)
                 && backupKeys.contains(DefaultsKey.lastUpdateIntroVersion),
                "a restored Mac does not replay onboarding or the intros already seen")
@@ -9277,6 +9322,22 @@ struct MetricsTests {
             CommandBarLink(name: "", kind: .link, destination: "x"),
             CommandBarLink(name: "ok", kind: .link, destination: "x"),
         ])).count == 1, "a half-written shortcut never survives a round trip")
+        expect(CommandBarLinks.rankingTitle(name: "gh", query: "gh vorssaint utils")
+                == "gh vorssaint utils",
+               "once an argument follows the name, the row is scored against the whole query")
+        expect(CommandBarLinks.rankingTitle(name: "gh", query: "gh") == "gh",
+               "the name alone still scores against its own name")
+        expect(CommandBarLinks.rankingTitle(name: "gh", query: "ghost writer") == "gh",
+               "a word that only starts with the name is not an argument, so scoring is untouched")
+        // The defect itself: scored against its own name, a saved search left
+        // the list on the first word of the argument, which is the moment it
+        // was about to run.
+        expect(CommandBarSearch.score(title: "gh", keywords: "Link",
+                                      query: "gh vorssaint utils") == nil
+                && CommandBarSearch.score(
+                    title: CommandBarLinks.rankingTitle(name: "gh", query: "gh vorssaint utils"),
+                    keywords: "Link", query: "gh vorssaint utils") != nil,
+               "a saved search stays in the list while what to look for is typed")
 
         expect(CommandBarText.wordCount("uma frase com cinco palavras") == 5
                 && CommandBarText.wordCount("  espaços   demais  ") == 2

@@ -59,7 +59,6 @@ enum SettingsBackupSupport {
         // feature intros the user has already been through.
         DefaultsKey.hasOnboarded,
         DefaultsKey.onboardingStep,
-        DefaultsKey.dockPreviewIntroVersion,
         DefaultsKey.featuresOnboardingVersion,
         DefaultsKey.lastUpdateIntroVersion,
         DefaultsKey.supportUpdateIntroVersion,

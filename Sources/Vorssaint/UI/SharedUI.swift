@@ -48,6 +48,11 @@ struct ShortcutCaps: View {
 /// white. The plate keeps the frost visible and gives the text something to sit
 /// on. Where the system is already told to reduce transparency it makes the
 /// material opaque by itself, so the plate stays out of the way.
+///
+/// `opacity` fades the material itself, for the one panel that lets the user
+/// choose how much of the screen shows through. Reduce transparency wins over
+/// it: the whole point of that setting is that panels stop being see-through,
+/// so a stored preference must not quietly undo it.
 struct HUDBackdrop: View {
     enum Contrast {
         case standard
@@ -56,9 +61,14 @@ struct HUDBackdrop: View {
 
     var cornerRadius: CGFloat = 0
     var contrast: Contrast = .standard
+    var opacity: Double = 1
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    private var materialOpacity: Double {
+        reduceTransparency ? 1 : min(max(opacity, 0), 1)
+    }
 
     /// Chosen from the worst case rather than by eye: a panel over a full white
     /// window in the dark theme, or over a full black one in the light theme,
@@ -72,7 +82,7 @@ struct HUDBackdrop: View {
     }
 
     var body: some View {
-        HUDBackdropMaterial(cornerRadius: cornerRadius)
+        HUDBackdropMaterial(cornerRadius: cornerRadius, opacity: materialOpacity)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .fill(colorScheme == .dark ? Color.black : Color.white)
@@ -93,6 +103,7 @@ struct HUDBackdrop: View {
 /// to the same radius as the card removes it. Pass the card's corner radius.
 private struct HUDBackdropMaterial: NSViewRepresentable {
     var cornerRadius: CGFloat = 0
+    var opacity: Double = 1
 
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = NSVisualEffectView()
@@ -108,6 +119,7 @@ private struct HUDBackdropMaterial: NSViewRepresentable {
     }
 
     private func apply(to view: NSVisualEffectView) {
+        view.alphaValue = CGFloat(opacity)
         view.wantsLayer = true
         view.layer?.cornerRadius = cornerRadius
         view.layer?.cornerCurve = .continuous

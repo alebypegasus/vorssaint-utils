@@ -39,7 +39,10 @@ struct UpdateHighlightsView: View {
         let action: () -> Void
     }
 
-    /// The curated pages for the pinned release. Features the user
+    /// The curated pages for the pinned release: only what this version
+    /// introduced. A feature that merely got better is read as new by anyone
+    /// who already had it, so improvements stay in the release notes and the
+    /// tour keeps meaning "this was not here before". Features the user
     /// uninstalled in the hub stay out; their Settings pages are gone too.
     private var highlights: [Highlight] {
         var pages: [Highlight] = []
@@ -80,15 +83,6 @@ struct UpdateHighlightsView: View {
                 caption: AppFeature.mouseButtonShortcuts.hubDescription(hub),
                 actionLabel: s.highlightsConfigure,
                 action: { openSettings(.mouse) }))
-        }
-        if AppFeature.micMute.isAvailable {
-            pages.append(Highlight(
-                id: "micmute", symbol: AppFeature.micMute.symbolName,
-                imageName: "highlights-micmute",
-                title: AppFeature.micMute.hubTitle(s, hub: hub),
-                caption: s.highlightsCaptionMicMute,
-                actionLabel: s.highlightsConfigure,
-                action: { openSettings(.quickTools) }))
         }
         if AppFeature.superKey.isAvailable {
             pages.append(Highlight(
@@ -233,8 +227,7 @@ struct UpdateHighlightsView: View {
     /// At least one featured item survives in the hub, so the tour has a
     /// page to show. The gate reads this before opening the window.
     static var hasContent: Bool {
-        [AppFeature.commandBar, .appUpdates, .mouseButtonShortcuts, .textSnippets, .superKey,
-         .micMute]
+        [AppFeature.commandBar, .appUpdates, .mouseButtonShortcuts, .textSnippets, .superKey]
             .contains { $0.isAvailable }
     }
 
