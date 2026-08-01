@@ -3,12 +3,10 @@
 
 import SwiftUI
 
-/// Beta entry point for fan control. It is intentionally informational for now:
-/// writing fan curves safely needs model-by-model validation before controls are
-/// enabled in a public build.
 struct FanControlSection: View {
     @ObservedObject private var l10n = L10n.shared
     @Environment(\.colorScheme) private var colorScheme
+    @StateObject private var service = FanControlService(smc: SMCClient())
     var collapsible = true
 
     var body: some View {
@@ -37,19 +35,56 @@ struct FanControlSection: View {
                     Spacer()
                 }
 
-                Picker("", selection: .constant("automatic")) {
-                    Text(l10n.s.fanControlModeAutomatic).tag("automatic")
-                    Text(l10n.s.fanControlModeManual).tag("manual")
+                if service.fans.isEmpty {
+                    Text("No fans detected or lacking SMC permission.")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.tertiary)
+                        .padding(.top, 4)
+                } else {
+                    ForEach($service.fans) { $fan in
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text(fan.name).font(.system(size: 11, weight: .medium))
+                                Spacer()
+                                Text("\(Int(fan.actualSpeed)) RPM").font(.system(size: 11)).monospacedDigit()
+                            }
+                            Picker("", selection: Binding(
+                                get: { fan.isManual ? "manual" : "automatic" },
+                                set: { mode in
+                                    service.setManualMode(for: fan.id, manual: mode == "manual")
+                                }
+                            )) {
+                                Text(l10n.s.fanControlModeAutomatic).tag("automatic")
+                                Text(l10n.s.fanControlModeManual).tag("manual")
+                            }
+                            .pickerStyle(.segmented)
+                            
+                            if fan.isManual {
+                                Slider(
+                                    value: Binding(
+                                        get: { fan.targetSpeed },
+                                        set: { speed in
+                                            service.setTargetSpeed(for: fan.id, speed: speed)
+                                        }
+                                    ),
+                                    in: fan.minSpeed...fan.maxSpeed,
+                                    step: 10
+                                )
+                                HStack {
+                                    Text("\(Int(fan.minSpeed))").font(.system(size: 9)).foregroundStyle(.tertiary)
+                                    Spacer()
+                                    Text("\(Int(fan.maxSpeed))").font(.system(size: 9)).foregroundStyle(.tertiary)
+                                }
+                            }
+                        }
+                        .padding(.top, 4)
+                    }
                 }
-                .pickerStyle(.segmented)
-                .disabled(true)
-
-                Text(l10n.s.fanControlBetaCaption)
-                    .font(.system(size: 10))
-                    .foregroundStyle(.tertiary)
-                    .fixedSize(horizontal: false, vertical: true)
             }
             .panelCard()
+            .onAppear {
+                service.refresh()
+            }
         }
     }
 }

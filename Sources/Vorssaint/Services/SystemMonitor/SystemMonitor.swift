@@ -834,10 +834,10 @@ final class SystemMonitor: ObservableObject {
         guard let client = smc else { return }
 
         let all = client.keys { name in
-            name.hasPrefix("Tp") || name.hasPrefix("Te") || name.hasPrefix("Tg")
+            name.hasPrefix("Tp") || name.hasPrefix("Te") || name.hasPrefix("Tf") || name.hasPrefix("TC") || name.hasPrefix("Tg")
                 || name.range(of: "^TB[0-9]T$", options: .regularExpression) != nil
         }
-        cpuKeys = all.filter { $0.name.hasPrefix("Tp") || $0.name.hasPrefix("Te") }
+        cpuKeys = all.filter { $0.name.hasPrefix("Tp") || $0.name.hasPrefix("Te") || $0.name.hasPrefix("Tf") || $0.name.hasPrefix("TC") }
         preferredCPUKeys = cpuKeys.filter {
             TemperatureSensorSelector.isCPUCoreKey($0.name, platform: cpuTemperaturePlatform)
         }

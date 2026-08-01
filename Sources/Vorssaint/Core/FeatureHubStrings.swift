@@ -66,6 +66,8 @@ struct FeatureHubStrings {
     let descClipboardHistory: String
     let descPastePlain: String
     let descFinderCutPaste: String
+    let nameFinderDeleteShortcuts: String
+    let descFinderDeleteShortcuts: String
     let descShelf: String
     let descURLCleaner: String
     let descMixer: String
@@ -115,6 +117,8 @@ struct FeatureHubStrings {
     let energyInputs: String
     let energyPeriodic: String
     let energyHelp: String
+    let shortcutFinderDelete: String
+    let shortcutFinderRevert: String
 }
 
 extension FeatureStrings {
@@ -194,6 +198,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "복사한 내용의 로컬 기록 보관",
         descPastePlain: "서식 없이 텍스트 붙여넣기",
         descFinderCutPaste: "Finder에서 파일 잘라내기 및 붙여넣기",
+        nameFinderDeleteShortcuts: "Finder 삭제 단축키",
+        descFinderDeleteShortcuts: "백스페이스로 삭제",
         descShelf: "파일을 메뉴 막대에 놓아 보관",
         descURLCleaner: "복사한 링크에서 추적 요소 제거",
         descMixer: "앱별 볼륨 슬라이더",
@@ -241,7 +247,9 @@ extension FeatureHubStrings {
         energyKeyboard: "키보드 감시",
         energyInputs: "마우스와 키보드 감시",
         energyPeriodic: "일정 간격으로 확인",
-        energyHelp: "기능이 켜져 있을 때 계속 유지하는 작업입니다. 제거한 기능은 전혀 불러오지 않습니다."
+        energyHelp: "기능이 켜져 있을 때 계속 유지하는 작업입니다. 제거한 기능은 전혀 불러오지 않습니다.",
+        shortcutFinderDelete: "파일 삭제 단축키",
+        shortcutFinderRevert: "삭제 취소 단축키"
     )
 }
 
@@ -302,6 +310,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Keep a local history of what you copy",
         descPastePlain: "Paste text without formatting",
         descFinderCutPaste: "Cut and paste files in Finder",
+        nameFinderDeleteShortcuts: "Finder Delete Shortcuts",
+        descFinderDeleteShortcuts: "Delete with Backspace",
         descShelf: "Drop files on the menu bar to hold them",
         descURLCleaner: "Copied links lose their tracking junk",
         descMixer: "A volume slider for each app",
@@ -349,7 +359,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Listens to the keyboard",
         energyInputs: "Listens to mouse and keyboard",
         energyPeriodic: "Checks on an interval",
-        energyHelp: "What the feature keeps alive while it is on. Uninstalled features load nothing at all."
+        energyHelp: "What the feature keeps alive while it is on. Uninstalled features load nothing at all.",
+        shortcutFinderDelete: "Shortcut to delete file",
+        shortcutFinderRevert: "Shortcut to revert deletion"
     )
 
     static let ptBR = FeatureHubStrings(
@@ -408,6 +420,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Guarda um histórico local do que você copia",
         descPastePlain: "Cole texto sem formatação",
         descFinderCutPaste: "Recorte e cole arquivos no Finder",
+        nameFinderDeleteShortcuts: "Atalhos de Exclusão no Finder",
+        descFinderDeleteShortcuts: "Apague arquivos com o Backspace",
         descShelf: "Solte arquivos na barra de menus para segurar",
         descURLCleaner: "Links copiados perdem os rastreadores",
         descMixer: "Um controle de volume para cada app",
@@ -455,7 +469,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Escuta o teclado",
         energyInputs: "Escuta mouse e teclado",
         energyPeriodic: "Verifica em intervalos",
-        energyHelp: "O custo enquanto a função está ligada. Desinstalada, ela não carrega nada."
+        energyHelp: "O custo enquanto a função está ligada. Desinstalada, ela não carrega nada.",
+        shortcutFinderDelete: "Atalho para apagar arquivo",
+        shortcutFinderRevert: "Atalho para desfazer a exclusão"
     )
 
     static let tr = FeatureHubStrings(
@@ -514,6 +530,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Kopyaladıklarınızın yerel geçmişini tutar",
         descPastePlain: "Metni biçimlendirmesiz yapıştırın",
         descFinderCutPaste: "Finder'da dosyaları kesip yapıştırın",
+        nameFinderDeleteShortcuts: "Finder Silme Kısayolları",
+        descFinderDeleteShortcuts: "Backspace ile Sil",
         descShelf: "Dosyaları menü çubuğuna bırakıp bekletin",
         descURLCleaner: "Kopyalanan bağlantılar izleyicilerden arınır",
         descMixer: "Her uygulama için ayrı ses düzeyi",
@@ -561,7 +579,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Klavyeyi dinler",
         energyInputs: "Fare ve klavyeyi dinler",
         energyPeriodic: "Aralıklarla denetler",
-        energyHelp: "Özellik açıkken tuttuğu maliyet. Kaldırılan özellik hiçbir şey yüklemez."
+        energyHelp: "Özellik açıkken tuttuğu maliyet. Kaldırılan özellik hiçbir şey yüklemez.",
+        shortcutFinderDelete: "Dosya silme kısayolu",
+        shortcutFinderRevert: "Silmeyi geri alma kısayolu"
     )
 
     static let ru = FeatureHubStrings(
@@ -620,6 +640,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Хранит локальную историю скопированного",
         descPastePlain: "Вставка текста без форматирования",
         descFinderCutPaste: "Вырезайте и вставляйте файлы в Finder",
+        nameFinderDeleteShortcuts: "Ярлыки удаления Finder",
+        descFinderDeleteShortcuts: "Удалить с помощью Backspace",
         descShelf: "Бросайте файлы на строку меню на хранение",
         descURLCleaner: "Скопированные ссылки очищаются от трекеров",
         descMixer: "Отдельная громкость для каждого приложения",
@@ -667,7 +689,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Слушает клавиатуру",
         energyInputs: "Слушает мышь и клавиатуру",
         energyPeriodic: "Проверяет с интервалом",
-        energyHelp: "Стоимость, пока функция включена. Удалённая функция ничего не загружает."
+        energyHelp: "Стоимость, пока функция включена. Удалённая функция ничего не загружает.",
+        shortcutFinderDelete: "Ярлык для удаления файла",
+        shortcutFinderRevert: "Ярлык для отмены удаления"
     )
 
     static let es = FeatureHubStrings(
@@ -726,6 +750,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Guarda un historial local de lo que copias",
         descPastePlain: "Pega texto sin formato",
         descFinderCutPaste: "Corta y pega archivos en el Finder",
+        nameFinderDeleteShortcuts: "Atajos de eliminación del Finder",
+        descFinderDeleteShortcuts: "Eliminar con Retroceso",
         descShelf: "Suelta archivos en la barra de menús para guardarlos",
         descURLCleaner: "Los enlaces copiados pierden los rastreadores",
         descMixer: "Un control de volumen para cada app",
@@ -773,7 +799,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Escucha el teclado",
         energyInputs: "Escucha ratón y teclado",
         energyPeriodic: "Comprueba a intervalos",
-        energyHelp: "El coste mientras la función está activada. Desinstalada, no carga nada."
+        energyHelp: "El coste mientras la función está activada. Desinstalada, no carga nada.",
+        shortcutFinderDelete: "Atajo para eliminar archivo",
+        shortcutFinderRevert: "Atajo para revertir la eliminación"
     )
 
     static let de = FeatureHubStrings(
@@ -832,6 +860,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Behält einen lokalen Verlauf des Kopierten",
         descPastePlain: "Text ohne Formatierung einsetzen",
         descFinderCutPaste: "Dateien im Finder ausschneiden und einsetzen",
+        nameFinderDeleteShortcuts: "Tastenkürzel für Finder-Löschen",
+        descFinderDeleteShortcuts: "Löschen mit Backspace",
         descShelf: "Dateien auf der Menüleiste ablegen und festhalten",
         descURLCleaner: "Kopierte Links verlieren ihre Tracker",
         descMixer: "Ein Lautstärkeregler für jede App",
@@ -879,7 +909,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Hört auf die Tastatur",
         energyInputs: "Hört auf Maus und Tastatur",
         energyPeriodic: "Prüft in Intervallen",
-        energyHelp: "Die Kosten, solange die Funktion an ist. Deinstalliert lädt sie gar nichts."
+        energyHelp: "Die Kosten, solange die Funktion an ist. Deinstalliert lädt sie gar nichts.",
+        shortcutFinderDelete: "Tastenkombination zum Löschen",
+        shortcutFinderRevert: "Tastenkombination zum Rückgängigmachen"
     )
 
     static let fr = FeatureHubStrings(
@@ -938,6 +970,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Garde un historique local de vos copies",
         descPastePlain: "Collez du texte sans mise en forme",
         descFinderCutPaste: "Coupez et collez des fichiers dans le Finder",
+        nameFinderDeleteShortcuts: "Raccourcis de suppression Finder",
+        descFinderDeleteShortcuts: "Supprimer avec Retour arrière",
         descShelf: "Déposez des fichiers sur la barre des menus",
         descURLCleaner: "Les liens copiés perdent leurs traqueurs",
         descMixer: "Un volume pour chaque app",
@@ -985,7 +1019,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Écoute le clavier",
         energyInputs: "Écoute souris et clavier",
         energyPeriodic: "Vérifie par intervalles",
-        energyHelp: "Le coût quand la fonction est active. Désinstallée, elle ne charge rien."
+        energyHelp: "Le coût quand la fonction est active. Désinstallée, elle ne charge rien.",
+        shortcutFinderDelete: "Raccourci pour supprimer le fichier",
+        shortcutFinderRevert: "Raccourci pour annuler la suppression"
     )
 
     static let it = FeatureHubStrings(
@@ -1044,6 +1080,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "Tiene una cronologia locale di ciò che copi",
         descPastePlain: "Incolla il testo senza formattazione",
         descFinderCutPaste: "Taglia e incolla i file nel Finder",
+        nameFinderDeleteShortcuts: "Scorciatoie di eliminazione Finder",
+        descFinderDeleteShortcuts: "Elimina con Backspace",
         descShelf: "Trascina file sulla barra dei menu per tenerli lì",
         descURLCleaner: "I link copiati perdono i tracciatori",
         descMixer: "Un volume per ogni app",
@@ -1091,7 +1129,9 @@ extension FeatureHubStrings {
         energyKeyboard: "Ascolta la tastiera",
         energyInputs: "Ascolta mouse e tastiera",
         energyPeriodic: "Controlla a intervalli",
-        energyHelp: "Il costo mentre la funzione è attiva. Disinstallata non carica nulla."
+        energyHelp: "Il costo mentre la funzione è attiva. Disinstallata non carica nulla.",
+        shortcutFinderDelete: "Scorciatoia per eliminare il file",
+        shortcutFinderRevert: "Scorciatoia per annullare l'eliminazione"
     )
 
     static let ja = FeatureHubStrings(
@@ -1150,6 +1190,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "コピーの履歴をローカルに保存",
         descPastePlain: "書式なしでテキストをペースト",
         descFinderCutPaste: "Finderでファイルをカット&ペースト",
+        nameFinderDeleteShortcuts: "Finderの削除ショートカット",
+        descFinderDeleteShortcuts: "Backspaceで削除",
         descShelf: "メニューバーにファイルをドロップして一時置き",
         descURLCleaner: "コピーしたリンクからトラッカーを除去",
         descMixer: "アプリごとの音量スライダ",
@@ -1197,7 +1239,9 @@ extension FeatureHubStrings {
         energyKeyboard: "キーボードを監視",
         energyInputs: "マウスとキーボードを監視",
         energyPeriodic: "一定間隔で確認",
-        energyHelp: "オンの間のコストです。アンインストールすれば何も読み込みません。"
+        energyHelp: "オンの間のコストです。アンインストールすれば何も読み込みません。",
+        shortcutFinderDelete: "ファイル削除のショートカット",
+        shortcutFinderRevert: "削除を元に戻すショートカット"
     )
 
     static let zhHans = FeatureHubStrings(
@@ -1256,6 +1300,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "在本地保存复制历史",
         descPastePlain: "粘贴无格式文本",
         descFinderCutPaste: "在访达中剪切和粘贴文件",
+        nameFinderDeleteShortcuts: "访达删除快捷键",
+        descFinderDeleteShortcuts: "使用退格键删除",
         descShelf: "把文件放到菜单栏上暂存",
         descURLCleaner: "复制的链接自动去除跟踪参数",
         descMixer: "每个应用独立的音量滑块",
@@ -1303,7 +1349,9 @@ extension FeatureHubStrings {
         energyKeyboard: "监听键盘",
         energyInputs: "监听鼠标和键盘",
         energyPeriodic: "按间隔检查",
-        energyHelp: "功能开启期间的开销。卸载后完全不加载。"
+        energyHelp: "功能开启期间的开销。卸载后完全不加载。",
+        shortcutFinderDelete: "删除文件快捷键",
+        shortcutFinderRevert: "撤销删除快捷键"
     )
 
     static let zhTW = FeatureHubStrings(
@@ -1362,6 +1410,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "在本機保存拷貝歷史",
         descPastePlain: "貼上無格式文字",
         descFinderCutPaste: "在 Finder 中剪下和貼上檔案",
+        nameFinderDeleteShortcuts: "Finder 刪除捷徑",
+        descFinderDeleteShortcuts: "使用倒退鍵刪除",
         descShelf: "把檔案放到選單列上暫存",
         descURLCleaner: "拷貝的連結自動移除追蹤參數",
         descMixer: "每個 App 獨立的音量滑桿",
@@ -1409,7 +1459,9 @@ extension FeatureHubStrings {
         energyKeyboard: "監聽鍵盤",
         energyInputs: "監聽滑鼠與鍵盤",
         energyPeriodic: "按間隔檢查",
-        energyHelp: "功能開啟期間的負擔。解除安裝後完全不載入。"
+        energyHelp: "功能開啟期間的負擔。解除安裝後完全不載入。",
+        shortcutFinderDelete: "刪除檔案捷徑",
+        shortcutFinderRevert: "還原刪除捷徑"
     )
 
     static let zhHK = FeatureHubStrings(
@@ -1468,6 +1520,8 @@ extension FeatureHubStrings {
         descClipboardHistory: "在本機保存複製歷史",
         descPastePlain: "貼上無格式文字",
         descFinderCutPaste: "在 Finder 剪下和貼上檔案",
+        nameFinderDeleteShortcuts: "Finder 刪除捷徑",
+        descFinderDeleteShortcuts: "使用退格鍵刪除",
         descShelf: "把檔案放到選單列暫存",
         descURLCleaner: "複製的連結自動移除追蹤參數",
         descMixer: "每個 App 獨立的音量滑桿",
@@ -1515,6 +1569,8 @@ extension FeatureHubStrings {
         energyKeyboard: "監聽鍵盤",
         energyInputs: "監聽滑鼠與鍵盤",
         energyPeriodic: "按間隔檢查",
-        energyHelp: "功能開啟期間的負擔。解除安裝後完全不載入。"
+        energyHelp: "功能開啟期間的負擔。解除安裝後完全不載入。",
+        shortcutFinderDelete: "刪除檔案捷徑",
+        shortcutFinderRevert: "還原刪除捷徑"
     )
 }

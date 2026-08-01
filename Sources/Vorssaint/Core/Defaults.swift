@@ -79,6 +79,7 @@ enum DefaultsKey {
     static let soundOutputSwitcherDeviceUIDs = "soundOutputSwitcherDeviceUIDs"
     static let preferredInputDevice = "preferredInputDevice" // audio input device UID
     static let finderCutPasteEnabled = "finderCutPasteEnabled"
+    static let finderDeleteShortcutsEnabled = "finderDeleteShortcutsEnabled"
     static let autoQuitEnabled = "autoQuitEnabled"
     static let autoQuitExceptions = "autoQuitExceptions"  // [bundle id] kept running
     static let shelfEnabled = "shelfEnabled"
@@ -168,6 +169,7 @@ enum DefaultsKey {
     static let panelControlSwitcher = "panelControlSwitcher"
     static let panelControlDockPreview = "panelControlDockPreview"
     static let panelControlCutPaste = "panelControlCutPaste"
+    static let panelControlFinderDeleteShortcuts = "panelControlFinderDeleteShortcuts"
     static let panelControlAutoQuit = "panelControlAutoQuit"
     static let panelControlShelf = "panelControlShelf"
     static let panelControlWindowMaximize = "panelControlWindowMaximize"
@@ -359,6 +361,8 @@ enum DefaultsKey {
     static let micMuteMenuBarIndicator = "micMuteMenuBarIndicator" // badge the status icon while muted
     static let quickLauncherShortcutEnabled = "quickLauncherShortcutEnabled"
     static let quickLauncherShortcut = "quickLauncherShortcut"
+    static let finderDeleteShortcut = "finderDeleteShortcut"
+    static let finderRevertShortcut = "finderRevertShortcut"
     static let quickLauncherItemOrder = "quickLauncherItemOrder"
     static let quickLauncherHiddenItems = "quickLauncherHiddenItems"
     static let panelUtilityQuickLauncher = "panelUtilityQuickLauncher"
@@ -714,6 +718,8 @@ enum Defaults {
         DefaultsKey.whatsAppOrganizerLastMoved: 0,
         DefaultsKey.whatsAppOrganizerLastDuplicates: 0,
         DefaultsKey.whatsAppOrganizerLastFailed: 0,
+        DefaultsKey.finderCutPasteEnabled: false,
+        DefaultsKey.finderDeleteShortcutsEnabled: false,
         DefaultsKey.urlCleanerEnabled: false,
         DefaultsKey.textSnippetsEnabled: false,
         DefaultsKey.snippetLibraryEnabled: false,
@@ -749,6 +755,7 @@ enum Defaults {
         DefaultsKey.panelControlSwitcher: true,
         DefaultsKey.panelControlDockPreview: true,
         DefaultsKey.panelControlCutPaste: true,
+        DefaultsKey.panelControlFinderDeleteShortcuts: true,
         DefaultsKey.panelControlAutoQuit: true,
         DefaultsKey.panelControlShelf: true,
         DefaultsKey.panelControlWindowMaximize: true,
@@ -903,6 +910,8 @@ enum Defaults {
         DefaultsKey.micMuteMenuBarIndicator: true,  // owner's call: on by default in 3.1.8 (badge only shows while muted)
         DefaultsKey.quickLauncherShortcutEnabled: true,
         DefaultsKey.quickLauncherShortcut: GlobalShortcut.quickLauncherDefault.storageValue,
+        DefaultsKey.finderDeleteShortcut: GlobalShortcut.finderDeleteDefault.storageValue,
+        DefaultsKey.finderRevertShortcut: GlobalShortcut.finderRevertDefault.storageValue,
         DefaultsKey.quickLauncherHiddenItems: "",
         DefaultsKey.panelUtilityQuickLauncher: true,
         DefaultsKey.panelUtilityColorPicker: true,
