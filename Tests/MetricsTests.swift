@@ -1609,7 +1609,7 @@ struct MetricsTests {
         expect(!SupportUpdateIntroInfo.shouldShow(appVersion: "3.3.0", lastSeenVersion: "3.3.0"),
                "support prompt stays hidden after it is seen")
         expect(!SupportUpdateIntroInfo.shouldShow(appVersion: "3.2.0", lastSeenVersion: nil)
-               && !SupportUpdateIntroInfo.shouldShow(appVersion: "3.3.1", lastSeenVersion: nil),
+               && !SupportUpdateIntroInfo.shouldShow(appVersion: "3.3.2", lastSeenVersion: nil),
                "support prompt never leaks into another release")
         expect(SupportUpdateIntroStep.community.next == .support
                && SupportUpdateIntroStep.support.next == nil,
@@ -1622,7 +1622,7 @@ struct MetricsTests {
         // per-release decision: this check fails on every version bump so the
         // decision above is made consciously, never by omission.
         let plistVersion = (NSDictionary(contentsOfFile: "Resources/Info.plist")?["CFBundleShortVersionString"] as? String) ?? ""
-        expect(plistVersion == "3.3.1",
+        expect(plistVersion == "3.3.2",
                "bumping the app version requires re-deciding the support prompt pin above")
         expect(SupportUpdateIntroInfo.releaseVersion == "3.3.0",
                "3.3.0 shows the deliberately curated community and support intro")

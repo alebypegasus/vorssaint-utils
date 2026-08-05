@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [3.3.2]
+
+Vorssaint 3.3.2 improves hardware monitoring and sensor compatibility.
+
+- **System Monitor**:
+  - Added support for reading and displaying NVMe SSD, HDD, and Memory temperatures.
+  - Added support for displaying Fan speeds (RPM) alongside other temperatures.
+  - Improved compatibility with Hackintosh systems and specific Intel/Apple Silicon configurations by cleanly hiding any unsupported sensors instead of displaying unavailable or placeholder states.
+
 ## [3.3.1]
 
 ### Added

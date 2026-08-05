@@ -33,6 +33,9 @@ struct SystemSnapshot {
     var cpuTemperatureReadAt: TimeInterval?
     var gpuTemperature: Double?
     var batteryTemperature: Double?
+    var ssdTemperature: Double?
+    var memoryTemperature: Double?
+    var fanSpeed: Double?
     var cpuUsage: Double?          // 0...1
     /// When `cpuUsage` was last really read, on the system uptime clock; the
     /// value is carried over failed reads, and the hot CPU alert has to tell
@@ -126,6 +129,9 @@ final class SystemMonitor: ObservableObject {
     private var fallbackCPUKeys: [SMCClient.Key] = []
     private var gpuKeys: [SMCClient.Key] = []
     private var batteryKeys: [SMCClient.Key] = []
+    private var ssdKeys: [SMCClient.Key] = []
+    private var memoryKeys: [SMCClient.Key] = []
+    private var fanKeys: [SMCClient.Key] = []
     private var tempKeysPrepared = false
     private var cpuTemperaturePlatform: CPUTemperaturePlatform = .generic
 
@@ -154,6 +160,9 @@ final class SystemMonitor: ObservableObject {
     private var cpuTemperatureCache: CachedSensorReading?
     private var gpuTemperatureCache: CachedSensorReading?
     private var batteryTemperatureCache: CachedSensorReading?
+    private var ssdTemperatureCache: CachedSensorReading?
+    private var memoryTemperatureCache: CachedSensorReading?
+    private var fanSpeedCache: CachedSensorReading?
     private var lastDiskReading: DiskReading?
     private var lastPowerReading: PowerReading?
     private var lastPeripheralBatteries: [PeripheralBatteryDevice] = []
@@ -391,11 +400,14 @@ final class SystemMonitor: ObservableObject {
         var needCPUTemperature = false
         var needGPUTemperature = false
         var needBatteryTemperature = false
+        var needSSDTemperature = false
+        var needMemoryTemperature = false
+        var needFanSpeed = false
 
         var needSMC: Bool { needPower || needTemperature }
 
         var needTemperature: Bool {
-            needCPUTemperature || needGPUTemperature || needBatteryTemperature
+            needCPUTemperature || needGPUTemperature || needBatteryTemperature || needSSDTemperature || needMemoryTemperature || needFanSpeed
         }
 
         var any: Bool {
@@ -451,6 +463,9 @@ final class SystemMonitor: ObservableObject {
             defaults.bool(forKey: DefaultsKey.menuBarGPUTemperature)
         plan.needBatteryTemperature = panelTemps || menuPanelNeeds.batteryTemperature ||
             defaults.bool(forKey: DefaultsKey.menuBarBatteryTemperature)
+        plan.needSSDTemperature = panelTemps
+        plan.needMemoryTemperature = panelTemps
+        plan.needFanSpeed = panelTemps
 
         // The hub gates whole metric families: an unavailable metric never
         // samples, no matter what is pinned, shown or alerting.
@@ -731,6 +746,50 @@ final class SystemMonitor: ObservableObject {
                 }
             }
 
+            if plan.needSSDTemperature {
+                if take(.temperature) {
+                    next.ssdTemperature = TemperatureSensorSelector.stabilizedTemperature(
+                        self.maxTemperature(of: self.ssdKeys),
+                        cache: &self.ssdTemperatureCache,
+                        now: now,
+                        maxAge: temperatureBridge)
+                } else {
+                    next.ssdTemperature = self.ssdTemperatureCache?.value
+                }
+            }
+            if plan.needMemoryTemperature {
+                if take(.temperature) {
+                    next.memoryTemperature = TemperatureSensorSelector.stabilizedTemperature(
+                        self.maxTemperature(of: self.memoryKeys),
+                        cache: &self.memoryTemperatureCache,
+                        now: now,
+                        maxAge: temperatureBridge)
+                } else {
+                    next.memoryTemperature = self.memoryTemperatureCache?.value
+                }
+            }
+            if plan.needFanSpeed {
+                if take(.temperature) {
+                    // For fan speed, we take the average of all fan speeds or just the maximum. We'll use max for simplicity as "fan speed".
+                    // But wait, fan keys are raw values not temperatures.
+                    // Let's read them.
+                    var maxFanSpeed: Double? = nil
+                    if let smc = self.smc {
+                        let speeds = self.fanKeys.compactMap { smc.readValue($0) }
+                        if let max = speeds.max(), max > 0 {
+                            maxFanSpeed = max
+                        }
+                    }
+                    next.fanSpeed = TemperatureSensorSelector.stabilizedTemperature(
+                        maxFanSpeed,
+                        cache: &self.fanSpeedCache,
+                        now: now,
+                        maxAge: temperatureBridge)
+                } else {
+                    next.fanSpeed = self.fanSpeedCache?.value
+                }
+            }
+
             next.cpuHistory = plan.needCPU ? self.cpuHistory.values : []
             next.gpuHistory = plan.needGPUUsage ? self.gpuHistory.values : []
             next.memoryHistory = plan.needMemory ? self.memoryHistory.values : []
@@ -815,8 +874,10 @@ final class SystemMonitor: ObservableObject {
         guard let client = smc else { return }
 
         let all = client.keys { name in
-            name.hasPrefix("Tp") || name.hasPrefix("Te") || name.hasPrefix("Tf") || name.hasPrefix("TC") || name.hasPrefix("Tg")
+            name.hasPrefix("Tp") || name.hasPrefix("Te") || name.hasPrefix("Tf") || name.hasPrefix("TC") || name.hasPrefix("Tg") || name.hasPrefix("TG")
                 || name.range(of: "^TB[0-9]T$", options: .regularExpression) != nil
+                || name.hasPrefix("TH") || name.hasPrefix("TN") || name.hasPrefix("Tm")
+                || name.hasPrefix("F")
         }
         cpuKeys = all.filter { $0.name.hasPrefix("Tp") || $0.name.hasPrefix("Te") || $0.name.hasPrefix("Tf") || $0.name.hasPrefix("TC") }
         preferredCPUKeys = cpuKeys.filter {
@@ -826,6 +887,9 @@ final class SystemMonitor: ObservableObject {
         fallbackCPUKeys = cpuKeys.filter { !preferredNames.contains($0.name) }
         gpuKeys = all.filter { $0.name.hasPrefix("Tg") || $0.name.hasPrefix("TG") }
         batteryKeys = all.filter { $0.name.hasPrefix("TB") }
+        ssdKeys = all.filter { $0.name.hasPrefix("TN") || $0.name.hasPrefix("TH") }
+        memoryKeys = all.filter { $0.name.hasPrefix("Tm") }
+        fanKeys = all.filter { $0.name.range(of: "^F[0-9]Ac$", options: .regularExpression) != nil }
     }
 
     private func cpuTemperature() -> Double? {

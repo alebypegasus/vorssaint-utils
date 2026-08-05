@@ -343,16 +343,22 @@ struct MetricDetailView: View {
         let snapshot = monitor.snapshot
         switch kind {
         case .cpu:
-            return [
+            var rows = [
                 row(l10n.s.usageSection, snapshot.cpuUsage.map(MetricFormat.percent) ?? l10n.s.networkMeasuring),
-                row(l10n.s.temperatures, snapshot.cpuTemperature.map(formatTemperature) ?? l10n.s.monitorUnavailable),
-                row(l10n.s.systemUptime, SystemSection.uptimeString()),
             ]
+            if let temp = snapshot.cpuTemperature {
+                rows.append(row(l10n.s.temperatures, formatTemperature(temp)))
+            }
+            rows.append(row(l10n.s.systemUptime, SystemSection.uptimeString()))
+            return rows
         case .gpu:
-            return [
+            var rows = [
                 row(l10n.s.usageSection, snapshot.gpuUsage.map(MetricFormat.percent) ?? l10n.s.networkMeasuring),
-                row(l10n.s.temperatures, snapshot.gpuTemperature.map(formatTemperature) ?? l10n.s.monitorUnavailable),
             ]
+            if let temp = snapshot.gpuTemperature {
+                rows.append(row(l10n.s.temperatures, formatTemperature(temp)))
+            }
+            return rows
         case .memory:
             let used = snapshot.memoryUsed.map(formatMemory) ?? l10n.s.networkMeasuring
             let total = snapshot.memoryTotal.map(formatMemory) ?? "-"
@@ -384,10 +390,12 @@ struct MetricDetailView: View {
             var rows = [
                 row(l10n.s.batteryCharge, power?.chargePercent.map { "\($0)%" } ?? l10n.s.networkMeasuring),
                 row(l10n.s.powerBattery, batteryFlowText(power)),
-                row(l10n.s.temperatures, snapshot.batteryTemperature.map(formatTemperature) ?? l10n.s.monitorUnavailable),
-                row(l10n.s.powerHealth, power?.healthPercent.map { "\(Int($0.rounded()))%" } ?? "-"),
-                row(l10n.s.powerCycles, power?.cycleCount.map(String.init) ?? "-"),
             ]
+            if let temp = snapshot.batteryTemperature {
+                rows.append(row(l10n.s.temperatures, formatTemperature(temp)))
+            }
+            rows.append(row(l10n.s.powerHealth, power?.healthPercent.map { "\(Int($0.rounded()))%" } ?? "-"))
+            rows.append(row(l10n.s.powerCycles, power?.cycleCount.map(String.init) ?? "-"))
             if snapshot.peripheralBatteries.isEmpty {
                 rows.append(row(l10n.s.monitorShowPeripheralBattery,
                                 l10n.s.peripheralBatteryNoDevices,
