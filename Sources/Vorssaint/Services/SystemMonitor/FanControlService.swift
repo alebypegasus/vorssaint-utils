@@ -42,11 +42,11 @@ final class FanControlService: ObservableObject {
             let targetKey = smc.key(named: "F\(i)Tg")
             let modeKey = smc.key(named: "F\(i)Md")
             
-            let actual = smc.readValue(actualKey!) ?? 0
-            let minS = smc.readValue(minKey!) ?? 0
-            let maxS = smc.readValue(maxKey!) ?? 1000
-            let target = smc.readValue(targetKey!) ?? 0
-            let mode = smc.readValue(modeKey!) ?? 0
+            let actual: Double = actualKey.flatMap { smc.readValue($0) } ?? 0
+            let minS: Double = minKey.flatMap { smc.readValue($0) } ?? 0
+            let maxS: Double = maxKey.flatMap { smc.readValue($0) } ?? 1000
+            let target: Double = targetKey.flatMap { smc.readValue($0) } ?? 0
+            let mode: Double = modeKey.flatMap { smc.readValue($0) } ?? 0
             
             currentFans.append(FanStatus(
                 id: i,

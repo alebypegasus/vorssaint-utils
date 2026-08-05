@@ -86,8 +86,14 @@ final class PowerSampler {
                 reading.adapterMaxWatts = Double(rated)
             }
 
-            if let capacity = batteryInt("CurrentCapacity", in: props),
-               let maxCapacity = batteryInt("MaxCapacity", in: props), maxCapacity > 0 {
+            let capacity = batteryInt("CurrentCapacity", in: props)
+                ?? batteryInt("AppleRawCurrentCapacity", in: props)
+            
+            let maxCapacity = batteryInt("MaxCapacity", in: props)
+                ?? batteryInt("AppleRawMaxCapacity", in: props)
+                ?? batteryInt("DesignCapacity", in: props)
+                
+            if let capacity = capacity, let maxCapacity = maxCapacity, maxCapacity > 0 {
                 reading.chargePercent = Int((Double(capacity) / Double(maxCapacity) * 100).rounded())
             }
             if let cycles = batteryInt("CycleCount", in: props) { reading.cycleCount = cycles }

@@ -935,13 +935,26 @@ final class SystemMonitor: ObservableObject {
                                                             kCFAllocatorDefault, 0),
                   let stats = ref.takeRetainedValue() as? [String: Any]
             else { continue }
-            
-            if let utilization = stats["Device Utilization %"] as? Int {
-                return Double(utilization) / 100.0
-            } else if let utilization = stats["GPU Core Utilization"] as? Int {
-                return Double(utilization) / 100.0
-            } else if let utilization = stats["GPU Activity(%)"] as? Int {
-                return Double(utilization) / 100.0
+            let keys = [
+                "Device Utilization % at cur p-state",
+                "Device Utilization %",
+                "GPU Core Utilization",
+                "GPU Activity(%)"
+            ]
+            for key in keys {
+                if let raw = stats[key] {
+                    let utilization: Int?
+                    if let v = raw as? Int {
+                        utilization = v
+                    } else if let v = raw as? NSNumber {
+                        utilization = v.intValue
+                    } else {
+                        utilization = nil
+                    }
+                    if let utilization {
+                        return Double(utilization) / 100.0
+                    }
+                }
             }
         }
         return nil

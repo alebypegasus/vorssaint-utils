@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [3.2.3]
+
+### Fixed
+- Fixed an issue where GPU usage would not display on certain hardware configurations.
+- Fixed a crash related to missing SMC keys when reading fan speeds.
+- Improved the reliability of battery metrics readings by adding fallback IORegistry keys.
+
 ## [3.2.2]
 
 ### Added
