@@ -233,10 +233,17 @@ struct SystemSection: View {
         if expanded == kind {
             VStack(alignment: .leading, spacing: 4) {
                 if breakdownRows.isEmpty {
-                    Text(breakdownIsLoading ? l10n.s.breakdownMeasuring : emptyBreakdownText(for: kind))
-                        .font(.system(size: 10.5))
-                        .foregroundStyle(.tertiary)
-                        .padding(.leading, 38)
+                    if breakdownIsLoading {
+                        Text(l10n.s.breakdownMeasuring)
+                            .font(.system(size: 10.5))
+                            .foregroundStyle(.tertiary)
+                            .padding(.leading, 38)
+                    } else if kind == .energy {
+                        Text(l10n.s.energyAppsIdle)
+                            .font(.system(size: 10.5))
+                            .foregroundStyle(.tertiary)
+                            .padding(.leading, 38)
+                    }
                 } else {
                     ForEach(breakdownRows) { row in
                         ProcessUsageRow(row: row,
@@ -247,10 +254,6 @@ struct SystemSection: View {
                 }
             }
         }
-    }
-
-    private func emptyBreakdownText(for kind: BreakdownKind) -> String {
-        kind == .energy ? l10n.s.energyAppsIdle : l10n.s.breakdownMeasuring
     }
 
     private func breakdownValue(_ row: ProcessUsage, for kind: BreakdownKind) -> String {

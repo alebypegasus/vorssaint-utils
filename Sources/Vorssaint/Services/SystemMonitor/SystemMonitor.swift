@@ -824,7 +824,7 @@ final class SystemMonitor: ObservableObject {
         }
         let preferredNames = Set(preferredCPUKeys.map(\.name))
         fallbackCPUKeys = cpuKeys.filter { !preferredNames.contains($0.name) }
-        gpuKeys = all.filter { $0.name.hasPrefix("Tg") }
+        gpuKeys = all.filter { $0.name.hasPrefix("Tg") || $0.name.hasPrefix("TG") }
         batteryKeys = all.filter { $0.name.hasPrefix("TB") }
     }
 

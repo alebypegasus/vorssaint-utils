@@ -321,9 +321,15 @@ struct MetricDetailView: View {
                 ActivityMonitorButton()
             }
             if processRows.isEmpty {
-                Text(processRowsLoading ? l10n.s.breakdownMeasuring : emptyProcessText)
-                    .font(.system(size: 10.5))
-                    .foregroundStyle(.tertiary)
+                if processRowsLoading {
+                    Text(l10n.s.breakdownMeasuring)
+                        .font(.system(size: 10.5))
+                        .foregroundStyle(.tertiary)
+                } else if !emptyProcessText.isEmpty {
+                    Text(emptyProcessText)
+                        .font(.system(size: 10.5))
+                        .foregroundStyle(.tertiary)
+                }
             } else {
                 ForEach(processRows) { row in
                     ProcessUsageRow(row: row, value: processValue(row))
@@ -472,9 +478,9 @@ struct MetricDetailView: View {
 
     private var emptyProcessText: String {
         switch kind {
-        case .power: return l10n.s.energyAppsIdle
+        case .battery, .power: return l10n.s.energyAppsIdle
         case .network: return l10n.s.networkAppsIdle
-        default: return l10n.s.breakdownMeasuring
+        default: return ""
         }
     }
 
