@@ -4,43 +4,133 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [3.2.3]
-
-### Fixed
-- Fixed an issue where GPU usage would not display on certain hardware configurations.
-- Fixed a crash related to missing SMC keys when reading fan speeds.
-- Improved the reliability of battery metrics readings by adding fallback IORegistry keys.
-
-## [3.2.2]
+## [3.3.1]
 
 ### Added
 - Added Finder Delete Shortcuts (Delete with Backspace and Revert with Shift+Backspace).
 
 ### Fixed
+- Fixed an issue where GPU usage would not display on certain hardware configurations.
+- Fixed a crash related to missing SMC keys when reading fan speeds.
+- Improved the reliability of battery metrics readings by adding fallback IORegistry keys.
 - Fixed alignment of the Finder Delete Shortcuts in the Menu Panel.
 - Translated Finder Delete Shortcuts to all supported languages.
 
-## [3.2.1]
-
 ### Summary
-Vorssaint 3.2.1 lets you see through the Dock preview panel, and fixes mouse
-button shortcuts on the arrows and the F keys and a saved search in the Command
-Bar that disappeared as soon as you typed what to look for.
-
-### Added
-- A slider for how solid the Dock preview panel looks. Under Switcher, with
-  Dock Preview on. Thanks to @ruvelro.
+Vorssaint 3.3.1 makes window switching more direct, restores missing app windows
+across previews, and keeps compact switcher layouts aligned.
 
 ### Changed
-- Supporting Vorssaint now goes through GitHub Sponsors, from the Support page
-  in Settings and from the screen shown after an update. The coffee link is
-  still there for whoever prefers it.
+- The window shortcut now opens the switcher for the app in front, without
+  opening the app list first. Thanks to @mrevanzak.
 
 ### Fixed
+- Windowless apps now keep their labels aligned in the App Switcher's Small size.
+  Thanks to @Yahddyyp.
+- Small app icons now keep the correct artwork in Finder. Thanks to @slrgt.
+- Adobe app windows now appear in App Switcher, Command Tab and Dock Preview.
+- Newly placed screenshot annotations can be moved, resized or edited immediately
+  while their selection remains active.
+
+## [3.3.0] - 2026-08-04
+
+### Summary
+Vorssaint 3.3.0 records the screen, captures and shares screenshots, and improves
+annotation order. Finder and Window Layout gain new tools and refinements, while
+setup and the Command Bar make features, feedback and saved searches easier to use.
+
+### Added
+- Screen recording with automatic zooms for clicks and typing, reusable presets,
+  direct copy, and video or GIF export. Off by default.
+- Screenshots can create temporary links for 1, 6 or 24 hours from the preview or
+  editor, with clear privacy details.
+- Scrolling screenshots join long pages into one image and stop exactly where
+  you choose. From Screenshot or the Command Bar. Thanks to @ruvelro.
+- Bug reports and feature ideas can be sent from General or the Command Bar,
+  with optional technical details shown before sending.
+- A slider for how solid the Dock preview panel looks. Under Switcher, with
+  Dock Preview on. Thanks to @ruvelro.
+- Window thumbnail capture can pause while chosen apps are in front. Under
+  Switcher, thanks to @KDarto.
+- Apps the clipboard history skips, so nothing copied in them is saved. Under
+  Clipboard. Thanks to @CSkjolden.
+- A configurable shortcut renames selected files and folders in Finder. It
+  starts on F2, off by default. Thanks to @Mito450.
+- Copied images can become PNG files with ⌘V in Finder, off by default under
+  Clipboard. Thanks to @AsphaltDemon.
+- Separate shortcuts capture the whole screen or reopen your latest screenshot.
+  Under Screenshot, both off by default. Thanks to @Yahddyyp.
+- A slider makes the Scratchpad background more solid, up to fully opaque.
+  Under Quick Tools. Thanks to @hash00.
+
+### Changed
+- First setup now asks what you want before requesting only the permissions
+  those choices need. Features remain available later in Settings.
+- The Command Bar can quit, restart, force quit or send an app to the
+  Uninstaller. Newly installed apps appear when the bar reopens.
+- Screenshot annotations can move forward or backward through the drawing
+  order, with undo support. Thanks to @hash00.
+- The System panel can open the Mac's full process inspector from its usage
+  list. Thanks to @hash00.
+- The Volume Mixer adjusts overall volume directly and can send system sounds
+  to a separate output. Thanks to @vkplayz0 and @p3P4.
+- Mute microphone now lives in Quick toggles in the menu bar panel. Thanks to
+  @AB-boi.
+- The Scratchpad now has a pin that keeps the current note open until you close
+  it. Thanks to @hash00.
+- Window Layout's Restore action now steps back through recent placements.
+- App Switcher and Dock Preview now have a Small size that reduces previews and
+  the space between them. Thanks to @CSkjolden.
+- Selecting an app with no open window in the App Switcher now asks it to open
+  one. Thanks to @Yahddyyp.
+- The App Switcher now appears immediately, without a pop-in animation. Thanks
+  to @CSkjolden.
+- The clipboard history no longer saves a copy that an app marks as a
+  password, whatever the other options are set to.
+- The remaining-time menu bar option now lives with Keep Awake session settings
+  under Energy. Thanks to @hash00.
+
+### Fixed
+- Quit on close now protects every part of an excepted app, including windows
+  run through bundled components.
+- Window Layout shortcuts now arrange the active Settings window too. Thanks to
+  @vraravam.
+- Menu bar readings now dim with the rest of the bar on displays that are not
+  active. Thanks to @JaffryGao.
+- The App Switcher's initial selection no longer loses part of its border when
+  only two apps are available. Thanks to @WiLuX-Source.
+- CPU and GPU temperatures no longer drop to impossible single-digit readings
+  when a sensor briefly reports bad data. Thanks to @georgo.
+- The App Switcher no longer adds a blank duplicate for a window on another
+  desktop. Thanks to @CSkjolden.
+- App Updates no longer lists Vorssaint itself or versions that need a newer
+  macOS. Thanks to @AB-boi.
+- A disabled feature no longer blocks its saved shortcut from being used
+  elsewhere. Thanks to @AB-boi.
+- Three-finger middle clicks now stay reliable when macOS initially reads the
+  press as a secondary click. Thanks to @justareported-blip.
+- The App Switcher no longer stalls when certain apps are open. Thanks to
+  @Sirtx.
+- Radial menu submenus now open their action list after creation and keep it
+  easy to find later. Thanks to @z76k.
+- The radial menu now stays open while the Super Key is held and follows the
+  pointer until the key is released. Thanks to @AB-boi.
+- The permissions page now explains the App Management access needed before
+  updating installed apps. Thanks to @AB-boi.
+- The clipboard history no longer drops plain identifier codes when it is set
+  to skip text that looks sensitive.
+- Picking a window on another desktop now switches over right away, instead of
+  stalling for a couple of seconds. Thanks to @CSkjolden.
+- The mouse side buttons now go back and forward on keyboard layouts such as
+  German and French, where they did nothing at all. Thanks to @thomas-goerlich.
+- Extra brightness now holds while you swipe between desktops, instead of
+  dropping out until the animation ends. Thanks to @stevenyang406.
 - A mouse button set to a shortcut with an arrow or an F key now presses it
   everywhere, including the window shortcuts. Thanks to @hash00.
 - A saved search in the Command Bar stays in the list while you type what to
   look for after its name. Thanks to @tenbux.
+- Saved Command Bar searches now work with spaces produced by Chinese input
+  methods. Thanks to @tingke.
 
 ## [3.2.0] - 2026-07-31
 

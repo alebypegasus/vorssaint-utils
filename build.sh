@@ -79,6 +79,11 @@ if [[ -d "$PINNED_SDK" ]]; then
 else
     SDK="$(xcrun --show-sdk-path)"
 fi
+SDK_COMPAT_FLAGS=()
+if [[ "$SDK" == "$PINNED_SDK" ]]; then
+    # Swift 6.4 can read the SDK 26 interfaces when given their compiler version.
+    SDK_COMPAT_FLAGS=(-Xfrontend -interface-compiler-version -Xfrontend 6.3.2)
+fi
 
 # --test: compile and run the standalone unit tests (pure helpers only: metrics,
 # Homebrew parsing, defaults, localization contracts; no app, no UI, no IOKit),
@@ -88,7 +93,7 @@ if (( TEST )); then
     rm -rf build
     mkdir -p build
     compile_test() {
-        swiftc -target "$1" -sdk "$SDK" \
+        swiftc -target "$1" -sdk "$SDK" "${SDK_COMPAT_FLAGS[@]}" \
         Sources/Vorssaint/Services/Media/MediaSupport.swift \
         Sources/Vorssaint/Core/Defaults.swift \
         Sources/Vorssaint/Core/FeatureCatalog.swift \
@@ -100,9 +105,12 @@ if (( TEST )); then
         Sources/Vorssaint/Core/BrightnessStrings.swift \
         Sources/Vorssaint/Core/QuickToggleStrings.swift \
         Sources/Vorssaint/Core/ScreenshotStrings.swift \
+        Sources/Vorssaint/Core/RecorderStrings.swift \
         Sources/Vorssaint/Core/CameraPreviewStrings.swift \
         Sources/Vorssaint/Core/ScratchpadStrings.swift \
+        Sources/Vorssaint/Core/FinderRenameStrings.swift \
         Sources/Vorssaint/Core/CommandBarStrings.swift \
+        Sources/Vorssaint/Core/FeedbackStrings.swift \
         Sources/Vorssaint/Core/RadialMenuStrings.swift \
         Sources/Vorssaint/Core/MenuBarAppearanceStrings.swift \
         Sources/Vorssaint/Core/AppAppearance.swift \
@@ -113,6 +121,14 @@ if (( TEST )); then
         Sources/Vorssaint/Services/Snippets/TextSnippetSupport.swift \
         Sources/Vorssaint/Services/RadialMenu/RadialMenuSupport.swift \
         Sources/Vorssaint/Services/QuickTools/ScratchpadSupport.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderSupport.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderTakeStore.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderMotion.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderPointerTrack.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderTypingTrack.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderTimeline.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderTextOverlay.swift \
+        Sources/Vorssaint/Services/Recorder/RecorderEditDocument.swift \
         Sources/Vorssaint/Core/AppInfo.swift \
         Sources/Vorssaint/Core/GlobalShortcut.swift \
         Sources/Vorssaint/Core/Localization.swift \
@@ -133,7 +149,9 @@ if (( TEST )); then
         Sources/Vorssaint/Services/Clipboard/ClipboardHistorySupport.swift \
         Sources/Vorssaint/Services/AutoQuit/AutoQuitSupport.swift \
         Sources/Vorssaint/Services/Shelf/ShelfSupport.swift \
+        Sources/Vorssaint/Services/Finder/FinderRenameSupport.swift \
         Sources/Vorssaint/Services/Update/UpdateInstallerSupport.swift \
+        Sources/Vorssaint/Services/InstalledApps.swift \
         Sources/Vorssaint/Services/LaunchAtLoginSupport.swift \
         Sources/Vorssaint/UI/Settings/SettingsSearchSupport.swift \
         Sources/Vorssaint/UI/Settings/FeatureVisibilitySupport.swift \
@@ -141,12 +159,15 @@ if (( TEST )); then
         Sources/Vorssaint/App/StatusItemAnchorSupport.swift \
         Sources/Vorssaint/Services/DockClick/DockClickSupport.swift \
         Sources/Vorssaint/Services/Finder/CutPasteProgressSupport.swift \
+        Sources/Vorssaint/Services/Finder/FinderPasteImageSupport.swift \
         Sources/Vorssaint/Services/MiddleClick/MiddleClickSupport.swift \
         Sources/Vorssaint/Services/MouseNavigation/MouseNavigationSupport.swift \
         Sources/Vorssaint/Services/MouseButtons/MouseButtonShortcutSupport.swift \
         Sources/Vorssaint/Services/MouseExceptions/MouseAppExceptionSupport.swift \
         Sources/Vorssaint/Core/MouseButtonStrings.swift \
         Sources/Vorssaint/Core/MouseExceptionStrings.swift \
+        Sources/Vorssaint/Core/ClipboardIgnoredAppsStrings.swift \
+        Sources/Vorssaint/Core/WindowPreviewExclusionStrings.swift \
         Sources/Vorssaint/Services/QuickTools/QuickToolsSupport.swift \
         Sources/Vorssaint/Services/CommandBar/CommandBarSupport.swift \
         Sources/Vorssaint/Services/CommandBar/CommandBarPreferences.swift \
@@ -159,6 +180,7 @@ if (( TEST )); then
         Sources/Vorssaint/Services/QuickTools/MicMuteSupport.swift \
         Sources/Vorssaint/Services/QuickTools/QuickTogglesSupport.swift \
         Sources/Vorssaint/Services/QuickTools/ScreenshotSupport.swift \
+        Sources/Vorssaint/Services/QuickTools/ScreenshotSharingSupport.swift \
         Sources/Vorssaint/Services/KeyboardDebounce/KeyboardDebounceSupport.swift \
         Sources/Vorssaint/Services/SuperKey/SuperKeySupport.swift \
         Sources/Vorssaint/Core/SuperKeyStrings.swift \
@@ -201,11 +223,11 @@ fi
 echo "▸ Compiling (release) against $(basename "$SDK")…"
 rm -rf build
 mkdir -p build
-swiftc -O -target "$TARGET_ARM64" -sdk "$SDK" \
+swiftc -O -target "$TARGET_ARM64" -sdk "$SDK" "${SDK_COMPAT_FLAGS[@]}" \
     Sources/Vorssaint/**/*.swift \
     -o "build/${EXECUTABLE}_arm64"
 
-swiftc -O -target "$TARGET_X86_64" -sdk "$SDK" \
+swiftc -O -target "$TARGET_X86_64" -sdk "$SDK" "${SDK_COMPAT_FLAGS[@]}" \
     Sources/Vorssaint/**/*.swift \
     -o "build/${EXECUTABLE}_x86_64"
 

@@ -19,7 +19,7 @@ enum AppFeature: String, CaseIterable {
     case scrollInverter, smoothScroll, mouseNavigation, mouseButtonShortcuts, middleClick,
          keyboardDebounce, textSnippets, superKey
     // Clipboard and files
-    case clipboardHistory, pastePlain, finderCutPaste, finderDeleteShortcuts, shelf, urlCleaner
+    case clipboardHistory, pastePlain, finderCutPaste, finderDeleteShortcuts, finderRename, shelf, urlCleaner
     // Sound
     case mixer, soundOutputSwitcher, micMute, musicBlock
     // Energy and display
@@ -27,7 +27,7 @@ enum AppFeature: String, CaseIterable {
     // Tools
     case quickLauncher, quickToggles, colorPicker, screenOCR, cleaningMode, mediaTools,
          cleaner, uninstaller, homebrew, appUpdates, screenshot, cameraPreview, radialMenu, scratchpad,
-         commandBar
+         commandBar, screenRecorder
     // System monitor, one entry per metric family (temperatures live with
     // their parent metric: CPU temp with CPU, battery temp with power).
     case monitorCPU, monitorGPU, monitorMemory, monitorNetwork, monitorDisk, monitorPower
@@ -41,7 +41,7 @@ enum FeatureGroup: String, CaseIterable {
 /// System permissions surfaced by the hub's transparency portal.
 enum AppPermission: String, CaseIterable {
     case accessibility, screenRecording, fullDiskAccess, filesAndFolders, notifications,
-         automationFinder, automationTerminal, audioCapture, camera
+         automationFinder, automationTerminal, audioCapture, camera, appManagement
 }
 
 extension AppFeature {
@@ -52,7 +52,7 @@ extension AppFeature {
         case .scrollInverter, .smoothScroll, .mouseNavigation, .mouseButtonShortcuts, .middleClick,
              .keyboardDebounce, .textSnippets, .superKey:
             return .mouseKeyboard
-        case .clipboardHistory, .pastePlain, .finderCutPaste, .finderDeleteShortcuts, .shelf, .urlCleaner:
+        case .clipboardHistory, .pastePlain, .finderCutPaste, .finderDeleteShortcuts, .finderRename, .shelf, .urlCleaner:
             return .clipboardFiles
         case .mixer, .soundOutputSwitcher, .micMute, .musicBlock:
             return .sound
@@ -60,7 +60,7 @@ extension AppFeature {
             return .energyDisplay
         case .quickLauncher, .quickToggles, .colorPicker, .screenOCR, .cleaningMode, .mediaTools,
              .cleaner, .uninstaller, .homebrew, .appUpdates, .screenshot, .cameraPreview, .radialMenu,
-             .scratchpad, .commandBar:
+             .scratchpad, .commandBar, .screenRecorder:
             return .tools
         case .monitorCPU, .monitorGPU, .monitorMemory, .monitorNetwork, .monitorDisk, .monitorPower:
             return .monitor
@@ -87,6 +87,7 @@ extension AppFeature {
         case .pastePlain: return "doc.plaintext"
         case .finderCutPaste: return "scissors"
         case .finderDeleteShortcuts: return "delete.left"
+        case .finderRename: return "pencil"
         case .shelf: return "tray.full"
         case .urlCleaner: return "link"
         case .mixer: return "slider.horizontal.3"
@@ -107,6 +108,7 @@ extension AppFeature {
         case .homebrew: return "shippingbox"
         case .appUpdates: return "arrow.down.app"
         case .screenshot: return "camera.viewfinder"
+        case .screenRecorder: return "record.circle"
         case .cameraPreview: return "web.camera"
         case .radialMenu: return "circle.grid.cross"
         case .scratchpad: return "note.text"
@@ -150,8 +152,10 @@ extension AppFeature {
         case .radialMenu: return [DefaultsKey.radialMenuEnabled]
         case .clipboardHistory: return [DefaultsKey.clipboardHistoryEnabled]
         case .pastePlain: return [DefaultsKey.pastePlainEnabled]
-        case .finderCutPaste: return [DefaultsKey.finderCutPasteEnabled]
+        case .finderCutPaste: return [DefaultsKey.finderCutPasteEnabled,
+                                      DefaultsKey.finderPasteImageAsFile]
         case .finderDeleteShortcuts: return [DefaultsKey.finderDeleteShortcutsEnabled]
+        case .finderRename: return [DefaultsKey.finderRenameEnabled]
         case .shelf: return [DefaultsKey.shelfEnabled]
         case .urlCleaner: return [DefaultsKey.urlCleanerEnabled]
         case .soundOutputSwitcher: return [DefaultsKey.soundOutputSwitcherEnabled]
@@ -161,7 +165,7 @@ extension AppFeature {
         case .windowLayout, .mixer, .micMute, .keepAwake,
              .quickLauncher, .quickToggles, .colorPicker, .screenOCR, .cleaningMode, .mediaTools,
              .cleaner, .uninstaller, .homebrew, .appUpdates, .screenshot, .cameraPreview, .scratchpad,
-             .commandBar,
+             .commandBar, .screenRecorder,
              .monitorCPU, .monitorGPU, .monitorMemory, .monitorNetwork, .monitorDisk, .monitorPower:
             return []
         }
@@ -182,20 +186,24 @@ extension AppFeature {
             return [.accessibility]
         case .finderCutPaste: return [.accessibility, .automationFinder]
         case .finderDeleteShortcuts: return [.accessibility]
+        case .finderRename: return [.accessibility]
         // Only emptying the Trash asks the Finder; every other quick toggle
         // (dark mode included) works without a permission.
         case .quickToggles: return [.automationFinder]
         case .switcher: return [.accessibility, .screenRecording]
         case .dockPreview: return [.accessibility, .screenRecording]
         case .screenOCR: return [.screenRecording]
-        case .screenshot: return [.screenRecording]
+        case .screenshot: return [.screenRecording, .accessibility]
+        // The sound of the Mac rides the same grant the pixels do. Accessibility
+        // keeps only typing timing while a recording is active.
+        case .screenRecorder: return [.screenRecording, .accessibility]
         case .cameraPreview: return [.camera]
         case .keepAwake: return [.accessibility]
         case .brightness: return [.accessibility]
         case .cleaner: return [.fullDiskAccess, .filesAndFolders, .notifications]
         case .uninstaller: return [.fullDiskAccess, .automationFinder]
-        case .homebrew: return [.automationTerminal]
-        case .appUpdates: return [.notifications]
+        case .homebrew: return [.automationTerminal, .appManagement]
+        case .appUpdates: return [.notifications, .appManagement]
         case .mixer: return [.audioCapture]
         case .monitorCPU, .monitorMemory, .monitorDisk, .monitorPower: return [.notifications]
         case .clipboardHistory, .shelf, .urlCleaner,
@@ -203,6 +211,24 @@ extension AppFeature {
              .extraBrightness, .quickLauncher, .colorPicker, .micMute, .mediaTools,
              .scratchpad, .monitorGPU, .monitorNetwork:
             return []
+        }
+    }
+
+    /// Broad grants worth explaining during first run. Permissions used only
+    /// by an optional sub-feature stay contextual, at the moment that control
+    /// is actually used.
+    var onboardingPermissions: [AppPermission] {
+        switch self {
+        case .keepAwake, .brightness, .radialMenu, .quickToggles, .cleaner,
+             .uninstaller, .homebrew, .appUpdates, .mixer, .cameraPreview,
+             .micMute:
+            return []
+        case .screenshot:
+            // Accessibility is only needed by scrolling capture. The regular
+            // screenshot flow should not ask for it during first setup.
+            return [.screenRecording]
+        default:
+            return permissions.filter { $0 == .accessibility || $0 == .screenRecording }
         }
     }
 
@@ -304,6 +330,7 @@ extension AppPermission {
         case .automationFinder, .automationTerminal: return "gearshape.2"
         case .audioCapture: return "waveform"
         case .camera: return "camera"
+        case .appManagement: return "app.badge"
         }
     }
 }

@@ -1032,6 +1032,10 @@ struct Strings {
     let switcherCurrentSpaceOnly: String
     let switcherCurrentSpaceOnlyCaption: String
     let shelfFileMissing: String
+    let previewSizeSmall: String
+    let mixerSoundEffectsOutputTitle: String
+    let mixerSoundEffectsOutputTooltip: String
+    let monitorOpenActivityMonitor: String
 }
 
 // MARK: - Português (Brasil)
@@ -1237,7 +1241,7 @@ extension Strings {
         switcherSimpleModeCaption: "Mostra ícones de apps e títulos das janelas, sem previews nem captura da tela pelo alternador.",
         switcherShortcutHintApps: "Apps",
         switcherShortcutHintWindows: "Janelas",
-        switcherWindowShortcutCaption: "Com o seletor aberto, pula entre as janelas do app selecionado.",
+        switcherWindowShortcutCaption: "Abre um seletor das janelas do app em primeiro plano. Com o seletor de apps aberto, pula entre as janelas do app selecionado.",
         switcherMergeTabs: "Mostrar uma entrada por app",
         switcherMergeTabsCaption: "Junta todas as janelas de um app em uma só entrada no alternador, em vez de uma por janela.",
         switcherWindowlessApps: "Apps sem janela aberta",
@@ -1636,8 +1640,8 @@ extension Strings {
         obLanguageUpdateTitle: "Agora no seu idioma",
         obLanguageUpdateBody: "O Vorssaint agora fala vários idiomas. Escolha o que você prefere usar; dá para mudar quando quiser nos Ajustes.",
         obPurposeTitle: "O que te trouxe aqui?",
-        obPurposeBody: "Escolha uma opção e o app se monta sozinho. O resto continua a um clique nos Ajustes.",
-        obPurposeSkip: "Deixar tudo à mão",
+        obPurposeBody: "Escolha uma configuração pronta ou marque exatamente o que quer usar.",
+        obPurposeSkip: "Você pode adicionar ou remover recursos depois nos Ajustes.",
 
         tabMonitor: "Monitor",
         monitorMenuBarSection: "Na barra de menus",
@@ -1920,7 +1924,11 @@ extension Strings {
         highlightsSeeAll: "Ver todas as mudanças",
         switcherCurrentSpaceOnly: "Mostrar só a Mesa atual",
         switcherCurrentSpaceOnlyCaption: "Mostra no alternador apenas as janelas da Mesa em que você está. Escolher uma janela nunca leva você para outra Mesa.",
-        shelfFileMissing: "O arquivo não existe mais"
+        shelfFileMissing: "O arquivo não existe mais",
+        previewSizeSmall: "Pequeno",
+        mixerSoundEffectsOutputTitle: "Sons do sistema",
+        mixerSoundEffectsOutputTooltip: "Escolher onde alertas e efeitos sonoros tocam",
+        monitorOpenActivityMonitor: "Abrir o Monitor de Atividade"
     )
 }
 
@@ -2127,7 +2135,7 @@ extension Strings {
         switcherSimpleModeCaption: "Shows app icons and window titles, without previews or screen capture by the switcher.",
         switcherShortcutHintApps: "Apps",
         switcherShortcutHintWindows: "Windows",
-        switcherWindowShortcutCaption: "While the switcher is open, jumps between the selected app's windows.",
+        switcherWindowShortcutCaption: "Opens a switcher for the frontmost app's windows. While the Apps switcher is open, jumps between the selected app's windows.",
         switcherMergeTabs: "Show one entry per app",
         switcherMergeTabsCaption: "Collapses all of an app's windows into one entry in the switcher, instead of one entry per window.",
         switcherWindowlessApps: "Apps with no open window",
@@ -2526,8 +2534,8 @@ extension Strings {
         obLanguageUpdateTitle: "Now in your language",
         obLanguageUpdateBody: "Vorssaint now speaks several languages. Choose the one you’d like to use; you can change it anytime in Settings.",
         obPurposeTitle: "What brought you here?",
-        obPurposeBody: "Pick one and the app sets itself up. Everything else stays one click away in Settings.",
-        obPurposeSkip: "Keep everything at hand",
+        obPurposeBody: "Choose a ready setup or select exactly what you want to use.",
+        obPurposeSkip: "You can add or remove features later in Settings.",
 
         tabMonitor: "Monitor",
         monitorMenuBarSection: "In the menu bar",
@@ -2810,6 +2818,10 @@ extension Strings {
         highlightsSeeAll: "See all changes",
         switcherCurrentSpaceOnly: "Show only the current desktop",
         switcherCurrentSpaceOnlyCaption: "Lists only windows from the desktop you are on. Picking a window never moves you to another desktop.",
-        shelfFileMissing: "The file no longer exists"
+        shelfFileMissing: "The file no longer exists",
+        previewSizeSmall: "Small",
+        mixerSoundEffectsOutputTitle: "System sounds",
+        mixerSoundEffectsOutputTooltip: "Choose where alerts and sound effects play",
+        monitorOpenActivityMonitor: "Open Activity Monitor"
     )
 }

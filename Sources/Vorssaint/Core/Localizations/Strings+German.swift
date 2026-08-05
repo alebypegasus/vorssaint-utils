@@ -204,7 +204,7 @@ extension Strings {
         switcherSimpleModeCaption: "Zeigt App-Symbole und Fenstertitel, ohne Vorschauen oder Bildschirmaufnahme durch den Umschalter.",
         switcherShortcutHintApps: "Apps",
         switcherShortcutHintWindows: "Fenster",
-        switcherWindowShortcutCaption: "Springt bei geöffnetem Umschalter zwischen den Fenstern der ausgewählten App.",
+        switcherWindowShortcutCaption: "Öffnet einen Umschalter für die Fenster der vordersten App. Bei geöffnetem App-Umschalter springt er zwischen den Fenstern der ausgewählten App.",
         switcherMergeTabs: "Einen Eintrag pro App anzeigen",
         switcherMergeTabsCaption: "Fasst alle Fenster einer App zu einem Eintrag im Umschalter zusammen, statt einen Eintrag pro Fenster.",
         switcherWindowlessApps: "Apps ohne geöffnetes Fenster",
@@ -603,8 +603,8 @@ extension Strings {
         obLanguageUpdateTitle: "Jetzt in deiner Sprache",
         obLanguageUpdateBody: "Vorssaint spricht jetzt mehrere Sprachen. Wähle die, die du verwenden möchtest; du kannst sie jederzeit in den Einstellungen ändern.",
         obPurposeTitle: "Was führt dich hierher?",
-        obPurposeBody: "Wähl eine Option und die App richtet sich selbst ein. Der Rest bleibt einen Klick entfernt.",
-        obPurposeSkip: "Alles griffbereit lassen",
+        obPurposeBody: "Wähle eine fertige Einrichtung oder genau die Funktionen, die du nutzen möchtest.",
+        obPurposeSkip: "Du kannst Funktionen später in den Einstellungen ändern.",
 
         tabMonitor: "Überwachung",
         monitorMenuBarSection: "In der Menüleiste",
@@ -887,6 +887,10 @@ extension Strings {
         highlightsSeeAll: "Alle Änderungen ansehen",
         switcherCurrentSpaceOnly: "Nur den aktuellen Schreibtisch anzeigen",
         switcherCurrentSpaceOnlyCaption: "Zeigt im Umschalter nur Fenster des Schreibtischs, auf dem du gerade bist. Die Auswahl eines Fensters wechselt nie zu einem anderen Schreibtisch.",
-        shelfFileMissing: "Die Datei existiert nicht mehr"
+        shelfFileMissing: "Die Datei existiert nicht mehr",
+        previewSizeSmall: "Klein",
+        mixerSoundEffectsOutputTitle: "Systemtöne",
+        mixerSoundEffectsOutputTooltip: "Auswählen, wo Hinweise und Toneffekte wiedergegeben werden",
+        monitorOpenActivityMonitor: "Aktivitätsanzeige öffnen"
     )
 }

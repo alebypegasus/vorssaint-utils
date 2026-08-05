@@ -205,7 +205,7 @@ extension Strings {
         switcherSimpleModeCaption: "Показывает значки приложений и заголовки окон, без миниатюр и захвата экрана переключателем.",
         switcherShortcutHintApps: "Приложения",
         switcherShortcutHintWindows: "Окна",
-        switcherWindowShortcutCaption: "Пока переключатель открыт, переходит между окнами выбранного приложения.",
+        switcherWindowShortcutCaption: "Открывает переключатель окон приложения на переднем плане. Пока открыт переключатель приложений, переходит между окнами выбранного приложения.",
         switcherMergeTabs: "Показывать одну запись на приложение",
         switcherMergeTabsCaption: "Сводит все окна приложения в одну запись в переключателе вместо отдельной записи на каждое окно.",
         switcherWindowlessApps: "Приложения без открытых окон",
@@ -604,8 +604,8 @@ extension Strings {
         obLanguageUpdateTitle: "Теперь и на вашем языке",
         obLanguageUpdateBody: "Теперь Vorssaint говорит на нескольких языках. Выберите тот, который хотите использовать; в любой момент его можно сменить в Настройках.",
         obPurposeTitle: "Что привело вас сюда?",
-        obPurposeBody: "Выберите вариант, и приложение настроится само. Остальное в одном клике в настройках.",
-        obPurposeSkip: "Оставить всё под рукой",
+        obPurposeBody: "Выберите готовую настройку или именно те функции, которыми хотите пользоваться.",
+        obPurposeSkip: "Функции можно добавить или убрать позже в настройках.",
 
         tabMonitor: "Монитор",
         monitorMenuBarSection: "В строке меню",
@@ -888,6 +888,10 @@ extension Strings {
         highlightsSeeAll: "Все изменения",
         switcherCurrentSpaceOnly: "Показывать только текущий рабочий стол",
         switcherCurrentSpaceOnlyCaption: "В переключателе видны только окна рабочего стола, на котором вы находитесь. Выбор окна никогда не переносит вас на другой рабочий стол.",
-        shelfFileMissing: "Файл больше не существует"
+        shelfFileMissing: "Файл больше не существует",
+        previewSizeSmall: "Маленький",
+        mixerSoundEffectsOutputTitle: "Системные звуки",
+        mixerSoundEffectsOutputTooltip: "Выбрать устройство для оповещений и звуковых эффектов",
+        monitorOpenActivityMonitor: "Открыть Мониторинг системы"
     )
 }

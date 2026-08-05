@@ -204,7 +204,7 @@ extension Strings {
         switcherSimpleModeCaption: "Muestra iconos de apps y títulos de ventanas, sin vistas previas ni captura de pantalla por el selector.",
         switcherShortcutHintApps: "Apps",
         switcherShortcutHintWindows: "Ventanas",
-        switcherWindowShortcutCaption: "Con el selector abierto, salta entre las ventanas de la app seleccionada.",
+        switcherWindowShortcutCaption: "Abre un selector de las ventanas de la app en primer plano. Con el selector de apps abierto, salta entre las ventanas de la app seleccionada.",
         switcherMergeTabs: "Mostrar una entrada por app",
         switcherMergeTabsCaption: "Agrupa todas las ventanas de una app en una sola entrada del selector, en vez de una por ventana.",
         switcherWindowlessApps: "Apps sin ventanas abiertas",
@@ -603,8 +603,8 @@ extension Strings {
         obLanguageUpdateTitle: "Ahora en tu idioma",
         obLanguageUpdateBody: "Vorssaint ahora habla varios idiomas. Elige el que quieras usar; puedes cambiarlo cuando quieras en Ajustes.",
         obPurposeTitle: "¿Qué te trae por aquí?",
-        obPurposeBody: "Elige una opción y la app se configura sola. El resto queda a un clic en los Ajustes.",
-        obPurposeSkip: "Dejarlo todo a mano",
+        obPurposeBody: "Elige una configuración lista o exactamente las funciones que quieres usar.",
+        obPurposeSkip: "Puedes añadir o quitar funciones después en Ajustes.",
 
         tabMonitor: "Monitor",
         monitorMenuBarSection: "En la barra de menús",
@@ -887,6 +887,10 @@ extension Strings {
         highlightsSeeAll: "Ver todos los cambios",
         switcherCurrentSpaceOnly: "Mostrar solo el escritorio actual",
         switcherCurrentSpaceOnlyCaption: "Muestra en el selector solo las ventanas del escritorio en el que estás. Elegir una ventana nunca te lleva a otro escritorio.",
-        shelfFileMissing: "El archivo ya no existe"
+        shelfFileMissing: "El archivo ya no existe",
+        previewSizeSmall: "Pequeño",
+        mixerSoundEffectsOutputTitle: "Sonidos del sistema",
+        mixerSoundEffectsOutputTooltip: "Elegir dónde se reproducen los avisos y efectos de sonido",
+        monitorOpenActivityMonitor: "Abrir Monitor de Actividad"
     )
 }
