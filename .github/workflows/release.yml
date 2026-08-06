@@ -91,10 +91,6 @@ jobs:
 
       - name: Verify signature & notarization
         run: |
-          if [ -z "${{ secrets.NOTARY_API_KEY_P8 }}" ]; then
-            echo "No notarization credentials found — skipping signature verification."
-            exit 0
-          fi
           DMG=$(ls dist/*.dmg | head -1)
           xcrun stapler validate "$DMG"
           MP=$(mktemp -d)
