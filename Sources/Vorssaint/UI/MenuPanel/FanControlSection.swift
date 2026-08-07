@@ -48,42 +48,7 @@ struct FanControlSection: View {
                                 Spacer()
                                 Text("\(Int(fan.actualSpeed)) RPM").font(.system(size: 11)).monospacedDigit()
                             }
-                            HStack(spacing: 8) {
-                                Button("Automático") {
-                                    DispatchQueue.global().async {
-                                        _ = FanControl.setMode("auto")
-                                        DispatchQueue.main.async { service.refresh() }
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                
-                                Button("Frio") {
-                                    DispatchQueue.global().async {
-                                        _ = FanControl.setMode("frio")
-                                        DispatchQueue.main.async { service.refresh() }
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                
-                                Button("Médio") {
-                                    DispatchQueue.global().async {
-                                        _ = FanControl.setMode("medio")
-                                        DispatchQueue.main.async { service.refresh() }
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                
-                                Button("Máximo") {
-                                    DispatchQueue.global().async {
-                                        _ = FanControl.setMode("maximo")
-                                        DispatchQueue.main.async { service.refresh() }
-                                    }
-                                }
-                                .buttonStyle(.borderedProminent)
-                                .tint(Color.red.opacity(0.8))
-                            }
-                            .controlSize(.small)
-                            .padding(.top, 4)
+                            fanControlButtons(for: fan)
                         }
                         .padding(.top, 4)
                     }
@@ -94,5 +59,45 @@ struct FanControlSection: View {
                 service.refresh()
             }
         }
+    }
+    
+    @ViewBuilder
+    private func fanControlButtons(for fan: FanInfo) -> some View {
+        HStack(spacing: 8) {
+            Button("Automático") {
+                DispatchQueue.global().async {
+                    _ = FanControl.setMode("auto")
+                    DispatchQueue.main.async { service.refresh() }
+                }
+            }
+            .buttonStyle(.bordered)
+            
+            Button("Frio") {
+                DispatchQueue.global().async {
+                    _ = FanControl.setMode("frio")
+                    DispatchQueue.main.async { service.refresh() }
+                }
+            }
+            .buttonStyle(.bordered)
+            
+            Button("Médio") {
+                DispatchQueue.global().async {
+                    _ = FanControl.setMode("medio")
+                    DispatchQueue.main.async { service.refresh() }
+                }
+            }
+            .buttonStyle(.bordered)
+            
+            Button("Máximo") {
+                DispatchQueue.global().async {
+                    _ = FanControl.setMode("maximo")
+                    DispatchQueue.main.async { service.refresh() }
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color.red.opacity(0.8))
+        }
+        .controlSize(.small)
+        .padding(.top, 4)
     }
 }

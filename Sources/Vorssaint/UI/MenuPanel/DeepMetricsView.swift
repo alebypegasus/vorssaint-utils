@@ -2,57 +2,57 @@ import SwiftUI
 
 struct DeepMetricsView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @State private var loading = true
-    @State private var metricsData = ""
+    
+    @State private var batteryInfo = ""
+    @State private var storageInfo = ""
+    @State private var networkInfo = ""
+    @State private var cpuGpuInfo = ""
 
     var body: some View {
-        VStack {
-            HStack {
-                Text("Relatório Profundo (Hardware & Powermetrics)")
-                    .font(.headline)
+        VStack(spacing: 0) {
+            HStack(spacing: 16) {
+                Image(systemName: "cpu.fill")
+                    .font(.system(size: 32))
+                    .foregroundStyle(PanelMetricColor.purple(for: colorScheme))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Relatório Profundo")
+                        .font(.title2.bold())
+                    Text("Hardware & Powermetrics")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
                 Spacer()
                 Button("Fechar") {
                     dismiss()
                 }
+                .buttonStyle(.bordered)
             }
-            .padding()
+            .padding(20)
+            .background(Color(NSColor.windowBackgroundColor))
+            
+            Divider()
 
             if loading {
-                ProgressView("Coletando métricas profundas e autenticando (TouchID)...")
-                    .padding()
+                loadingView
             } else {
-                ScrollView {
-                    Text(metricsData)
-                        .font(.system(size: 10, design: .monospaced))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                }
+                metricsScrollView
             }
         }
-        .frame(width: 600, height: 500)
+        .frame(width: 700, height: 600)
         .onAppear {
             DispatchQueue.global().async {
-                let cpuGpu = runSudoAppleScript(commands: ["/usr/bin/powermetrics -n 1 --samplers cpu_power,gpu_power,thermal,tasks"])
                 let battery = HardwareInfo.getBatteryInfo()
                 let storage = HardwareInfo.getStorageInfo()
                 let network = HardwareInfo.getNetworkInfo()
-                
-                let result = """
-                ================ BATERIA E ENERGIA ================
-                \(battery)
-                
-                ================ ARMAZENAMENTO ================
-                \(storage)
-                
-                ================ REDE ================
-                \(network)
-                
-                ================ CPU/GPU (Sudo) ================
-                \(cpuGpu)
-                """
+                let cpuGpu = runSudoAppleScript(commands: ["/usr/bin/powermetrics -n 1 --samplers cpu_power,gpu_power,thermal,tasks"])
                 
                 DispatchQueue.main.async {
-                    self.metricsData = result
+                    self.batteryInfo = battery
+                    self.storageInfo = storage
+                    self.networkInfo = network
+                    self.cpuGpuInfo = cpuGpu
                     self.loading = false
                 }
             }
@@ -70,5 +70,64 @@ struct DeepMetricsView: View {
             return output.stringValue ?? "Success"
         }
         return "AppleScript initialization failed."
+    }
+    
+    @ViewBuilder
+    private var loadingView: some View {
+        VStack(spacing: 16) {
+            ProgressView()
+                .controlSize(.large)
+            Text("Coletando métricas profundas e autenticando (TouchID)...")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(NSColor.underPageBackgroundColor))
+    }
+    
+    @ViewBuilder
+    private var metricsScrollView: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                MetricCard(title: "Bateria e Energia", icon: "battery.100.bolt", color: PanelMetricColor.green(for: colorScheme), content: batteryInfo)
+                MetricCard(title: "Armazenamento", icon: "internaldrive.fill", color: PanelMetricColor.orange(for: colorScheme), content: storageInfo)
+                MetricCard(title: "Rede", icon: "network", color: PanelMetricColor.blue(for: colorScheme), content: networkInfo)
+                MetricCard(title: "CPU / GPU (Sudo)", icon: "memorychip.fill", color: PanelMetricColor.purple(for: colorScheme), content: cpuGpuInfo)
+            }
+            .padding(20)
+        }
+        .background(Color(NSColor.underPageBackgroundColor))
+    }
+}
+
+struct MetricCard: View {
+    let title: String
+    let icon: String
+    let color: Color
+    let content: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                Image(systemName: icon)
+                    .foregroundStyle(color)
+                    .font(.system(size: 16, weight: .semibold))
+                Text(title)
+                    .font(.system(size: 14, weight: .bold))
+            }
+            
+            Divider()
+            
+            Text(content)
+                .font(.system(size: 11, weight: .regular, design: .monospaced))
+                .lineSpacing(2)
+                .foregroundStyle(.primary.opacity(0.85))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .textSelection(.enabled)
+        }
+        .padding(16)
+        .background(Color(NSColor.controlBackgroundColor))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
     }
 }

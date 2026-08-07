@@ -1,0 +1,198 @@
+211.05ms	Sources/Vorssaint/App/AppAppearanceController.swift:19:9	didSet observer main.(file).AppAppearanceController.appearance.didSet observer@Sources/Vorssaint/App/AppAppearanceController.swift:19:9
+0.08ms	Sources/Vorssaint/App/AppAppearanceController.swift:16:16	getter main.(file).AppAppearanceController.shared.getter@Sources/Vorssaint/App/AppAppearanceController.swift:16:16
+3.09ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	getter main.(file).AppAppearanceController.appearance.getter@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+3.78ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	setter main.(file).AppAppearanceController.appearance.setter@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.04ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	_modify accessor main.(file).AppAppearanceController.appearance._modify accessor@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.16ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	getter main.(file).AppAppearanceController.$appearance.getter@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.06ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	setter main.(file).AppAppearanceController.$appearance.setter@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.05ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	_modify accessor main.(file).AppAppearanceController.$appearance._modify accessor@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.04ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	getter main.(file).AppAppearanceController._appearance.getter@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.03ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	setter main.(file).AppAppearanceController._appearance.setter@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+0.02ms	Sources/Vorssaint/App/AppAppearanceController.swift:18:20	_modify accessor main.(file).AppAppearanceController._appearance._modify accessor@Sources/Vorssaint/App/AppAppearanceController.swift:18:20
+6.32ms	Sources/Vorssaint/App/AppAppearanceController.swift:26:13	initializer main.(file).AppAppearanceController.init()@Sources/Vorssaint/App/AppAppearanceController.swift:26:13
+0.04ms	Sources/Vorssaint/App/AppAppearanceController.swift:35:22	getter main.(file).AppAppearanceController.panel.getter@Sources/Vorssaint/App/AppAppearanceController.swift:35:22
+0.05ms	Sources/Vorssaint/App/AppAppearanceController.swift:35:22	setter main.(file).AppAppearanceController.panel.setter@Sources/Vorssaint/App/AppAppearanceController.swift:35:22
+0.04ms	Sources/Vorssaint/App/AppAppearanceController.swift:35:22	_modify accessor main.(file).AppAppearanceController.panel._modify accessor@Sources/Vorssaint/App/AppAppearanceController.swift:35:22
+62.91ms	Sources/Vorssaint/App/AppAppearanceController.swift:39:10	instance method main.(file).AppAppearanceController.apply()@Sources/Vorssaint/App/AppAppearanceController.swift:39:10
+1.97ms	Sources/Vorssaint/App/AppAppearanceController.swift:45:10	instance method main.(file).AppAppearanceController.follow(panel:)@Sources/Vorssaint/App/AppAppearanceController.swift:45:10
+28.90ms	Sources/Vorssaint/App/AppAppearanceController.swift:50:45	getter main.(file).AppAppearanceController.nsAppearance.getter@Sources/Vorssaint/App/AppAppearanceController.swift:50:45
+0.02ms	Sources/Vorssaint/App/AppAppearanceController.swift:15:13	deinitializer main.(file).AppAppearanceController.deinit@Sources/Vorssaint/App/AppAppearanceController.swift:15:13
+0.10ms	Sources/Vorssaint/App/AppDelegate.swift:11:17	getter main.(file).AppDelegate.statusController.getter@Sources/Vorssaint/App/AppDelegate.swift:11:17
+0.06ms	Sources/Vorssaint/App/AppDelegate.swift:11:17	setter main.(file).AppDelegate.statusController.setter@Sources/Vorssaint/App/AppDelegate.swift:11:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:11:17	_modify accessor main.(file).AppDelegate.statusController._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:11:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:12:17	getter main.(file).AppDelegate.popover.getter@Sources/Vorssaint/App/AppDelegate.swift:12:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:13:17	getter main.(file).AppDelegate.popoverClosedAt.getter@Sources/Vorssaint/App/AppDelegate.swift:13:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:13:17	setter main.(file).AppDelegate.popoverClosedAt.setter@Sources/Vorssaint/App/AppDelegate.swift:13:17
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:13:17	_modify accessor main.(file).AppDelegate.popoverClosedAt._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:13:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:14:17	getter main.(file).AppDelegate.popoverDismissMonitor.getter@Sources/Vorssaint/App/AppDelegate.swift:14:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:14:17	setter main.(file).AppDelegate.popoverDismissMonitor.setter@Sources/Vorssaint/App/AppDelegate.swift:14:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:14:17	_modify accessor main.(file).AppDelegate.popoverDismissMonitor._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:14:17
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:15:17	getter main.(file).AppDelegate.popoverLocalDismissMonitor.getter@Sources/Vorssaint/App/AppDelegate.swift:15:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:15:17	setter main.(file).AppDelegate.popoverLocalDismissMonitor.setter@Sources/Vorssaint/App/AppDelegate.swift:15:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:15:17	_modify accessor main.(file).AppDelegate.popoverLocalDismissMonitor._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:15:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:16:17	getter main.(file).AppDelegate.popoverKeyboardMonitor.getter@Sources/Vorssaint/App/AppDelegate.swift:16:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:16:17	setter main.(file).AppDelegate.popoverKeyboardMonitor.setter@Sources/Vorssaint/App/AppDelegate.swift:16:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:16:17	_modify accessor main.(file).AppDelegate.popoverKeyboardMonitor._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:16:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:17:17	getter main.(file).AppDelegate.popoverIsClosing.getter@Sources/Vorssaint/App/AppDelegate.swift:17:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:17:17	setter main.(file).AppDelegate.popoverIsClosing.setter@Sources/Vorssaint/App/AppDelegate.swift:17:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:17:17	_modify accessor main.(file).AppDelegate.popoverIsClosing._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:17:17
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:18:17	getter main.(file).AppDelegate.popoverIsSwitchingAnchor.getter@Sources/Vorssaint/App/AppDelegate.swift:18:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:18:17	setter main.(file).AppDelegate.popoverIsSwitchingAnchor.setter@Sources/Vorssaint/App/AppDelegate.swift:18:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:18:17	_modify accessor main.(file).AppDelegate.popoverIsSwitchingAnchor._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:18:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:19:17	getter main.(file).AppDelegate.metricAnchorSwitchSerial.getter@Sources/Vorssaint/App/AppDelegate.swift:19:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:19:17	setter main.(file).AppDelegate.metricAnchorSwitchSerial.setter@Sources/Vorssaint/App/AppDelegate.swift:19:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:19:17	_modify accessor main.(file).AppDelegate.metricAnchorSwitchSerial._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:19:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:20:17	getter main.(file).AppDelegate.popoverCloseCompletions.getter@Sources/Vorssaint/App/AppDelegate.swift:20:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:20:17	setter main.(file).AppDelegate.popoverCloseCompletions.setter@Sources/Vorssaint/App/AppDelegate.swift:20:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:20:17	_modify accessor main.(file).AppDelegate.popoverCloseCompletions._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:20:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:21:17	getter main.(file).AppDelegate.isTerminating.getter@Sources/Vorssaint/App/AppDelegate.swift:21:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:21:17	setter main.(file).AppDelegate.isTerminating.setter@Sources/Vorssaint/App/AppDelegate.swift:21:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:21:17	_modify accessor main.(file).AppDelegate.isTerminating._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:21:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:22:17	getter main.(file).AppDelegate.cancellables.getter@Sources/Vorssaint/App/AppDelegate.swift:22:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:22:17	setter main.(file).AppDelegate.cancellables.setter@Sources/Vorssaint/App/AppDelegate.swift:22:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:22:17	_modify accessor main.(file).AppDelegate.cancellables._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:22:17
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:23:17	getter main.(file).AppDelegate.settingsWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:23:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:23:17	setter main.(file).AppDelegate.settingsWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:23:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:23:17	_modify accessor main.(file).AppDelegate.settingsWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:23:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:24:17	getter main.(file).AppDelegate.feedbackWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:24:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:24:17	setter main.(file).AppDelegate.feedbackWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:24:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:24:17	_modify accessor main.(file).AppDelegate.feedbackWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:24:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:25:17	getter main.(file).AppDelegate.onboardingWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:25:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:25:17	setter main.(file).AppDelegate.onboardingWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:25:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:25:17	_modify accessor main.(file).AppDelegate.onboardingWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:25:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:26:17	getter main.(file).AppDelegate.supportIntroWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:26:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:26:17	setter main.(file).AppDelegate.supportIntroWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:26:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:26:17	_modify accessor main.(file).AppDelegate.supportIntroWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:26:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:27:17	getter main.(file).AppDelegate.updateHighlightsWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:27:17
+0.08ms	Sources/Vorssaint/App/AppDelegate.swift:27:17	setter main.(file).AppDelegate.updateHighlightsWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:27:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:27:17	_modify accessor main.(file).AppDelegate.updateHighlightsWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:27:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:28:17	getter main.(file).AppDelegate.supportIntroCanClose.getter@Sources/Vorssaint/App/AppDelegate.swift:28:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:28:17	setter main.(file).AppDelegate.supportIntroCanClose.setter@Sources/Vorssaint/App/AppDelegate.swift:28:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:28:17	_modify accessor main.(file).AppDelegate.supportIntroCanClose._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:28:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:29:17	getter main.(file).AppDelegate.updateShowcaseWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:29:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:29:17	setter main.(file).AppDelegate.updateShowcaseWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:29:17
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:29:17	_modify accessor main.(file).AppDelegate.updateShowcaseWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:29:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:30:17	getter main.(file).AppDelegate.updatePreviewWindow.getter@Sources/Vorssaint/App/AppDelegate.swift:30:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:30:17	setter main.(file).AppDelegate.updatePreviewWindow.setter@Sources/Vorssaint/App/AppDelegate.swift:30:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:30:17	_modify accessor main.(file).AppDelegate.updatePreviewWindow._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:30:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:31:17	getter main.(file).AppDelegate.popoverOpenDuration.getter@Sources/Vorssaint/App/AppDelegate.swift:31:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:32:17	getter main.(file).AppDelegate.popoverCloseDuration.getter@Sources/Vorssaint/App/AppDelegate.swift:32:17
+587.79ms	Sources/Vorssaint/App/AppDelegate.swift:36:10	instance method main.(file).AppDelegate.applicationDidFinishLaunching@Sources/Vorssaint/App/AppDelegate.swift:36:10
+12.82ms	Sources/Vorssaint/App/AppDelegate.swift:177:25	static method main.(file).AppDelegate.boundAccessibilityWaits()@Sources/Vorssaint/App/AppDelegate.swift:177:25
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:187:17	getter main.(file).AppDelegate.startupOfPreviousRunDidNotFinish.getter@Sources/Vorssaint/App/AppDelegate.swift:187:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:187:17	setter main.(file).AppDelegate.startupOfPreviousRunDidNotFinish.setter@Sources/Vorssaint/App/AppDelegate.swift:187:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:187:17	_modify accessor main.(file).AppDelegate.startupOfPreviousRunDidNotFinish._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:187:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:191:24	getter main.(file).AppDelegate.healthyStartupSeconds.getter@Sources/Vorssaint/App/AppDelegate.swift:191:24
+146.84ms	Sources/Vorssaint/App/AppDelegate.swift:193:18	instance method main.(file).AppDelegate.beginStartupWatch()@Sources/Vorssaint/App/AppDelegate.swift:193:18
+1.61ms	Sources/Vorssaint/App/AppDelegate.swift:202:18	instance method main.(file).AppDelegate.endStartupWatch()@Sources/Vorssaint/App/AppDelegate.swift:202:18
+204.84ms	Sources/Vorssaint/App/AppDelegate.swift:206:10	instance method main.(file).AppDelegate.applicationWillTerminate@Sources/Vorssaint/App/AppDelegate.swift:206:10
+16.82ms	Sources/Vorssaint/App/AppDelegate.swift:246:10	instance method main.(file).AppDelegate.applicationShouldHandleReopen(_:hasVisibleWindows:)@Sources/Vorssaint/App/AppDelegate.swift:246:10
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:282:24	getter main.(file).AppDelegate.menuBarLog.getter@Sources/Vorssaint/App/AppDelegate.swift:282:24
+34.26ms	Sources/Vorssaint/App/AppDelegate.swift:285:18	instance method main.(file).AppDelegate.iconIsOnScreen()@Sources/Vorssaint/App/AppDelegate.swift:285:18
+130.15ms	Sources/Vorssaint/App/AppDelegate.swift:296:18	instance method main.(file).AppDelegate.logStatusItemPlacement@Sources/Vorssaint/App/AppDelegate.swift:296:18
+0.67ms	Sources/Vorssaint/App/AppDelegate.swift:307:10	instance method main.(file).AppDelegate.applicationSupportsSecureRestorableState@Sources/Vorssaint/App/AppDelegate.swift:307:10
+154.14ms	Sources/Vorssaint/App/AppDelegate.swift:309:18	instance method main.(file).AppDelegate.bindManagers()@Sources/Vorssaint/App/AppDelegate.swift:309:18
+95.09ms	Sources/Vorssaint/App/AppDelegate.swift:325:18	instance method main.(file).AppDelegate.setUpPopover()@Sources/Vorssaint/App/AppDelegate.swift:325:18
+4.80ms	Sources/Vorssaint/App/AppDelegate.swift:342:18	instance method main.(file).AppDelegate.togglePopover(anchor:)@Sources/Vorssaint/App/AppDelegate.swift:342:18
+30.22ms	Sources/Vorssaint/App/AppDelegate.swift:350:18	instance method main.(file).AppDelegate.toggleMainPopover()@Sources/Vorssaint/App/AppDelegate.swift:350:18
+294.46ms	Sources/Vorssaint/App/AppDelegate.swift:357:18	instance method main.(file).AppDelegate.showMetricPanel(for:anchoredTo:)@Sources/Vorssaint/App/AppDelegate.swift:357:18
+86.22ms	Sources/Vorssaint/App/AppDelegate.swift:374:18	instance method main.(file).AppDelegate.scheduleMetricAnchorSwitch(to:anchoredTo:)@Sources/Vorssaint/App/AppDelegate.swift:374:18
+108.78ms	Sources/Vorssaint/App/AppDelegate.swift:387:18	instance method main.(file).AppDelegate.reanchorMetricPopover(to:anchoredTo:)@Sources/Vorssaint/App/AppDelegate.swift:387:18
+12.08ms	Sources/Vorssaint/App/AppDelegate.swift:428:18	instance method main.(file).AppDelegate.statusButtonMidX@Sources/Vorssaint/App/AppDelegate.swift:428:18
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:439:17	getter main.(file).AppDelegate.lastStatusClick.getter@Sources/Vorssaint/App/AppDelegate.swift:439:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:439:17	setter main.(file).AppDelegate.lastStatusClick.setter@Sources/Vorssaint/App/AppDelegate.swift:439:17
+0.14ms	Sources/Vorssaint/App/AppDelegate.swift:439:17	_modify accessor main.(file).AppDelegate.lastStatusClick._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:439:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:440:17	getter main.(file).AppDelegate.popoverAnchor.getter@Sources/Vorssaint/App/AppDelegate.swift:440:17
+0.29ms	Sources/Vorssaint/App/AppDelegate.swift:440:17	setter main.(file).AppDelegate.popoverAnchor.setter@Sources/Vorssaint/App/AppDelegate.swift:440:17
+0.07ms	Sources/Vorssaint/App/AppDelegate.swift:440:17	_modify accessor main.(file).AppDelegate.popoverAnchor._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:440:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:441:17	getter main.(file).AppDelegate.lastGoodPanelAnchor.getter@Sources/Vorssaint/App/AppDelegate.swift:441:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:441:17	setter main.(file).AppDelegate.lastGoodPanelAnchor.setter@Sources/Vorssaint/App/AppDelegate.swift:441:17
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:441:17	_modify accessor main.(file).AppDelegate.lastGoodPanelAnchor._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:441:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:442:17	getter main.(file).AppDelegate.popoverDriftObservers.getter@Sources/Vorssaint/App/AppDelegate.swift:442:17
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:442:17	setter main.(file).AppDelegate.popoverDriftObservers.setter@Sources/Vorssaint/App/AppDelegate.swift:442:17
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:442:17	_modify accessor main.(file).AppDelegate.popoverDriftObservers._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:442:17
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:445:24	getter main.(file).AppDelegate.statusClickFreshness.getter@Sources/Vorssaint/App/AppDelegate.swift:445:24
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:453:13	getter main.(file).AppDelegate.PanelAnchor.midX.getter@Sources/Vorssaint/App/AppDelegate.swift:453:13
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:454:13	getter main.(file).AppDelegate.PanelAnchor.top.getter@Sources/Vorssaint/App/AppDelegate.swift:454:13
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:455:13	getter main.(file).AppDelegate.PanelAnchor.screen.getter@Sources/Vorssaint/App/AppDelegate.swift:455:13
+0.05ms	Sources/Vorssaint/App/AppDelegate.swift:458:13	getter main.(file).AppDelegate.PanelAnchor.trusted.getter@Sources/Vorssaint/App/AppDelegate.swift:458:13
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:465:13	getter main.(file).AppDelegate.PanelAnchor.overridesSoundFrame.getter@Sources/Vorssaint/App/AppDelegate.swift:465:13
+0.03ms	Sources/Vorssaint/App/AppDelegate.swift:469:18	getter main.(file).AppDelegate.PanelAnchor.button.getter@Sources/Vorssaint/App/AppDelegate.swift:469:18
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:469:18	setter main.(file).AppDelegate.PanelAnchor.button.setter@Sources/Vorssaint/App/AppDelegate.swift:469:18
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:469:18	_modify accessor main.(file).AppDelegate.PanelAnchor.button._modify accessor@Sources/Vorssaint/App/AppDelegate.swift:469:18
+23.46ms	Sources/Vorssaint/App/AppDelegate.swift:472:18	instance method main.(file).AppDelegate.captureStatusClick()@Sources/Vorssaint/App/AppDelegate.swift:472:18
+31.75ms	Sources/Vorssaint/App/AppDelegate.swift:485:18	instance method main.(file).AppDelegate.correctedPopoverMidX(for:)@Sources/Vorssaint/App/AppDelegate.swift:485:18
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:496:24	getter main.(file).AppDelegate.statusClickEventTypes.getter@Sources/Vorssaint/App/AppDelegate.swift:496:24
+13.92ms	Sources/Vorssaint/App/AppDelegate.swift:502:18	instance method main.(file).AppDelegate.statusScreen(for:)@Sources/Vorssaint/App/AppDelegate.swift:502:18
+13.15ms	Sources/Vorssaint/App/AppDelegate.swift:518:18	instance method main.(file).AppDelegate.frameStillDescribesMenuBar@Sources/Vorssaint/App/AppDelegate.swift:518:18
+82.84ms	Sources/Vorssaint/App/AppDelegate.swift:529:18	instance method main.(file).AppDelegate.resolvePanelAnchor(for:window:)@Sources/Vorssaint/App/AppDelegate.swift:529:18
+36.58ms	Sources/Vorssaint/App/AppDelegate.swift:586:18	instance method main.(file).AppDelegate.beginPopoverDriftCorrection(window:anchor:)@Sources/Vorssaint/App/AppDelegate.swift:586:18
+32.13ms	Sources/Vorssaint/App/AppDelegate.swift:602:18	instance method main.(file).AppDelegate.applyPopoverDriftFrame@Sources/Vorssaint/App/AppDelegate.swift:602:18
+5.14ms	Sources/Vorssaint/App/AppDelegate.swift:621:18	instance method main.(file).AppDelegate.anchorVisibleFrame(_:window:)@Sources/Vorssaint/App/AppDelegate.swift:621:18
+16.32ms	Sources/Vorssaint/App/AppDelegate.swift:628:18	instance method main.(file).AppDelegate.endPopoverDriftCorrection()@Sources/Vorssaint/App/AppDelegate.swift:628:18
+26.84ms	Sources/Vorssaint/App/AppDelegate.swift:637:18	instance method main.(file).AppDelegate.switchMetricPopover(to:anchoredTo:)@Sources/Vorssaint/App/AppDelegate.swift:637:18
+63.37ms	Sources/Vorssaint/App/AppDelegate.swift:663:18	instance method main.(file).AppDelegate.showPopover(anchor:allowRecentClose:animate:activate:)@Sources/Vorssaint/App/AppDelegate.swift:663:18
+79.17ms	Sources/Vorssaint/App/AppDelegate.swift:710:18	instance method main.(file).AppDelegate.installPopoverDismissMonitor()@Sources/Vorssaint/App/AppDelegate.swift:710:18
+11.74ms	Sources/Vorssaint/App/AppDelegate.swift:742:18	instance method main.(file).AppDelegate.removePopoverDismissMonitor()@Sources/Vorssaint/App/AppDelegate.swift:742:18
+11.66ms	Sources/Vorssaint/App/AppDelegate.swift:757:18	instance method main.(file).AppDelegate.shouldDismissPopover(forLocalEvent:)@Sources/Vorssaint/App/AppDelegate.swift:757:18
+14.84ms	Sources/Vorssaint/App/AppDelegate.swift:767:18	instance method main.(file).AppDelegate.handlePopoverKeyDown@Sources/Vorssaint/App/AppDelegate.swift:767:18
+87.64ms	Sources/Vorssaint/App/AppDelegate.swift:789:18	instance method main.(file).AppDelegate.isPlainPopoverHoldKey@Sources/Vorssaint/App/AppDelegate.swift:789:18
+29.34ms	Sources/Vorssaint/App/AppDelegate.swift:795:18	instance method main.(file).AppDelegate.isTextEditingActive(in:)@Sources/Vorssaint/App/AppDelegate.swift:795:18
+36.31ms	Sources/Vorssaint/App/AppDelegate.swift:804:24	instance method main.(file).AppDelegate.appResignedActive()@Sources/Vorssaint/App/AppDelegate.swift:804:24
+13.38ms	Sources/Vorssaint/App/AppDelegate.swift:813:24	instance method main.(file).AppDelegate.appBecameActive()@Sources/Vorssaint/App/AppDelegate.swift:813:24
+47.06ms	Sources/Vorssaint/App/AppDelegate.swift:825:18	instance method main.(file).AppDelegate.restoreAfterAppStoreHandoff()@Sources/Vorssaint/App/AppDelegate.swift:825:18
+27.24ms	Sources/Vorssaint/App/AppDelegate.swift:836:10	instance method main.(file).AppDelegate.closePopover(animated:after:completion:)@Sources/Vorssaint/App/AppDelegate.swift:836:10
+40.08ms	Sources/Vorssaint/App/AppDelegate.swift:847:18	instance method main.(file).AppDelegate.closePopoverNow(animated:completion:)@Sources/Vorssaint/App/AppDelegate.swift:847:18
+14.94ms	Sources/Vorssaint/App/AppDelegate.swift:871:18	instance method main.(file).AppDelegate.animatePopoverOpen@Sources/Vorssaint/App/AppDelegate.swift:871:18
+6.87ms	Sources/Vorssaint/App/AppDelegate.swift:887:18	instance method main.(file).AppDelegate.finishPopoverClose()@Sources/Vorssaint/App/AppDelegate.swift:887:18
+5.44ms	Sources/Vorssaint/App/AppDelegate.swift:898:18	instance method main.(file).AppDelegate.runPopoverCloseCompletions()@Sources/Vorssaint/App/AppDelegate.swift:898:18
+32.17ms	Sources/Vorssaint/App/AppDelegate.swift:906:10	instance method main.(file).AppDelegate.popoverWillShow@Sources/Vorssaint/App/AppDelegate.swift:906:10
+2.53ms	Sources/Vorssaint/App/AppDelegate.swift:916:10	instance method main.(file).AppDelegate.popoverShouldClose@Sources/Vorssaint/App/AppDelegate.swift:916:10
+24.74ms	Sources/Vorssaint/App/AppDelegate.swift:920:10	instance method main.(file).AppDelegate.popoverDidClose@Sources/Vorssaint/App/AppDelegate.swift:920:10
+4.52ms	Sources/Vorssaint/App/AppDelegate.swift:943:18	instance method main.(file).AppDelegate.showContextMenu()@Sources/Vorssaint/App/AppDelegate.swift:943:18
+149.66ms	Sources/Vorssaint/App/AppDelegate.swift:955:18	instance method main.(file).AppDelegate.presentContextMenu()@Sources/Vorssaint/App/AppDelegate.swift:955:18
+2.14ms	Sources/Vorssaint/App/AppDelegate.swift:1035:24	instance method main.(file).AppDelegate.menuToggleAwake()@Sources/Vorssaint/App/AppDelegate.swift:1035:24
+10.01ms	Sources/Vorssaint/App/AppDelegate.swift:1039:24	instance method main.(file).AppDelegate.menuCleaningMode()@Sources/Vorssaint/App/AppDelegate.swift:1039:24
+1.86ms	Sources/Vorssaint/App/AppDelegate.swift:1043:24	instance method main.(file).AppDelegate.menuActivateDuration@Sources/Vorssaint/App/AppDelegate.swift:1043:24
+1.10ms	Sources/Vorssaint/App/AppDelegate.swift:1047:24	instance method main.(file).AppDelegate.menuOpenSettings()@Sources/Vorssaint/App/AppDelegate.swift:1047:24
+21.36ms	Sources/Vorssaint/App/AppDelegate.swift:1051:24	instance method main.(file).AppDelegate.menuOpenUninstaller()@Sources/Vorssaint/App/AppDelegate.swift:1051:24
+1.14ms	Sources/Vorssaint/App/AppDelegate.swift:1056:24	instance method main.(file).AppDelegate.menuOpenShelf()@Sources/Vorssaint/App/AppDelegate.swift:1056:24
+2.32ms	Sources/Vorssaint/App/AppDelegate.swift:1060:24	instance method main.(file).AppDelegate.menuCheckUpdates()@Sources/Vorssaint/App/AppDelegate.swift:1060:24
+2.50ms	Sources/Vorssaint/App/AppDelegate.swift:1065:24	instance method main.(file).AppDelegate.quitApp()@Sources/Vorssaint/App/AppDelegate.swift:1065:24
+112.48ms	Sources/Vorssaint/App/AppDelegate.swift:1069:24	instance method main.(file).AppDelegate.showAbout()@Sources/Vorssaint/App/AppDelegate.swift:1069:24
+157.85ms	Sources/Vorssaint/App/AppDelegate.swift:1090:10	instance method main.(file).AppDelegate.installMainMenu()@Sources/Vorssaint/App/AppDelegate.swift:1090:10
+144.45ms	Sources/Vorssaint/App/AppDelegate.swift:1159:10	instance method main.(file).AppDelegate.openSettingsWindow()@Sources/Vorssaint/App/AppDelegate.swift:1159:10
+43.37ms	Sources/Vorssaint/App/AppDelegate.swift:1195:10	instance method main.(file).AppDelegate.openFeedbackWindow(kind:)@Sources/Vorssaint/App/AppDelegate.swift:1195:10
+114.41ms	Sources/Vorssaint/App/AppDelegate.swift:1217:18	instance method main.(file).AppDelegate.positionSettingsWindow(_:force:)@Sources/Vorssaint/App/AppDelegate.swift:1217:18
+117.52ms	Sources/Vorssaint/App/AppDelegate.swift:1247:18	instance method main.(file).AppDelegate.settingsFrame(_:avoiding:in:)@Sources/Vorssaint/App/AppDelegate.swift:1247:18
+6.97ms	Sources/Vorssaint/App/AppDelegate.swift:1280:10	instance method main.(file).AppDelegate.reshowStatusItem()@Sources/Vorssaint/App/AppDelegate.swift:1280:10
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:1294:24	getter main.(file).AppDelegate.reshowVerifyAttempts.getter@Sources/Vorssaint/App/AppDelegate.swift:1294:24
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:1295:24	getter main.(file).AppDelegate.reshowVerifyInterval.getter@Sources/Vorssaint/App/AppDelegate.swift:1295:24
+189.42ms	Sources/Vorssaint/App/AppDelegate.swift:1297:18	instance method main.(file).AppDelegate.verifyIconReappeared(attemptsLeft:)@Sources/Vorssaint/App/AppDelegate.swift:1297:18
+0.04ms	Sources/Vorssaint/App/AppDelegate.swift:1326:24	getter main.(file).AppDelegate.menuBarManagerBundlePrefixes.getter@Sources/Vorssaint/App/AppDelegate.swift:1326:24
+68.45ms	Sources/Vorssaint/App/AppDelegate.swift:1333:25	static method main.(file).AppDelegate.runningMenuBarManagerName()@Sources/Vorssaint/App/AppDelegate.swift:1333:25
+33.80ms	Sources/Vorssaint/App/AppDelegate.swift:1345:10	instance method main.(file).AppDelegate.relaunchApp()@Sources/Vorssaint/App/AppDelegate.swift:1345:10
+49.72ms	Sources/Vorssaint/App/AppDelegate.swift:1354:10	instance method main.(file).AppDelegate.showOnboarding(mode:)@Sources/Vorssaint/App/AppDelegate.swift:1354:10
+3.47ms	Sources/Vorssaint/App/AppDelegate.swift:1391:18	instance method main.(file).AppDelegate.presentUpdateIntros()@Sources/Vorssaint/App/AppDelegate.swift:1391:18
+6.51ms	Sources/Vorssaint/App/AppDelegate.swift:1397:18	instance method main.(file).AppDelegate.showUpdateHighlightsIfNeeded()@Sources/Vorssaint/App/AppDelegate.swift:1397:18
+45.62ms	Sources/Vorssaint/App/AppDelegate.swift:1406:18	instance method main.(file).AppDelegate.showUpdateHighlights()@Sources/Vorssaint/App/AppDelegate.swift:1406:18
+2.95ms	Sources/Vorssaint/App/AppDelegate.swift:1443:18	instance method main.(file).AppDelegate.markUpdateHighlightsSeen()@Sources/Vorssaint/App/AppDelegate.swift:1443:18
+37.00ms	Sources/Vorssaint/App/AppDelegate.swift:1448:18	instance method main.(file).AppDelegate.showUpdateShowcaseIntroIfNeeded()@Sources/Vorssaint/App/AppDelegate.swift:1448:18
+40.25ms	Sources/Vorssaint/App/AppDelegate.swift:1462:18	instance method main.(file).AppDelegate.showUpdateShowcaseIntro()@Sources/Vorssaint/App/AppDelegate.swift:1462:18
+5.32ms	Sources/Vorssaint/App/AppDelegate.swift:1495:18	instance method main.(file).AppDelegate.showSupportUpdateIntroIfNeeded()@Sources/Vorssaint/App/AppDelegate.swift:1495:18
+43.59ms	Sources/Vorssaint/App/AppDelegate.swift:1507:18	instance method main.(file).AppDelegate.showSupportUpdateIntro()@Sources/Vorssaint/App/AppDelegate.swift:1507:18
+92.09ms	Sources/Vorssaint/App/AppDelegate.swift:1550:18	instance method main.(file).AppDelegate.centerIntroWindow@Sources/Vorssaint/App/AppDelegate.swift:1550:18
+46.62ms	Sources/Vorssaint/App/AppDelegate.swift:1567:10	instance method main.(file).AppDelegate.showUpdatePreview()@Sources/Vorssaint/App/AppDelegate.swift:1567:10
+6.32ms	Sources/Vorssaint/App/AppDelegate.swift:1606:10	instance method main.(file).AppDelegate.windowDidEndLiveResize@Sources/Vorssaint/App/AppDelegate.swift:1606:10
+13.38ms	Sources/Vorssaint/App/AppDelegate.swift:1613:18	instance method main.(file).AppDelegate.saveSettingsWindowSize@Sources/Vorssaint/App/AppDelegate.swift:1613:18
+4.45ms	Sources/Vorssaint/App/AppDelegate.swift:1619:10	instance method main.(file).AppDelegate.windowShouldClose@Sources/Vorssaint/App/AppDelegate.swift:1619:10
+35.20ms	Sources/Vorssaint/App/AppDelegate.swift:1624:10	instance method main.(file).AppDelegate.windowWillClose@Sources/Vorssaint/App/AppDelegate.swift:1624:10
+10.00ms	Sources/Vorssaint/App/AppDelegate.swift:1662:18	instance method main.(file).AppDelegate.markOnboardingComplete()@Sources/Vorssaint/App/AppDelegate.swift:1662:18
+1.13ms	Sources/Vorssaint/App/AppDelegate.swift:1673:18	instance method main.(file).AppDelegate.markSupportUpdateIntroSeenIfCurrentUpdate()@Sources/Vorssaint/App/AppDelegate.swift:1673:18
+3.42ms	Sources/Vorssaint/App/AppDelegate.swift:1677:18	instance method main.(file).AppDelegate.markSupportUpdateIntroSeen()@Sources/Vorssaint/App/AppDelegate.swift:1677:18
+27.89ms	Sources/Vorssaint/App/AppDelegate.swift:1682:18	instance method main.(file).AppDelegate.markUpdateShowcaseIntroSeenIfCurrentUpdate()@Sources/Vorssaint/App/AppDelegate.swift:1682:18
+3.81ms	Sources/Vorssaint/App/AppDelegate.swift:1687:18	instance method main.(file).AppDelegate.markUpdateShowcaseIntroSeen()@Sources/Vorssaint/App/AppDelegate.swift:1687:18
+0.06ms	Sources/Vorssaint/App/AppDelegate.swift:10:95	initializer main.(file).AppDelegate.init()@Sources/Vorssaint/App/AppDelegate.swift:10:95
+0.02ms	Sources/Vorssaint/App/AppDelegate.swift:10:13	deinitializer main.(file).AppDelegate.deinit@Sources/Vorssaint/App/AppDelegate.swift:10:13
+22.35ms	Sources/Vorssaint/App/AppDelegate.swift:1694:10	instance method main.(file).AppDelegate extension.userNotificationCenter(_:didReceive:withCompletionHandler:)@Sources/Vorssaint/App/AppDelegate.swift:1694:10
+error: compile command failed due to signal 15 (use -v to see invocation)

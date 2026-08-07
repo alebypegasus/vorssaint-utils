@@ -79,20 +79,7 @@ struct SystemSection: View {
                 }
                 
                 Divider()
-                Button(action: {
-                    showDeepMetrics = true
-                }) {
-                    HStack {
-                        Image(systemName: "cpu.fill")
-                        Text("Relatório Profundo (Requer Senha)")
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.primary)
-                }
-                .buttonStyle(.plain)
-                .padding(.vertical, 4)
+                deepMetricsButton
             }
             .panelCard()
         }
@@ -246,6 +233,24 @@ struct SystemSection: View {
                 }
             }
         }
+    }
+
+    @ViewBuilder
+    private var deepMetricsButton: some View {
+        Button(action: {
+            showDeepMetrics = true
+        }) {
+            HStack {
+                Image(systemName: "cpu.fill")
+                Text("Relatório Profundo (Requer Senha)")
+                Spacer()
+                Image(systemName: "chevron.right")
+            }
+            .font(.system(size: 11, weight: .semibold))
+            .foregroundStyle(.primary)
+        }
+        .buttonStyle(.plain)
+        .padding(.vertical, 4)
     }
 
     @ViewBuilder
