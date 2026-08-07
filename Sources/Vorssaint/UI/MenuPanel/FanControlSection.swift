@@ -41,7 +41,7 @@ struct FanControlSection: View {
                         .foregroundStyle(.tertiary)
                         .padding(.top, 4)
                 } else {
-                    ForEach($service.fans) { $fan in
+                    ForEach(service.fans) { fan in
                         VStack(alignment: .leading, spacing: 6) {
                             HStack {
                                 Text(fan.name).font(.system(size: 11, weight: .medium))
@@ -62,7 +62,7 @@ struct FanControlSection: View {
     }
     
     @ViewBuilder
-    private func fanControlButtons(for fan: FanInfo) -> some View {
+    private func fanControlButtons(for fan: FanStatus) -> some View {
         HStack(spacing: 8) {
             Button("Automático") {
                 DispatchQueue.global().async {
