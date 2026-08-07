@@ -4,8 +4,22 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
-## [3.3.2]
 
+
+
+
+## [3.4.0]
+
+Vorssaint 3.4.0 integrates deep monitoring and fan control directly into the GUI.
+
+- **System Monitor**:
+  - Added Deep Metrics view to inspect all detailed powermetrics including CPU/GPU usage by process, detailed battery cycles, and disk space.
+  - The Deep Metrics view prompts for TouchID for secure `sudo` powermetrics execution directly within the app.
+- **Fan Control (Beta)**:
+  - Redesigned interface with quick action buttons for: Automatic, Cold, Medium, and Maximum profiles.
+  - Automatically handles privilege escalation (TouchID/Password) to communicate securely with SMC.
+
+## [3.3.2]
 Vorssaint 3.3.2 improves hardware monitoring and sensor compatibility.
 
 - **System Monitor**:

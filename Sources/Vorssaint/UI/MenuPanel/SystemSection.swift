@@ -17,6 +17,7 @@ struct SystemSection: View {
     @Environment(\.colorScheme) private var colorScheme
     var collapsible = true
     @State private var expanded: BreakdownKind?
+    @State private var showDeepMetrics = false
     @State private var alertsExpanded = false
     @State private var breakdownRows: [ProcessUsage] = []
     @State private var breakdownIsLoading = false
@@ -76,8 +77,27 @@ struct SystemSection: View {
                         }
                     }
                 }
+                
+                Divider()
+                Button(action: {
+                    showDeepMetrics = true
+                }) {
+                    HStack {
+                        Image(systemName: "cpu.fill")
+                        Text("Relatório Profundo (Requer Senha)")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.primary)
+                }
+                .buttonStyle(.plain)
+                .padding(.vertical, 4)
             }
             .panelCard()
+        }
+        .sheet(isPresented: $showDeepMetrics) {
+            DeepMetricsView()
         }
         .onReceive(monitor.$snapshot) { _ in
             // The breakdown forks `ps` (and walks IORegistry for GPU), so refresh it

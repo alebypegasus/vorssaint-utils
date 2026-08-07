@@ -48,34 +48,42 @@ struct FanControlSection: View {
                                 Spacer()
                                 Text("\(Int(fan.actualSpeed)) RPM").font(.system(size: 11)).monospacedDigit()
                             }
-                            Picker("", selection: Binding(
-                                get: { fan.isManual ? "manual" : "automatic" },
-                                set: { mode in
-                                    service.setManualMode(for: fan.id, manual: mode == "manual")
+                            HStack(spacing: 8) {
+                                Button("Automático") {
+                                    DispatchQueue.global().async {
+                                        _ = FanControl.setMode("auto")
+                                        DispatchQueue.main.async { service.refresh() }
+                                    }
                                 }
-                            )) {
-                                Text(l10n.s.fanControlModeAutomatic).tag("automatic")
-                                Text(l10n.s.fanControlModeManual).tag("manual")
-                            }
-                            .pickerStyle(.segmented)
-                            
-                            if fan.isManual {
-                                Slider(
-                                    value: Binding(
-                                        get: { fan.targetSpeed },
-                                        set: { speed in
-                                            service.setTargetSpeed(for: fan.id, speed: speed)
-                                        }
-                                    ),
-                                    in: fan.minSpeed...fan.maxSpeed,
-                                    step: 10
-                                )
-                                HStack {
-                                    Text("\(Int(fan.minSpeed))").font(.system(size: 9)).foregroundStyle(.tertiary)
-                                    Spacer()
-                                    Text("\(Int(fan.maxSpeed))").font(.system(size: 9)).foregroundStyle(.tertiary)
+                                .buttonStyle(.bordered)
+                                
+                                Button("Frio") {
+                                    DispatchQueue.global().async {
+                                        _ = FanControl.setMode("frio")
+                                        DispatchQueue.main.async { service.refresh() }
+                                    }
                                 }
+                                .buttonStyle(.bordered)
+                                
+                                Button("Médio") {
+                                    DispatchQueue.global().async {
+                                        _ = FanControl.setMode("medio")
+                                        DispatchQueue.main.async { service.refresh() }
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                
+                                Button("Máximo") {
+                                    DispatchQueue.global().async {
+                                        _ = FanControl.setMode("maximo")
+                                        DispatchQueue.main.async { service.refresh() }
+                                    }
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(Color.red.opacity(0.8))
                             }
+                            .controlSize(.small)
+                            .padding(.top, 4)
                         }
                         .padding(.top, 4)
                     }

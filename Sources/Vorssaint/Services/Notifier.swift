@@ -16,6 +16,7 @@ enum Notifier {
                                     category: "notifications")
 
     static func requestPermission() {
+        guard Bundle.main.bundleIdentifier != nil else { return }
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
             // A denied prompt is the user's call; a request that ERRORS means
             // notifications silently cannot work at all — leave a trace so
@@ -36,6 +37,7 @@ enum Notifier {
                                          body: String,
                                          undoTitle: String,
                                          transactionID: UUID) {
+        guard Bundle.main.bundleIdentifier != nil else { return }
         let center = UNUserNotificationCenter.current()
         let undo = UNNotificationAction(
             identifier: whatsAppOrganizerUndoActionIdentifier,
@@ -61,6 +63,10 @@ enum Notifier {
                              body: String,
                              categoryIdentifier: String?,
                              userInfo: [AnyHashable: Any]) {
+        guard Bundle.main.bundleIdentifier != nil else {
+            log.notice("notification dropped: no bundle identifier (running outside .app?)")
+            return
+        }
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             guard settings.authorizationStatus == .authorized
