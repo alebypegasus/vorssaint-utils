@@ -1,0 +1,95 @@
+
+Analysis of sampling swift-frontend (pid 3810) every 100 milliseconds
+Process:         swift-frontend [3810]
+Path:            /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend
+Load Address:    0x1025ac000
+Identifier:      swift-frontend
+Version:         6.3.3.1.3
+Build Info:      IDEApplication-24959000000000000~2 (17F113)
+Code Type:       X86-64
+Platform:        macOS
+Parent Process:  swift-driver [3778]
+Target Type:     live task
+
+Date/Time:       2026-08-07 20:24:16.871 -0300
+Launch Time:     2026-08-07 20:24:12.339 -0300
+OS Version:      macOS 26.6.1 (25G76)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+----
+
+Call graph:
+
+Total number in stack (recursive counted multiple, when >=5):
+
+Sort by top of stack, same collapsed (when >= 5):
+
+Binary Images:
+       0x1025ac000 -        0x10b1ca6af +swift-frontend (6.3.3.1.3) <75B9C618-C47B-3F08-A788-8BBB4DABCE5D> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend
+       0x10d7f0000 -        0x10d814de7 +lib_CompilerSwiftLexicalLookup.dylib (6.3.3.1.3) <E3B086B3-BF27-3A1A-849D-3D14400B8D89> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftLexicalLookup.dylib
+       0x10d852000 -        0x10d867c1f +lib_CompilerSwiftDiagnostics.dylib (6.3.3.1.3) <5EAF839D-76F9-3EAC-AE6A-24DDAAD4BA35> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftDiagnostics.dylib
+       0x10d8af000 -        0x10d8bc4cf +lib_CompilerSwiftIDEUtils.dylib (6.3.3.1.3) <477769AD-EE56-3620-BF92-93EF4F8E9756> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftIDEUtils.dylib
+       0x10d909000 -        0x10d912a67 +lib_CompilerSwiftSyntaxMacros.dylib (6.3.3.1.3) <792CCCC3-0B18-3C5F-8D67-B88BF8546106> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftSyntaxMacros.dylib
+       0x10d92d000 -        0x10d9500ff +lib_CompilerSwiftIfConfig.dylib (6.3.3.1.3) <079AC527-0183-3642-807B-0C22BBF1E114> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftIfConfig.dylib
+       0x10d9fc000 -        0x10da13f5f +lib_CompilerSwiftOperators.dylib (6.3.3.1.3) <79B1FC2A-5E38-301B-BF10-DEB0DA60C0C3> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftOperators.dylib
+       0x10daae000 -        0x10daedd37 +lib_CompilerSwiftCompilerPluginMessageHandling.dylib (6.3.3.1.3) <D52EFB94-B643-3055-BAFA-151EF7826A6D> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftCompilerPluginMessageHandling.dylib
+       0x10db86000 -        0x10dbab697 +lib_CompilerSwiftSyntaxMacroExpansion.dylib (6.3.3.1.3) <9DEA55E2-6B31-3EEE-8FFD-1883ABD1F1E9> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftSyntaxMacroExpansion.dylib
+       0x10dc3f000 -        0x10dc9b7b7 +lib_CompilerSwiftParserDiagnostics.dylib (6.3.3.1.3) <3374045A-E94D-398B-979B-604C6124E3AA> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftParserDiagnostics.dylib
+       0x10dda7000 -        0x10ddb5847 +lib_CompilerSwiftBasicFormat.dylib (6.3.3.1.3) <22A5E467-CCB8-3E69-B43C-5B0EDEC3ECED> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftBasicFormat.dylib
+       0x10de7b000 -        0x10dead42f +lib_CompilerSwiftSyntaxBuilder.dylib (6.3.3.1.3) <3B3B6D92-AFBA-339D-8011-CA22B60EFE5F> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftSyntaxBuilder.dylib
+       0x10e480000 -        0x10e5c47af +lib_CompilerSwiftParser.dylib (6.3.3.1.3) <C242D876-80EF-3959-A3F8-857876249D85> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftParser.dylib
+       0x10fedd000 -        0x110216787 +lib_CompilerSwiftSyntax.dylib (6.3.3.1.3) <9AE30A4A-F122-3EFE-9686-8CEE2737AECF> /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/compiler/lib_CompilerSwiftSyntax.dylib
+    0x7ff80d83c000 -     0x7ff80d88038b  libobjc.A.dylib (951.7) <51EA4ED1-462A-3E2F-BE49-21C9D386345D> /usr/lib/libobjc.A.dylib
+    0x7ff80d881000 -     0x7ff80d8afa9f  libdyld.dylib (1387) <13B97894-18F3-32A0-B22C-37EB4057DF14> /usr/lib/system/libdyld.dylib
+    0x7ff80d8b0000 -     0x7ff80d95c84f  dyld (1.0.0 - 1387) <7331D12C-0F65-3AAE-808E-12F9FF0ECA3A> /usr/lib/dyld
+    0x7ff80d95d000 -     0x7ff80d9606e8  libsystem_blocks.dylib (96) <277BFFA0-005B-35B8-893E-64A4D34DFCF9> /usr/lib/system/libsystem_blocks.dylib
+    0x7ff80d961000 -     0x7ff80d9b4041  libxpc.dylib (3102.160.5) <55204527-DEC5-3AD4-8200-DDB70372A2C0> /usr/lib/system/libxpc.dylib
+    0x7ff80d9b5000 -     0x7ff80d9d4749  libsystem_trace.dylib (1861.160.4) <51A3CDF6-544F-3F95-B7A2-3813E050DC40> /usr/lib/system/libsystem_trace.dylib
+    0x7ff80d9d5000 -     0x7ff80da9b94f  libcorecrypto.dylib (1922.160.10) <8B4E8CF5-C5C9-36F1-8F65-9143D45BB42F> /usr/lib/system/libcorecrypto.dylib
+    0x7ff80da9c000 -     0x7ff80daeddcf  libsystem_malloc.dylib (812.160.5) <67383601-3152-3666-989C-024EDA985098> /usr/lib/system/libsystem_malloc.dylib
+    0x7ff80daee000 -     0x7ff80db35d91  libdispatch.dylib (1542.160.2) <2D8B6933-9709-3A7B-979C-6775540A1227> /usr/lib/system/libdispatch.dylib
+    0x7ff80db36000 -     0x7ff80db38d43  libsystem_featureflags.dylib (103) <72E85B9D-D831-375E-8B7E-5B8FDC157C7D> /usr/lib/system/libsystem_featureflags.dylib
+    0x7ff80db39000 -     0x7ff80dbc0e9f  libsystem_c.dylib (1752.160.4) <BCE2FD57-A4E4-38CF-93A7-260335502E82> /usr/lib/system/libsystem_c.dylib
+    0x7ff80dbc1000 -     0x7ff80dc4bb63  libc++.1.dylib (2100.43) <D93682DD-46B3-361F-B34F-B93ACD640CAD> /usr/lib/libc++.1.dylib
+    0x7ff80dc4c000 -     0x7ff80dc635f7  libc++abi.dylib (2100.43) <3574C711-C1C9-3E10-9668-1688B2C9E101> /usr/lib/libc++abi.dylib
+    0x7ff80dc64000 -     0x7ff80dca25af  libsystem_kernel.dylib (12377.161.13) <3C5C0AD3-85E6-377E-BE18-B7A6CAC84C0A> /usr/lib/system/libsystem_kernel.dylib
+    0x7ff80dca3000 -     0x7ff80dcaeebf  libsystem_pthread.dylib (539.100.4) <3154D766-7E34-34D5-ACDD-6434609E4FFD> /usr/lib/system/libsystem_pthread.dylib
+    0x7ff80dcaf000 -     0x7ff80dcb8ebf  libsystem_platform.dylib (375.120.2) <2FD67DC6-B7EE-30E4-8DC5-D5A3E6BB5C1D> /usr/lib/system/libsystem_platform.dylib
+    0x7ff80dcb9000 -     0x7ff80dce72a7  libsystem_info.dylib (600) <C5FE3512-D588-3F0D-A19C-40ED0E78770D> /usr/lib/system/libsystem_info.dylib
+    0x7ff8116ed000 -     0x7ff8116f770f  libsystem_darwin.dylib (1752.160.4) <EC6178E6-6674-3532-92C6-4140A7FE991A> /usr/lib/system/libsystem_darwin.dylib
+    0x7ff811b35000 -     0x7ff811b462b7  libsystem_notify.dylib (348.160.3) <85EF85C9-D59D-39E7-A6FF-E1260620D656> /usr/lib/system/libsystem_notify.dylib
+    0x7ff813f2f000 -     0x7ff813f484a7  libsystem_networkextension.dylib (2226.160.6) <10EB4A74-D6F5-3634-B61B-D5A0BBCAA0B4> /usr/lib/system/libsystem_networkextension.dylib
+    0x7ff813fc6000 -     0x7ff813fdd1bf  libsystem_asl.dylib (406) <DBD08C51-9CC1-3BCB-A87C-05F70E5FE8AC> /usr/lib/system/libsystem_asl.dylib
+    0x7ff815dad000 -     0x7ff815db4c57  libsystem_symptoms.dylib (2169.160.3) <52CFCB8E-F942-3992-A8A0-728E0B06C9F8> /usr/lib/system/libsystem_symptoms.dylib
+    0x7ff81a224000 -     0x7ff81a25aa3b  libsystem_containermanager.dylib (725.160.3) <259A79F8-DB34-3578-BF86-35DC27A811AE> /usr/lib/system/libsystem_containermanager.dylib
+    0x7ff81b693000 -     0x7ff81b69690f  libsystem_configuration.dylib (1405.160.3) <6630F359-F64C-3EB2-AEA5-EE2AB69F34DF> /usr/lib/system/libsystem_configuration.dylib
+    0x7ff81b697000 -     0x7ff81b69dbf7  libsystem_sandbox.dylib (2680.160.6) <9309265A-2BC6-33DA-B806-D61B1C55C1F3> /usr/lib/system/libsystem_sandbox.dylib
+    0x7ff81cdcd000 -     0x7ff81cdcfdbb  libquarantine.dylib (196.160.2) <BAA10210-40C5-3AF0-8C8B-462A6045C955> /usr/lib/system/libquarantine.dylib
+    0x7ff81d6de000 -     0x7ff81d6e498f  libsystem_coreservices.dylib (191.5.1) <4BA14795-A514-39FE-B12B-C61D72DA760B> /usr/lib/system/libsystem_coreservices.dylib
+    0x7ff81dbc7000 -     0x7ff81dbda5eb  libz.1.dylib (100.120.1) <D85FFB72-55B5-369B-A9D8-BC4F762CBF20> /usr/lib/libz.1.dylib
+    0x7ff81dbdb000 -     0x7ff81dc48a97  libsystem_m.dylib (3312.100.1) <02448248-46DE-3146-B45E-A02DCB38C528> /usr/lib/system/libsystem_m.dylib
+    0x7ff81dc4a000 -     0x7ff81dc4d63f  libmacho.dylib (1387) <9672F5C7-B8A8-3CF1-916A-CB7FA76F1047> /usr/lib/system/libmacho.dylib
+    0x7ff81dc65000 -     0x7ff81dc70f57  libcommonCrypto.dylib (600035) <39963BBC-2AA9-39AA-B8F5-1AEC11183731> /usr/lib/system/libcommonCrypto.dylib
+    0x7ff81dc71000 -     0x7ff81dc79567  libunwind.dylib (2100.2) <7F713142-4D6D-3BEE-90D8-A8F959B847D9> /usr/lib/system/libunwind.dylib
+    0x7ff81dc82000 -     0x7ff81dc8da7f  libcopyfile.dylib (240.160.2.0.1) <D9B29269-BE6C-3B37-BEFB-6C646D547132> /usr/lib/system/libcopyfile.dylib
+    0x7ff81dc8e000 -     0x7ff81dc95aff  libcompiler_rt.dylib (103.3) <AD8883FD-E12D-33E9-BF67-D78006578BA5> /usr/lib/system/libcompiler_rt.dylib
+    0x7ff81dc96000 -     0x7ff81dc9a76b  libsystem_collections.dylib (1752.160.4) <771A31C4-B5B7-3205-A140-43270DDC5DA2> /usr/lib/system/libsystem_collections.dylib
+    0x7ff81dc9b000 -     0x7ff81dc9e107  libsystem_secinit.dylib (168.100.7) <C1480F34-BA52-3321-98CA-AE8F20BCDA28> /usr/lib/system/libsystem_secinit.dylib
+    0x7ff81dc9f000 -     0x7ff81dca180f  libremovefile.dylib (85.100.6) <61D2D691-B9F3-38A1-8770-1FCB94EB4695> /usr/lib/system/libremovefile.dylib
+    0x7ff81dca2000 -     0x7ff81dca2b37  libkeymgr.dylib (31) <7E24C203-B051-3A3D-858D-4FC44CB8D951> /usr/lib/system/libkeymgr.dylib
+    0x7ff81dca3000 -     0x7ff81dcab62f  libsystem_dnssd.dylib (2881.160.4) <D650B9DC-447D-36DB-BC0D-F0DD16281F0E> /usr/lib/system/libsystem_dnssd.dylib
+    0x7ff81dcac000 -     0x7ff81dcb1003  libcache.dylib (95) <38E6D4D5-3146-3B30-A9A7-277D7E7967BA> /usr/lib/system/libcache.dylib
+    0x7ff81dcb2000 -     0x7ff81dcb3b2b  libSystem.B.dylib (1356) <D56A3632-DC79-3455-B0E2-9196AAF2A974> /usr/lib/libSystem.B.dylib
+    0x7ff8218b6000 -     0x7ff821ddd588  libswiftCore.dylib (6.3.2 - 6.3.2.1.11) <CF29BA2B-977E-3E7F-AF8D-7E44E7A4D4B9> /usr/lib/swift/libswiftCore.dylib
+    0x7ff916aaf000 -     0x7ff916ab164f  libswiftDarwin.dylib (377.160.5) <346D6FC4-71D3-3E0D-B64E-74716032DEF6> /usr/lib/swift/libswiftDarwin.dylib
+    0x7ffe153cf000 -     0x7ffe153d656f  libRosetta.dylib (367.9) <4C0D857A-05B1-3318-9DC3-4894FF9CFB4D> /usr/lib/libRosetta.dylib
+    0x7ffe16a06000 -     0x7ffe16a34097  libswiftPrespecialized.dylib (0) <32DB9953-8C4E-312D-8E45-9973F0CA223C> /usr/lib/libswiftPrespecialized.dylib
+    0x7ffe16e2f000 -     0x7ffe16e2faa1  libswift_Builtin_float.dylib (6.3.2.1.11) <0AF61CB4-003E-39F1-A081-65F49A5C6842> /usr/lib/swift/libswift_Builtin_float.dylib
+    0x7ffe16e9f000 -     0x7ffe16ea20e7  libswift_DarwinFoundation1.dylib (377.160.5) <61D8F6DA-643C-35D1-8897-F717FFDD9052> /usr/lib/swift/libswift_DarwinFoundation1.dylib
+    0x7ffe16ea3000 -     0x7ffe16ea3ccb  libswift_DarwinFoundation2.dylib (377.160.5) <32EFC0C7-93BB-37DA-9783-94749E79EFF5> /usr/lib/swift/libswift_DarwinFoundation2.dylib
+    0x7ffe16ea4000 -     0x7ffe16ea4797  libswift_DarwinFoundation3.dylib (377.160.5) <5EEE323C-383B-322D-841E-485CE1169681> /usr/lib/swift/libswift_DarwinFoundation3.dylib
+    0x7ffe17145000 -     0x7ffe17149003  libsystem_darwindirectory.dylib (122) <918014A6-7B70-3F3B-8B4A-0288885B0CF6> /usr/lib/system/libsystem_darwindirectory.dylib
+    0x7ffe1714a000 -     0x7ffe17154253  libsystem_eligibility.dylib (319.160.17) <FA38E6A6-0485-372B-BCE5-71E4881BBF16> /usr/lib/system/libsystem_eligibility.dylib
+    0x7ffe17155000 -     0x7ffe1715cffb  libsystem_sanitizers.dylib (26.1) <D238AB92-4A6F-387B-8368-6DB313610ED0> /usr/lib/system/libsystem_sanitizers.dylib
+    0x7ffe1715d000 -     0x7ffe1715dba7  libsystem_trial.dylib (474.2.18.2) <D6C32A75-1B2A-39F9-ACFF-95C2FACC3767> /usr/lib/system/libsystem_trial.dylib
+
