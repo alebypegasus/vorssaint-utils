@@ -526,7 +526,7 @@ final class ProcessUsageService {
         // Se o total de GPU delta for muito pequeno, evitamos mostrar
         guard totalDelta > 0 else { return finishGPU([], limit: limit) }
         
-        let systemGpuUsage = SystemMonitor.shared.snapshot.gpuUsage * 100 // pego do monitor (ex: 36%)
+        let systemGpuUsage = (SystemMonitor.shared.snapshot.gpuUsage ?? 0) * 100 // pego do monitor (ex: 36%)
         
         for (pid, delta) in deltas {
             // A porcentagem do app é baseada na fatia dele do delta total de GPU que foi usado
