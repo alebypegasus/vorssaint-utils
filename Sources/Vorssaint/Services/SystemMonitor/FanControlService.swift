@@ -17,7 +17,6 @@ final class FanControlService: ObservableObject {
     @Published var fans: [FanStatus] = []
     
     private let smc: SMCClient?
-    private var fanCount: Int = 0
     
     init(smc: SMCClient?) {
         self.smc = smc
@@ -25,39 +24,42 @@ final class FanControlService: ObservableObject {
     }
     
     func refresh() {
-        guard let smc = smc else { return }
-        
-        if let fNumKey = smc.key(named: "FNum"), let num = smc.readValue(fNumKey) {
-            fanCount = Int(num)
-        } else {
-            fanCount = 0
+        let output = FanControl.getStatus()
+        if output.contains("No fans detected") || output.contains("Could not read") || output.contains("Total fans in system: 0") {
+            DispatchQueue.main.async { self.fans = [] }
+            return
         }
         
         var currentFans: [FanStatus] = []
+        var currentFan: FanStatus?
         
-        for i in 0..<fanCount {
-            let actualKey = smc.key(named: "F\(i)Ac")
-            let minKey = smc.key(named: "F\(i)Mn")
-            let maxKey = smc.key(named: "F\(i)Mx")
-            let targetKey = smc.key(named: "F\(i)Tg")
-            let modeKey = smc.key(named: "F\(i)Md")
-            
-            let actual: Double = actualKey.flatMap { smc.readValue($0) } ?? 0
-            let minS: Double = minKey.flatMap { smc.readValue($0) } ?? 0
-            let maxS: Double = maxKey.flatMap { smc.readValue($0) } ?? 1000
-            let target: Double = targetKey.flatMap { smc.readValue($0) } ?? 0
-            let mode: Double = modeKey.flatMap { smc.readValue($0) } ?? 0
-            
-            currentFans.append(FanStatus(
-                id: i,
-                name: "Fan \(i + 1)",
-                actualSpeed: actual,
-                minSpeed: minS,
-                maxSpeed: maxS,
-                targetSpeed: target,
-                isManual: mode == 1
-            ))
+        for line in output.components(separatedBy: .newlines) {
+            let l = line.trimmingCharacters(in: .whitespaces)
+            if l.hasPrefix("Fan #") {
+                if let f = currentFan { currentFans.append(f) }
+                let idStr = l.replacingOccurrences(of: "Fan #", with: "").replacingOccurrences(of: ":", with: "")
+                currentFan = FanStatus(id: Int(idStr) ?? 0, name: "Fan \(idStr)", actualSpeed: 0, minSpeed: 0, maxSpeed: 0, targetSpeed: 0, isManual: false)
+            } else if l.hasPrefix("Fan ID") {
+                let parts = l.components(separatedBy: ":")
+                if parts.count > 1, currentFan != nil { currentFan?.name = parts[1].trimmingCharacters(in: .whitespaces) }
+            } else if l.hasPrefix("Current speed") {
+                let parts = l.components(separatedBy: ":")
+                if parts.count > 1, currentFan != nil { currentFan?.actualSpeed = Double(parts[1].trimmingCharacters(in: .whitespaces)) ?? 0 }
+            } else if l.hasPrefix("Minimum speed") {
+                let parts = l.components(separatedBy: ":")
+                if parts.count > 1, currentFan != nil { currentFan?.minSpeed = Double(parts[1].trimmingCharacters(in: .whitespaces)) ?? 0 }
+            } else if l.hasPrefix("Maximum speed") {
+                let parts = l.components(separatedBy: ":")
+                if parts.count > 1, currentFan != nil { currentFan?.maxSpeed = Double(parts[1].trimmingCharacters(in: .whitespaces)) ?? 0 }
+            } else if l.hasPrefix("Target speed") {
+                let parts = l.components(separatedBy: ":")
+                if parts.count > 1, currentFan != nil { currentFan?.targetSpeed = Double(parts[1].trimmingCharacters(in: .whitespaces)) ?? 0 }
+            } else if l.hasPrefix("Mode") {
+                let parts = l.components(separatedBy: ":")
+                if parts.count > 1, currentFan != nil { currentFan?.isManual = parts[1].trimmingCharacters(in: .whitespaces).lowercased() == "forced" }
+            }
         }
+        if let f = currentFan { currentFans.append(f) }
         
         DispatchQueue.main.async {
             self.fans = currentFans
@@ -65,18 +67,16 @@ final class FanControlService: ObservableObject {
     }
     
     func setManualMode(for fanId: Int, manual: Bool) {
-        guard let smc = smc, let modeKey = smc.key(named: "F\(fanId)Md") else { return }
-        let bytes: [UInt8] = [manual ? 1 : 0]
-        _ = smc.writeValue(modeKey, bytes: bytes)
+        if manual {
+            _ = FanControl.setMode("maximo")
+        } else {
+            _ = FanControl.setMode("auto")
+        }
         refresh()
     }
     
     func setTargetSpeed(for fanId: Int, speed: Double) {
-        guard let smc = smc, let targetKey = smc.key(named: "F\(fanId)Tg") else { return }
-        // fpe2 encoding (14 int, 2 frac -> * 4.0)
-        let raw = UInt16(speed * 4.0)
-        let bytes: [UInt8] = [UInt8(raw >> 8), UInt8(raw & 0xFF)]
-        _ = smc.writeValue(targetKey, bytes: bytes)
+        _ = FanControl.setMode(String(Int(speed)))
         refresh()
     }
 }

@@ -512,14 +512,31 @@ final class ProcessUsageService {
               now - previous.time < 30 // stale baseline => re-prime
         else { return finishGPU(nil, limit: limit) }
 
-        let elapsedNs = (now - previous.time) * 1_000_000_000
         var rows: [ProcessUsage] = []
+        var totalDelta: Double = 0
+        var deltas: [(pid_t, Double)] = []
+
         for (pid, total) in current {
             guard let before = previous.perPid[pid], total > before else { continue }
-            let percent = (total - before) / elapsedNs * 100
+            let delta = total - before
+            totalDelta += delta
+            deltas.append((pid, delta))
+        }
+
+        // Se o total de GPU delta for muito pequeno, evitamos mostrar
+        guard totalDelta > 0 else { return finishGPU([], limit: limit) }
+        
+        let systemGpuUsage = SystemMonitor.shared.snapshot.gpuUsage * 100 // pego do monitor (ex: 36%)
+        
+        for (pid, delta) in deltas {
+            // A porcentagem do app é baseada na fatia dele do delta total de GPU que foi usado
+            // vezes a % total de uso da GPU real
+            var percent = (delta / totalDelta) * systemGpuUsage
+            if percent.isNaN || percent.isInfinite { percent = 0 }
             guard percent >= 0.05 else { continue }
             rows.append(ProcessUsage(pid: pid, name: "pid \(pid)", value: min(percent, 100)))
         }
+        
         return finishGPU(groupedByApp(rows), limit: limit)
     }
 
